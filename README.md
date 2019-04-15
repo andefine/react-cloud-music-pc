@@ -75,3 +75,17 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 ```shell
 yarn add node-sass
 ```
+
+### 配置 `alias`
+- `yarn eject`
+- 找到 `webpack.config.js`
+```js
+// webpack.config.js
+alias: {
+  // Support React Native Web
+  // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
+  'react-native': 'react-native-web',
+  // 添加这一行
+  '@': paths.appSrc
+}
+```
