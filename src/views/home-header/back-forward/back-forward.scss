@@ -1,0 +1,37 @@
+@import "@/styles/color.scss";
+
+.bf {
+  display: flex;
+  margin-left: 64px;
+  border: 1px solid $dark-bg;
+  border-radius: 2px;
+  width: 51px;
+  height: 20px;
+  &__back, &__forward {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 20px;
+  }
+  &__forward {
+    border-left: 1px solid $dark-bg;
+  }
+  &__back-icon, &__forward-icon {
+    font-size: 12px;
+    color: #fff;
+    opacity: 0.3;
+  }
+  &__forward-icon {
+    transform: rotate(180deg);
+  }
+  &__back-icon--active, &__forward-icon--active {
+    opacity: 0.9;
+  }
+  &__back-icon--active {
+    @extend .bf__back-icon;
+  }
+  &__forward-icon--active {
+    @extend .bf__forward-icon;
+  }
+}
