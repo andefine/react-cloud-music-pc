@@ -7,7 +7,7 @@
   padding: 0 16px 0 16px;
   height: 48px;
   background: $header-bg;
-  &__left {
+  &__left, &__right {
     display: flex;
     align-items: center;
   }
@@ -16,5 +16,8 @@
   }
   &__search {
     margin-left: 10px;
+  }
+  &__menu {
+    margin-left: 26px;
   }
 }

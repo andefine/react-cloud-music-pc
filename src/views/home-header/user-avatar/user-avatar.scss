@@ -1,0 +1,39 @@
+@import "@/styles/color.scss";
+
+$size: 26px;
+$avatar-color: #e1e3e4;
+
+.user-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__i {
+    display: block;
+    border-radius: 100%;
+    width: $size;
+    height: $size;
+    line-height: $size;
+    font-size: $size;
+    color: $avatar-color;
+    background: #fff;
+  }
+  &__drop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__username {
+    margin-left: 6px;
+  }
+  &__triangle {
+    margin-left: 9px;
+  }
+  // 不解释，直接搜 `css 下三角`
+  &__triangle {
+    width: 0;
+    height: 0;
+    border-top: 4px solid $not-active;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+  }
+}

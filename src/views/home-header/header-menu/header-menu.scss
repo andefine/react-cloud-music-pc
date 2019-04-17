@@ -1,0 +1,14 @@
+@import "@/styles/color.scss";
+
+.header-menu {
+  border-right: 1px solid $dark-bg;
+  padding-right: 18px;
+  height: 20px;
+  &__i {
+    margin-right: 26px;
+    font-size: 16px;
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}
