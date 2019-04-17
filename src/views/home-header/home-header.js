@@ -10,7 +10,7 @@ export default class HomeHeader extends Component {
       <header className="home-header">
         <div className="home-header__left">
           <Logo></Logo>
-          <BackForward></BackForward>
+          <BackForward className="home-header__bf"></BackForward>
         </div>
         <div className="home-header__right"></div>
       </header>

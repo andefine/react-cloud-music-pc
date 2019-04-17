@@ -17,7 +17,7 @@ export default class BackForward extends Component {
     const forwardModifier = this.state.active.forward ? '--active' : ''
     
     return (
-      <div className="bf">
+      <div className={this.props.className ? (`bf ${this.props.className}`) : 'bf'}>
         <div className="bf__back">
           <i className={`bf__back-icon${backModifier} iconfont icon-back`}></i>
         </div>
