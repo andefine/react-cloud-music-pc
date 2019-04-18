@@ -16,7 +16,7 @@ $bg: #161618;
     border: 0;
     width: 190px;
     font-size: 12px;
-    color: #fff;
+    color: $font;
     background: transparent;
     &::placeholder {
       color: $placeholder;

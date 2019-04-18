@@ -1,8 +1,26 @@
+// 下面三个就是三种红色，由深到浅
 $dark-theme: #660404;
-$theme: #b82525;
-$light-theme: #cd2929;
+$theme: #b82525; // 一般红色都用这个
+$light-theme: #cd2929; // 一般 hover 的红色用这个
+
+// 顶部背景颜色
 $header-bg: #212124;
+
+// 侧边栏菜单背景颜色
+$aside-bg: #191b1f;
+
+// 主区域背景颜色
 $dark-bg: #16181c;
+
+// palceholder 文字颜色
 $placeholder: #454546;
+
+// 下面两个是图标颜色，一个是
 $not-active: #adafb2;
-$active: #dcdde4;
+
+// 正常状态下的文字颜色。
+// 一些文字正常状态下可能是稍微灰一点，可以加一个透明度，
+// 图标也有 激活 和 非激活 状态，激活状态可以用这个颜色，非激活可以使用相同的透明度来实现
+$font: #dcdde4;
+
+$grayFont: #666;
