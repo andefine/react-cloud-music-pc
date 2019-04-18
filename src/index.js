@@ -5,6 +5,6 @@ import 'normalize.css'
 import '@/iconfont/iconfont.css'
 import '@/styles/index.scss'
 
-import Home from '@/views/home/home'
+import Layout from '@/views/layout/layout'
 
-ReactDOM.render(<Home />, document.getElementById('root'))
+ReactDOM.render(<Layout />, document.getElementById('root'))

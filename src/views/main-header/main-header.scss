@@ -1,9 +1,12 @@
 @import '@/styles/color.scss';
 
-.home-header {
+.main-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(to right, $dark-theme 0%, $theme 50%, $dark-theme 100%);
+  border-image-slice: 2;
   padding: 0 16px 0 16px;
   height: 48px;
   background: $header-bg;

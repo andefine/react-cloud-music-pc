@@ -1,6 +1,7 @@
 @import "./color.scss";
 
 html, body {
+  height: 100%;
   font-family: 'Microsoft Yahei';
   font-size: 12px;
   color: $not-active;
@@ -13,4 +14,10 @@ h3 {
 input {
   border: 0;
   outline: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
