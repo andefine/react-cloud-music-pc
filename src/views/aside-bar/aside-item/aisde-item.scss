@@ -1,0 +1,30 @@
+@import "@/styles/color.scss";
+
+$active-bg: #26282c;
+
+.aside-item {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border-left: 3px solid transparent;
+  padding-left: 16px;
+  height: 32px;
+  opacity: 0.8;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+  }
+  &--active {
+    @extend .aside-item;
+    border-color: $theme;
+    background: $active-bg;
+    opacity: 1;
+  }
+  &__text {
+    flex-grow: 1;
+    overflow: hidden;
+    margin-left: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

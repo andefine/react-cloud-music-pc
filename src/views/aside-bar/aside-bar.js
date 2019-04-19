@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './aside-bar.scss'
 
 import AsideTitle from './aside-title/aside-title'
+import AsideItem from './aside-item/aside-item'
 
 export default class AsideBar extends Component {
   constructor (props) {
@@ -13,7 +14,8 @@ export default class AsideBar extends Component {
         list: [
           {
             title: '发现音乐',
-            icon: 'music'
+            icon: 'music',
+            active: true
           },
           {
             title: '私人FM',
@@ -31,11 +33,36 @@ export default class AsideBar extends Component {
       }
     }
   }
+
+  handleSwitch = (index) => {
+    const list = this.state.recommend.list.map(cur => {
+      return ({
+        ...cur,
+        active: false
+      })
+    })
+    list[index].active = true
+    this.setState({
+      recommend: {
+        ...this.state.recommend,
+        list
+      }
+    })
+  }
   
   render () {
     return (
       <aside className="aside-bar">
-        <AsideTitle>推荐</AsideTitle>
+        <AsideTitle>{this.state.recommend.title}</AsideTitle>
+        {this.state.recommend.list.map((item, index) =>
+          <AsideItem
+            key={index}
+            iconClass={item.icon}
+            text={item.title}
+            active={item.active}
+            onClick={this.handleSwitch.bind(this, index)}
+          ></AsideItem>
+        )}
       </aside>
     )
   }
