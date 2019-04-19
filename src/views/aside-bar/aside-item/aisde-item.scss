@@ -9,7 +9,7 @@ $active-bg: #26282c;
   border-left: 3px solid transparent;
   padding-left: 16px;
   height: 32px;
-  opacity: 0.8;
+  opacity: $fontOpacity;
   cursor: pointer;
   &:hover {
     opacity: 1;
