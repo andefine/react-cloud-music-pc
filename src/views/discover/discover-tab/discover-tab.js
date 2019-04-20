@@ -1,47 +1,49 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+
 import './discover-tab.scss'
 
-export default class DiscoverTab extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      tabs: [
-        {
-          title: '个性推荐',
-          active: true
-        },
-        {
-          title: '歌单'
-        },
-        {
-          title: '主播电台'
-        },
-        {
-          title: '排行榜'
-        },
-        {
-          title: '歌手'
-        },
-        {
-          title: '最新音乐'
-        }
-      ]
+class DiscoverTab extends Component {
+  handleSwitchTab = (index, path) => {
+    let pathname = ''
+    if (index === 0) {
+      pathname = '/'
+    } else {
+      pathname = `/${path}`
     }
+
+    // 如果目标路径和当前路径相同，无需跳转
+    if (pathname === this.props.location.pathname) {
+      return
+    }
+    
+    this.props.history.push(pathname)
   }
   
   render () {
     return (
       <div className="discover-tab">
-        {this.state.tabs.map((item, index) => 
-          <div
-            key={index}
-            className={`discover-tab-item${
-              item.active ? '--active' : ''
-            }`}
-          >{item.title}</div>
-        )}
+        {
+          this.props.tabs.map(({ text, path }, index) => {
+            let active = false
+            if (index === 0 && this.props.location.pathname === '/') {
+              active = true
+            }
+            if (index !== 0 && this.props.location.pathname.includes(path)) {
+              active = true
+            }
+            return (
+              <div
+                key={index}
+                className={`discover-tab-item${active ? '--active' : ''}`}
+                onClick={() => {this.handleSwitchTab(index, path)}}
+              >{text}</div>
+            )
+          })
+        }
       </div>
     )
   }
 }
+
+export default withRouter(DiscoverTab)

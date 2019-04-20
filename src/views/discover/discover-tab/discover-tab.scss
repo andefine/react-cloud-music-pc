@@ -1,13 +1,12 @@
 @import "@/styles/color.scss";
 
 $height: 56px;
-$border-color: #202226;
 $item-width: 56px;
 
 .discover-tab {
   display: flex;
   justify-content: center;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid $line-color;
   height: $height;
 }
 
@@ -20,6 +19,7 @@ $item-width: 56px;
   text-align: center;
   font-size: 14px;
   opacity: $fontOpacity;
+  cursor: pointer;
   &:first-of-type {
     margin-left: 0;
   }

@@ -19,25 +19,25 @@ class Main extends Component {
         title: '推荐',
         list: [
           {
-            title: '发现音乐',
+            text: '发现音乐',
             icon: 'music',
             path: 'discover',
             component: Discover
           },
           {
-            title: '私人FM',
+            text: '私人FM',
             icon: 'FM',
             path: 'personal-fm',
             component: PersonalFm
           },
           {
-            title: '视频',
+            text: '视频',
             icon: 'video',
             path: 'video',
             component: Video
           },
           {
-            title: '朋友',
+            text: '朋友',
             icon: 'friend',
             path: 'friend',
             component: Friend
@@ -48,24 +48,24 @@ class Main extends Component {
   }
   
   render () {
-    // 进入改页面如果是根路径，直接重定向到 发现页
-    if (this.props.location.pathname === '/') {
-      this.props.history.replace('/discover')
-    }
-    
     return (
       <main className="main">
         <AsideBar menus={this.state.recommend}></AsideBar>
         {
-          this.state.recommend.list.map((item, index) => 
-            <Route
-              key={index}
-              path={`/${item.path}`}
-              component={item.component}
-            ></Route>
-          )
+          this.state.recommend.list.map(({ path, component }, index) => {
+            let pathname = ``
+            if (index !== 0) {
+              pathname = `/${path}`
+            }
+            return (
+              <Route
+                key={index}
+                path={pathname}
+                component={component}
+              ></Route>
+            )
+          })
         }
-        <Route path="/" exact component={Discover}></Route>
       </main>
     )
   }

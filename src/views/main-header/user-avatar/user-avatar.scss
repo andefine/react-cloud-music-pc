@@ -32,7 +32,7 @@ $avatar-color: #e1e3e4;
   &__triangle {
     width: 0;
     height: 0;
-    border-top: 4px solid $not-active;
+    border-top: 4px solid rgba($color: $font, $alpha: $fontOpacity);
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
   }

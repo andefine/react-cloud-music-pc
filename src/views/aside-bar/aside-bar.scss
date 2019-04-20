@@ -2,6 +2,7 @@
 
 .aside-bar {
   box-sizing: border-box;
+  border-right: 1px solid $line-color;
   width: 200px;
   height: 100%;
   background: $aside-bg;
