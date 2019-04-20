@@ -99,3 +99,11 @@ alias: {
 - 项目中引入
 
 将*以iconfont为文件名* *以`css` `eot` `svg` `ttf` `woff`为后缀的这五个文件* 放到一个文件夹下，再在入口文件中引入 `iconfont.css` 就行啦，非常简单
+
+### `react-router`
+
+#### `BrowserRouter` vs `HashRouter`
+
+#### `history` object
+
+#### `state` `redux store` `this` `static`

@@ -1,7 +1,7 @@
-import request from '@/utils/request'
+import http from '@/utils/http'
 
 export function getBanner () {
-  return request({
+  return http({
     url: '/banner'
   })
 }
