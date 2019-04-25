@@ -17,29 +17,30 @@ class Main extends Component {
       // 推荐菜单
       recommend: {
         title: '推荐',
-        list: [
+        menus: [
           {
-            text: '发现音乐',
+            label: '发现音乐',
             icon: 'music',
-            path: 'discover',
+            path: '/',
+            exact: true,
             component: Discover
           },
           {
-            text: '私人FM',
+            label: '私人FM',
             icon: 'FM',
-            path: 'personal-fm',
+            path: '/personal-fm',
             component: PersonalFm
           },
           {
-            text: '视频',
+            label: '视频',
             icon: 'video',
-            path: 'video',
+            path: '/video',
             component: Video
           },
           {
-            text: '朋友',
+            label: '朋友',
             icon: 'friend',
-            path: 'friend',
+            path: '/friend',
             component: Friend
           }
         ]
@@ -48,19 +49,21 @@ class Main extends Component {
   }
   
   render () {
+    const recommend = this.state.recommend
     return (
       <main className="main">
-        <AsideBar menus={this.state.recommend}></AsideBar>
+        <AsideBar menus={recommend}></AsideBar>
         {
-          this.state.recommend.list.map(({ path, component }, index) => {
-            let pathname = ``
-            if (index !== 0) {
-              pathname = `/${path}`
-            }
+          recommend.menus.map(({ path, exact, component }, index) => {
+            // let pathname = ``
+            // if (index !== 0) {
+            //   pathname = `/${path}`
+            // }
             return (
               <Route
                 key={index}
-                path={pathname}
+                path={path}
+                exact={exact}
                 component={component}
               ></Route>
             )
