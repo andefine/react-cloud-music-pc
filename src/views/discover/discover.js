@@ -19,33 +19,34 @@ class Discover extends Component {
     this.state = {
       tabs: [
         {
-          text: '个性推荐',
-          path: 'personal-recommend',
+          label: '个性推荐',
+          // path: 'personal-recommend',
+          path: '/personal-recommend',
           component: PersonalRecommend
         },
         {
-          text: '歌单',
-          path: 'song-sheet',
+          label: '歌单',
+          path: '/song-sheet',
           component: SongSheet
         },
         {
-          text: '主播电台',
-          path: 'radio',
+          label: '主播电台',
+          path: '/radio',
           component: Radio
         },
         {
-          text: '排行榜',
-          path: 'ranking-list',
+          label: '排行榜',
+          path: '/ranking-list',
           component: RankingList
         },
         {
-          text: '歌手',
-          path: 'singer',
+          label: '歌手',
+          path: '/singer',
           component: Singer
         },
         {
-          text: '最新音乐',
-          path: 'latest-music',
+          label: '最新音乐',
+          path: '/latest-music',
           component: LatestMusic
         }
       ]
@@ -58,10 +59,12 @@ class Discover extends Component {
   }
   
   render () {
+    const { tabs } = this.state
+    
     return (
       <div className="discover">
-        <DiscoverTab tabs={this.state.tabs}></DiscoverTab>
-        {
+        <DiscoverTab tabs={tabs}></DiscoverTab>
+        {/* {
           this.state.tabs.map(({ path, component }, index) => {
             let pathname = ''
             if (index !== 0) {
@@ -75,7 +78,7 @@ class Discover extends Component {
               ></Route>
             )
           })
-        }
+        } */}
       </div>
     )
   }

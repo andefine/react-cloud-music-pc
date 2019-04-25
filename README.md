@@ -106,6 +106,8 @@ alias: {
 #### 使用自定义 Link 来而不是在上面绑定事件触发 `history.push`
 具体看`main.js`中配置的路由，`aside-bar.js`和`aside-item.js`，以及 [example `Custom Link`](https://reacttraining.com/react-router/web/example/custom-link)
 
+#### `Link`是可以使用 `className` 的，所以可以自定义样式
+
 #### `BrowserRouter` vs `HashRouter`
 
 #### `history` object

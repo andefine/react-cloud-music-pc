@@ -21,7 +21,7 @@ class Main extends Component {
           {
             label: '发现音乐',
             icon: 'music',
-            path: '/',
+            path: '/discover',
             exact: true,
             component: Discover
           },
@@ -55,15 +55,11 @@ class Main extends Component {
         <AsideBar menus={recommend}></AsideBar>
         {
           recommend.menus.map(({ path, exact, component }, index) => {
-            // let pathname = ``
-            // if (index !== 0) {
-            //   pathname = `/${path}`
-            // }
             return (
               <Route
                 key={index}
                 path={path}
-                exact={exact}
+                // exact={exact}
                 component={component}
               ></Route>
             )

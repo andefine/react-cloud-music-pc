@@ -8,24 +8,23 @@ $item-width: 56px;
   justify-content: center;
   border-bottom: 1px solid $line-color;
   height: $height;
+  &__item {
+    margin-left: 30px;
+    box-sizing: border-box;
+    width: $item-width;
+    height: $height;
+    line-height: $height;
+    text-align: center;
+    font-size: 14px;
+    opacity: $fontOpacity;
+    &:first-of-type {
+      margin-left: 0;
+    }
+    &--active {
+      @extend .discover-tab__item;
+      border-bottom: 2px solid rgba($color: $font, $alpha: 0.5);
+      opacity: 1;
+    }
+  }
 }
 
-.discover-tab-item {
-  margin-left: 30px;
-  box-sizing: border-box;
-  width: $item-width;
-  height: $height;
-  line-height: $height;
-  text-align: center;
-  font-size: 14px;
-  opacity: $fontOpacity;
-  cursor: pointer;
-  &:first-of-type {
-    margin-left: 0;
-  }
-  &--active {
-    @extend .discover-tab-item;
-    border-bottom: 2px solid rgba($color: $font, $alpha: 0.5);
-    opacity: 1;
-  }
-}
