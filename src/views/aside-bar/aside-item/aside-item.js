@@ -2,11 +2,10 @@ import React from 'react'
 import { Route, Link } from 'react-router-dom'
 import './aisde-item.scss'
 
-export default function AsideItem ({ label, icon, to, exact }) {
+export default function AsideItem ({ label, icon, to }) {
   return (
     <Route
       path={to}
-      exact={exact}
       children={({ match }) => (
         <Link
           to={to}

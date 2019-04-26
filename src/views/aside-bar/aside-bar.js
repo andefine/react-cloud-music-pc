@@ -11,14 +11,13 @@ function AsideBar ({ menus }) {
     <aside className="aside-bar">
       <AsideTitle>{menus.title}</AsideTitle>
       {
-        menus.menus.map(({ label, icon, path, exact }, index) => {
+        menus.menus.map(({ label, icon, path }, index) => {
           return (
             <AsideItem
               key={index}
               icon={icon}
               label={label}
               to={path}
-              exact={exact}
             ></AsideItem>
           )
         })

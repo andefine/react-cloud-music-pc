@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, withRouter } from 'react-router-dom'
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 
 import './main.scss'
 
@@ -22,7 +22,6 @@ class Main extends Component {
             label: '发现音乐',
             icon: 'music',
             path: '/discover',
-            exact: true,
             component: Discover
           },
           {
@@ -50,21 +49,24 @@ class Main extends Component {
   
   render () {
     const recommend = this.state.recommend
+    const { menus } = recommend
     return (
       <main className="main">
         <AsideBar menus={recommend}></AsideBar>
-        {
-          recommend.menus.map(({ path, exact, component }, index) => {
-            return (
-              <Route
-                key={index}
-                path={path}
-                // exact={exact}
-                component={component}
-              ></Route>
-            )
-          })
-        }
+        <Switch>
+          <Redirect exact from="/" to={menus[0].path}></Redirect>
+          {
+            menus.map(({ path, component }, index) => {
+              return (
+                <Route
+                  key={index}
+                  path={path}
+                  component={component}
+                ></Route>
+              )
+            })
+          }
+        </Switch>
       </main>
     )
   }

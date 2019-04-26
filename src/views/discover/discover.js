@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, withRouter } from 'react-router-dom'
+import { Switch, Redirect, Route, withRouter } from 'react-router-dom'
 
 import './discover.scss'
 import * as api from '@/api'
@@ -59,26 +59,26 @@ class Discover extends Component {
   }
   
   render () {
+    const { match } = this.props
     const { tabs } = this.state
-    
+  
     return (
       <div className="discover">
         <DiscoverTab tabs={tabs}></DiscoverTab>
-        {/* {
-          this.state.tabs.map(({ path, component }, index) => {
-            let pathname = ''
-            if (index !== 0) {
-              pathname = `/${path}`
-            }
-            return (
-              <Route
-                key={index}
-                path={pathname}
-                component={component}
-              ></Route>
-            )
-          })
-        } */}
+        <Switch>
+          <Redirect exact from={match.url} to={`${match.url}${tabs[0].path}`}></Redirect>
+          {
+            tabs.map(({ path, component }, index) => {
+              return (
+                <Route
+                  key={index}
+                  path={path}
+                  component={component}
+                ></Route>
+              )
+            })
+          }
+        </Switch>
       </div>
     )
   }
