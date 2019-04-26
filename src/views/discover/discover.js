@@ -5,7 +5,7 @@ import './discover.scss'
 import * as api from '@/api'
 
 import DiscoverTab from './discover-tab/discover-tab'
-import PersonalRecommend from '@/views/personal-recommend/personal-recommend'
+import Recommend from '@/views/recommend/recommend'
 import SongSheet from '@/views/song-sheet/song-sheet'
 import Radio from '@/views/radio/radio'
 import RankingList from '@/views/ranking-list/ranking-list'
@@ -20,9 +20,9 @@ class Discover extends Component {
       tabs: [
         {
           label: '个性推荐',
-          // path: 'personal-recommend',
-          path: '/personal-recommend',
-          component: PersonalRecommend
+          // path: 'recommend',
+          path: '/recommend',
+          component: Recommend
         },
         {
           label: '歌单',
@@ -72,7 +72,7 @@ class Discover extends Component {
               return (
                 <Route
                   key={index}
-                  path={path}
+                  path={`${match.url}${path}`}
                   component={component}
                 ></Route>
               )

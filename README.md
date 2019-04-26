@@ -113,3 +113,5 @@ alias: {
 #### `history` object
 
 #### `state` `redux store` `this` `static`
+
+#### can React support feature like keep-alive in Vue? [#12039](https://github.com/facebook/react/issues/12039)
