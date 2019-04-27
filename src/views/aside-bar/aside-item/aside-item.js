@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import './aisde-item.scss'
 
 export default function AsideItem ({ label, icon, to }) {
@@ -19,4 +20,10 @@ export default function AsideItem ({ label, icon, to }) {
     >
     </Route>
   )
+}
+
+AsideItem.propTypes = {
+  label: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
 }

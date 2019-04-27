@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Link, withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import './discover-tab.scss'
 
@@ -28,6 +29,10 @@ function DiscoverTab ({ tabs, match }) {
       }
     </div>
   )
+}
+
+DiscoverTab.propTypes = {
+  tabs: PropTypes.array.isRequired
 }
 
 export default withRouter(DiscoverTab)

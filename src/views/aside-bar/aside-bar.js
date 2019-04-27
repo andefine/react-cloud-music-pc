@@ -1,29 +1,41 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import './aside-bar.scss'
 
 import AsideTitle from './aside-title/aside-title'
 import AsideItem from './aside-item/aside-item'
 
-function AsideBar ({ menus }) {
+function AsideBar ({ titles, menus }) {
   return (
     <aside className="aside-bar">
-      <AsideTitle>{menus.title}</AsideTitle>
       {
-        menus.menus.map(({ label, icon, path }, index) => {
-          return (
-            <AsideItem
-              key={index}
-              icon={icon}
-              label={label}
-              to={path}
-            ></AsideItem>
-          )
-        })
+        titles.map(({ label, menuName }, index) => (
+          <Fragment key={index}>
+            <AsideTitle>{label}</AsideTitle>
+            {
+              menus[`${menuName}Menus`].map(({ label, icon, path }, index) => {
+                return (
+                  <AsideItem
+                    key={index}
+                    icon={icon}
+                    label={label}
+                    to={path}
+                  ></AsideItem>
+                )
+              })
+            }
+          </Fragment>
+        ))
       }
     </aside>
   )
+}
+
+AsideBar.propTypes = {
+  titles: PropTypes.array.isRequired,
+  menus: PropTypes.object.isRequired
 }
 
 export default withRouter(AsideBar)

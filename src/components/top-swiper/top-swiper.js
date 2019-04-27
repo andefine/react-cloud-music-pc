@@ -14,13 +14,7 @@ export default class TopSwiper extends Component {
       },
       loop: true,
       centeredSlides: true,
-      slidesPerView: 3,
-      on: {
-        progress: function (progress) {
-          // console.log(progress)
-          // console.log(this.slides)
-        }
-      }
+      slidesPerView: 'auto'
     })
   }
   
