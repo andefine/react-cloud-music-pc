@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Switch, Redirect, Route, withRouter } from 'react-router-dom'
 
 import './discover.scss'
-import * as api from '@/api'
 
 import DiscoverTab from './discover-tab/discover-tab'
 import Recommend from '@/views/recommend/recommend'
@@ -51,11 +50,6 @@ class Discover extends Component {
         }
       ]
     }
-  }
-  
-  async componentDidMount () {
-    const banner = await api.getBanner()
-    console.log(banner)
   }
   
   render () {

@@ -1,0 +1,6 @@
+@import "./variable.scss";
+
+@mixin tab-content {
+  margin: 20px auto 0;
+  width: $tab-content-width;
+}
