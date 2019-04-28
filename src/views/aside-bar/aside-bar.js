@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
@@ -12,7 +12,7 @@ function AsideBar ({ titles, menus }) {
     <aside className="aside-bar">
       {
         titles.map(({ label, menuName }, index) => (
-          <Fragment key={index}>
+          <div className="aside-bar__part" key={index}>
             <AsideTitle>{label}</AsideTitle>
             {
               menus[`${menuName}Menus`].map(({ label, icon, path }, index) => {
@@ -26,7 +26,7 @@ function AsideBar ({ titles, menus }) {
                 )
               })
             }
-          </Fragment>
+          </div>
         ))
       }
     </aside>
