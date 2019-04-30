@@ -20,3 +20,12 @@ export const getBanners = () => (dispatch, getState) => {
       dispatch(receiveBanners(banners))
     })
 }
+
+export const receivePlaylists = () => {}
+
+export const getPlaylists = () => dispatch => {
+  return api.getRecommendPlaylist()
+    .then(res => {
+      
+    })
+}

@@ -5,3 +5,9 @@ export function getBanners () {
     url: '/banner'
   })
 }
+
+export function getRecommendPlaylist () {
+  return http({
+    url: '/personalized'
+  })
+}
