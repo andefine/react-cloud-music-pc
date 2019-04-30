@@ -1,40 +1,32 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-import './recommend.scss' 
-
+import './recommend.scss'
 import TopSwiper from '@/components/top-swiper/top-swiper'
-import * as api from '@/api'
 
-
-export default class PersonalRecommend extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      banners: []
-    }
-  }
-  
-  async componentDidMount () {
-    const { banners } = await api.getBanner()
-    this.setState({
-      banners
-    })
-  }
-  
-  render () {
-    const { banners } = this.state
-    
-    return (
-      <div className="recommend">
-        {
-          banners.length > 0 ? (
-            <TopSwiper list={banners}></TopSwiper>
-          ) : (
-            null
-          )
-        }
-      </div>
-    )
-  }
+function Recommend ({ banners }) {
+  return (
+    <div className="recommend">
+      {
+        banners.length > 0 ? (
+          <TopSwiper list={banners}></TopSwiper>
+        ) : (
+          null
+        )
+      }
+    </div>
+  )
 }
+
+Recommend.propTypes = {
+  banners: PropTypes.arrayOf(PropTypes.object).isRequired
+}
+
+const mapStateToProps = ({ recommend }) => ({
+  banners: recommend.banners
+})
+
+export default connect(
+  mapStateToProps
+)(Recommend)

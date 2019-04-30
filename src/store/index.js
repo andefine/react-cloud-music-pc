@@ -1,4 +1,15 @@
-import { createStore } from 'redux'
-import reducers from './reducers'
+import { createStore, applyMiddleware } from 'redux'
+import reducer from './reducers'
 
-export default createStore(reducers)
+import thunk from 'redux-thunk'
+import { createLogger } from 'redux-logger'
+
+const middleware = [thunk]
+if (process.env.NODE_ENV !== 'production') {
+  middleware.push(createLogger())
+}
+
+export default createStore(
+  reducer,
+  applyMiddleware(...middleware)
+)

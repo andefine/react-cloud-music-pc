@@ -1,16 +1,22 @@
-export const GET_BANNERS_BEGIN = 'GET_BANNERS_BEGIN'
-export const GET_BANNERS_SUCCESS = 'GET_BANNERS_SUCCESS'
-export const GET_BANNERS_FAILURE = 'GET_BANNERS_FAILURE'
+import * as api from '@/api'
+import {
+  RECEIVE_BANNERS
+} from './action-types'
 
-export function getBanners () {
-  return {
-    type: GET_BANNERS_BEGIN
-  }
-}
+export const receiveBanners = (banners) => ({
+  type: RECEIVE_BANNERS,
+  banners
+})
 
-export function receiveBanners (banners) {
-  return {
-    type: GET_BANNERS_SUCCESS,
-    banners
+export const getBanners = () => (dispatch, getState) => {
+  const { banners } = getState().recommend
+  
+  if (banners.length > 0) {
+    return Promise.resolve()
   }
+  
+  return api.getBanners()
+    .then(({ banners }) => {
+      dispatch(receiveBanners(banners))
+    })
 }

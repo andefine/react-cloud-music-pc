@@ -1,6 +1,6 @@
 import http from '@/utils/http'
 
-export function getBanner () {
+export function getBanners () {
   return http({
     url: '/banner'
   })

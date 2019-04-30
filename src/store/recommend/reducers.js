@@ -1,25 +1,25 @@
-import {
-  GET_BANNERS_BEGIN,
-  GET_BANNERS_SUCCESS,
-  // GET_BANNERS_FAILURE,
-} from './actions'
+import { combineReducers } from 'redux'
 
-export function banner (state = {
-  isFetching: false,
-  items: []
-}, action) {
+import {
+  RECEIVE_BANNERS
+} from './action-types'
+
+const initialState = {
+  banners: []
+}
+
+export function banners (state = initialState.banners, action) {
   switch (action.type) {
-    case GET_BANNERS_BEGIN:
-      return {
+    case RECEIVE_BANNERS:
+      return [
         ...state,
-        isFetching: true
-      }
-    case GET_BANNERS_SUCCESS:
-      return {
-        isFetching: false,
-        items: action.banners
-      }
+        ...action.banners
+      ]
     default:
       return state
   }
 }
+
+export default combineReducers({
+  banners
+})
