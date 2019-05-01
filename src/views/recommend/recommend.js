@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import './recommend.scss'
 import TopSwiper from '@/components/top-swiper/top-swiper'
+import CardTitle from '@/components/card-list-title/card-list-title'
 import RecommendPlaylist from './recommend-playlist/recommend-playlist'
 
 function Recommend ({ banners }) {
@@ -16,6 +17,7 @@ function Recommend ({ banners }) {
           null
         )
       }
+      <CardTitle title="推荐歌单"></CardTitle>
       <RecommendPlaylist></RecommendPlaylist>
     </div>
   )

@@ -1,13 +1,29 @@
 import React from 'react'
-
+import { connect } from 'react-redux'
 import './recommend-playlist.scss'
-import CardListTitle from '@/components/card-list-title/card-list-title'
+import { getShowPlaylists } from '@/store/recommend/selectors'
+import PlaylistCard from '@/components/playlist-card/playlist-card'
 
-export default function RecommendPlaylist () {
+function RecommendPlaylist ({ playlists }) {
   return (
     <div className="rc-playlist">
-      <CardListTitle title='推荐歌单'></CardListTitle>
-      
+      {
+        playlists.map(({ id, ...rest }) => {
+          return (
+            <PlaylistCard key={id} {...rest}></PlaylistCard>
+          )
+        })
+      }
     </div>
   )
 }
+
+const mapStateToProps = ({ recommend }) => {
+  return {
+    playlists: getShowPlaylists(recommend.playlists)
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(RecommendPlaylist)

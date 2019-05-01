@@ -1,14 +1,16 @@
 import { combineReducers } from 'redux'
 
 import {
-  RECEIVE_BANNERS
+  RECEIVE_BANNERS,
+  RECEIVE_PLAYLISTS
 } from './action-types'
 
 const initialState = {
-  banners: []
+  banners: [],
+  playlists: []
 }
 
-export function banners (state = initialState.banners, action) {
+function banners (state = initialState.banners, action) {
   switch (action.type) {
     case RECEIVE_BANNERS:
       return [
@@ -20,6 +22,19 @@ export function banners (state = initialState.banners, action) {
   }
 }
 
+const playlists = (state = initialState.playlists, action) => {
+  switch (action.type) {
+    case RECEIVE_PLAYLISTS:
+      return [
+        ...state,
+        ...action.playlists
+      ]
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
-  banners
+  banners,
+  playlists
 })

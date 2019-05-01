@@ -1,4 +1,7 @@
 .playlist-card {
   width: 194px;
-  
+  height: 270px;
+  &__img {
+    width: 100%;
+  }
 }

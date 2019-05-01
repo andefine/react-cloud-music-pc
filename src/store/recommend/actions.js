@@ -1,6 +1,7 @@
 import * as api from '@/api'
 import {
-  RECEIVE_BANNERS
+  RECEIVE_BANNERS,
+  RECEIVE_PLAYLISTS
 } from './action-types'
 
 export const receiveBanners = (banners) => ({
@@ -21,11 +22,14 @@ export const getBanners = () => (dispatch, getState) => {
     })
 }
 
-export const receivePlaylists = () => {}
+export const receivePlaylists = (playlists) => ({
+  type: RECEIVE_PLAYLISTS,
+  playlists
+})
 
-export const getPlaylists = () => dispatch => {
-  return api.getRecommendPlaylist()
-    .then(res => {
-      
-    })
+export const getPlaylists = () => {
+  return async (dispatch) => {
+    const { result } = await api.getRecommendPlaylist()
+    dispatch(receivePlaylists(result))
+  }
 }
