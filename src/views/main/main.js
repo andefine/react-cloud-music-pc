@@ -123,24 +123,26 @@ class Main extends Component {
           titles={asideTitles}
           menus={{ recommendMenus, myMusicMenus, createdSongSheetMenus }}
         ></AsideBar>
-        <Switch>
-          <Redirect exact from="/" to={recommendMenus[0].path}></Redirect>
-          {
-            [
-              ...recommendMenus,
-              ...myMusicMenus,
-              ...createdSongSheetMenus
-            ].map(({ path, component }, index) => {
-              return (
-                <Route
-                  key={index}
-                  path={path}
-                  component={component}
-                ></Route>
-              )
-            })
-          }
-        </Switch>
+        <div className="main__content">
+          <Switch>
+            <Redirect exact from="/" to={recommendMenus[0].path}></Redirect>
+            {
+              [
+                ...recommendMenus,
+                ...myMusicMenus,
+                ...createdSongSheetMenus
+              ].map(({ path, component }, index) => {
+                return (
+                  <Route
+                    key={index}
+                    path={path}
+                    component={component}
+                  ></Route>
+                )
+              })
+            }
+          </Switch>
+        </div>
       </main>
     )
   }

@@ -1,3 +1,5 @@
 .rc-playlist {
-  
+  display: grid;
+  grid-template-columns: 194px 194px 194px 194px 194px;
+  justify-content: space-between;
 }

@@ -1,0 +1,31 @@
+@import "@/styles/variable.scss";
+
+$width: 194px;
+$height: 270px;
+
+.daily-song {
+  width: $width;
+  height: $height;
+  &__pic {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: $width;
+    background: #fff;
+  }
+  &__weekday {
+    font-size: 18px;
+    color: $gray-font;
+  }
+  &__date {
+    font-size: 96px;
+    color: $theme;
+  }
+  &__name {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 18px;
+  }
+}
