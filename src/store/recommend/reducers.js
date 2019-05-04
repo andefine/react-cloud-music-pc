@@ -2,12 +2,14 @@ import { combineReducers } from 'redux'
 
 import {
   RECEIVE_BANNERS,
-  RECEIVE_PLAYLISTS
+  RECEIVE_PLAYLISTS,
+  RECEIVE_PRIVATE_CONTENTS
 } from './action-types'
 
 const initialState = {
   banners: [],
-  playlists: []
+  playlists: [],
+  privateContents: []
 }
 
 function banners (state = initialState.banners, action) {
@@ -34,7 +36,20 @@ const playlists = (state = initialState.playlists, action) => {
   }
 }
 
+const privateContents = (state = initialState.privateContents, action) => {
+  switch (action.type) {
+    case RECEIVE_PRIVATE_CONTENTS:
+      return [
+        ...state,
+        ...action.privateContents
+      ]
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   banners,
-  playlists
+  playlists,
+  privateContents
 })

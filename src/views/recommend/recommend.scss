@@ -2,4 +2,7 @@
 
 .recommend {
   @include tab-content;
+  &__only-title {
+    margin-top: 10px;
+  }
 }
