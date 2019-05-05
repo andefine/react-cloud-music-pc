@@ -1,12 +1,5 @@
 .private-content {
-  display: flex;
-  width: 80%;
-  height: 100px;
-  background: #444;
-  &__item {
-    margin-right: 10px;
-    width: 20%;
-    height: 100px;
-    background: #fff;
-  }
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 18px;
 }
