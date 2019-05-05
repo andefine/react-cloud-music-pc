@@ -7,9 +7,9 @@ import './aside-bar.scss'
 import AsideTitle from './aside-title/aside-title'
 import AsideItem from './aside-item/aside-item'
 
-function AsideBar ({ titles, menus }) {
+function AsideBar ({ titles, menus, className }) {
   return (
-    <aside className="aside-bar">
+    <aside className={`aside-bar ${className}`}>
       {
         titles.map(({ label, menuName }, index) => (
           <div className="aside-bar__part" key={index}>

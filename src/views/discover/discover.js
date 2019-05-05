@@ -59,20 +59,22 @@ class Discover extends Component {
     return (
       <div className="discover">
         <DiscoverTab tabs={tabs}></DiscoverTab>
-        <Switch>
-          <Redirect exact from={match.url} to={`${match.url}${tabs[0].path}`}></Redirect>
-          {
-            tabs.map(({ path, component }, index) => {
-              return (
-                <Route
-                  key={index}
-                  path={`${match.url}${path}`}
-                  component={component}
-                ></Route>
-              )
-            })
-          }
-        </Switch>
+        <div className="discover__content">
+          <Switch>
+            <Redirect exact from={match.url} to={`${match.url}${tabs[0].path}`}></Redirect>
+            {
+              tabs.map(({ path, component }, index) => {
+                return (
+                  <Route
+                    key={index}
+                    path={`${match.url}${path}`}
+                    component={component}
+                  ></Route>
+                )
+              })
+            }
+          </Switch>
+        </div>
       </div>
     )
   }

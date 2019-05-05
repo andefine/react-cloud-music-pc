@@ -10,8 +10,10 @@ const DailySong = () => {
   return (
     <div className="daily-song">
       <div className="daily-song__pic">
-        <span className="daily-song__weekday">{`星期${dayToWeekday(day)}`}</span>
-        <span className="daily-song__date">{date}</span>
+        <div className="daily-song__pic-content">
+          <span className="daily-song__weekday">{`星期${dayToWeekday(day)}`}</span>
+          <span className="daily-song__date">{date}</span>
+        </div>
       </div>
       <span className="daily-song__name">每日歌曲推荐</span>
     </div>

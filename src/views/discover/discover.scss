@@ -1,1 +1,7 @@
+@import "../../styles/mixin.scss";
 
+.discover {
+  &__content {
+    @include media-content-width;
+  }
+}

@@ -2,5 +2,17 @@
 
 @mixin tab-content {
   margin: 20px auto 0;
-  width: $tab-content-width;
+  // width: $tab-content-width;
+}
+
+@mixin media-content-width {
+  margin: 0 auto;
+  // 下面的 1040 是内容区域的最大宽度，
+  // 在 1040 这个临界点，浏览器的宽度正好是 1300
+  @media screen and (max-width: 1300px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 1300px) {
+    width: 1040px;
+  }
 }

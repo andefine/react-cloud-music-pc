@@ -120,6 +120,7 @@ class Main extends Component {
     return (
       <main className="main">
         <AsideBar
+          className="main__aside-bar"
           titles={asideTitles}
           menus={{ recommendMenus, myMusicMenus, createdSongSheetMenus }}
         ></AsideBar>
