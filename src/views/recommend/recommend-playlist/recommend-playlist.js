@@ -10,9 +10,16 @@ function RecommendPlaylist ({ playlists }) {
     <div className="rc-playlist">
       <DailySong></DailySong>
       {
-        playlists.map(({ id, ...rest }) => {
+        playlists.map(({ id, name, picUrl, playCount, copywriter }) => {
           return (
-            <PlaylistCard key={id} {...rest}></PlaylistCard>
+            <PlaylistCard
+              key={id}
+              id={id}
+              name={name}
+              picUrl={picUrl}
+              playCount={playCount}
+              copywriter={copywriter}
+            ></PlaylistCard>
           )
         })
       }

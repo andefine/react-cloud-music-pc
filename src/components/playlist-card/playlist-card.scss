@@ -1,11 +1,70 @@
 .playlist-card {
   position: relative;
   padding-top: 100%;
-  &__img {
+  &__img-link {
+    overflow: hidden;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
+    &:hover {
+      .playlist-card__play {
+        opacity: 1;
+      }
+      .playlist-card__count {
+        opacity: 0;
+      }
+      .playlist-card__copywriter {
+        transform: translateY(0);
+      }
+    }
+  }
+  &__img {
+    width: 100%;
+  }
+  &__count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    box-sizing: border-box;
+    padding-right: 6px;
+    width: 100%;
+    height: 20px;
+    text-align: right;
+    font-size: 12px;
+    background: linear-gradient(to right, rgba(#000, 0) 0%, rgba(#000, 0) 40%, rgba(#000, 0.3) 100%);
+  }
+  &__count-icon {
+    font-size: 12px;
+  }
+  &__count-num {
+    margin-left: 5px;
+  }
+  &__copywriter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    padding: 8px 8px;
+    width: 100%;
+    line-height: 18px;
+    background: rgba(#000, 0.5);
+    transform: translateY(-100%);
+    transition: all 0.4s 0.4s;
+  }
+  &__play {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    font-size: 26px;
+    line-height: 1;
+    background: rgba(#000, 0.4);
+    opacity: 0;
+    transition: all 0.2s 0.1s;
+    &:hover {
+      background: rgba(#000, 0.5);
+    }
   }
   &__name {
     display: block;
