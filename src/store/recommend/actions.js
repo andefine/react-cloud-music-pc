@@ -2,7 +2,8 @@ import * as api from '@/api'
 import {
   RECEIVE_BANNERS,
   RECEIVE_PLAYLISTS,
-  RECEIVE_PRIVATE_CONTENTS
+  RECEIVE_PRIVATE_CONTENTS,
+  RECEIVE_LATEST_MUSICS
 } from './action-types'
 
 /**
@@ -79,4 +80,29 @@ export const getPrivateContents = () => async (dispatch, getState) => {
 
   const { result } = await api.getPrivateContents()
   dispatch(receivePrivateContents(result))
+}
+
+/**
+ * 保存 最新音乐 数组
+ *
+ * @param {*} latestMusics
+ */
+const receiveLatestMusics = (latestMusics) => ({
+  type: RECEIVE_LATEST_MUSICS,
+  latestMusics
+})
+
+/**
+ * 异步获取 最新音乐。
+ * 如果已存在，不作请求
+ *
+ */
+export const getLatestMusics = () => async (dispatch, getState) => {
+  const { latestMusics } = getState().recommend
+  if (latestMusics.length > 0) {
+    return
+  }
+
+  const { result } = await api.getLatestMusics()
+  dispatch(receiveLatestMusics(result))
 }

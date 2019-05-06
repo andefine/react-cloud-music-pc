@@ -9,7 +9,7 @@ export const getBanners = () => http({
 })
 
 /**
- * 获取推荐歌单
+ * 获取 推荐歌单
  *
  */
 export const getRecommendPlaylist = () => http({
@@ -17,9 +17,17 @@ export const getRecommendPlaylist = () => http({
 })
 
 /**
- * 获取独家放送
+ * 获取 独家放送
  *
  */
 export const getPrivateContents = () => http({
   url: '/personalized/privatecontent'
+})
+
+/**
+ * 获取 最新音乐
+ *
+ */
+export const getLatestMusics = () => http({
+  url: '/personalized/newsong'
 })

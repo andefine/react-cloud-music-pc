@@ -8,7 +8,8 @@ import store from '@/store'
 import {
   getBanners,
   getPlaylists as getRecommendPlaylists,
-  getPrivateContents
+  getPrivateContents,
+  getLatestMusics
 } from '@/store/recommend/actions'
 
 import 'normalize.css'
@@ -20,6 +21,7 @@ import Layout from '@/views/layout/layout'
 store.dispatch(getBanners())
 store.dispatch(getRecommendPlaylists())
 store.dispatch(getPrivateContents())
+store.dispatch(getLatestMusics())
 
 ReactDOM.render(
   <Provider store={store}>
