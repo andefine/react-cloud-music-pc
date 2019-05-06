@@ -3,6 +3,7 @@
 .daily-song {
   position: relative;
   &__pic {
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,6 +12,11 @@
     padding-top: 100%;
     width: 100%;
     background: #fff;
+    &:hover {
+      .daily-song__tip {
+        transform: translateY(0);
+      }
+    }
   }
   &__pic-content {
     display: flex;
@@ -29,6 +35,19 @@
     font-size: 96px;
     line-height: 1;
     color: $theme;
+  }
+  &__tip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    padding: 6px 8px;
+    width: 100%;
+    font-size: 12px;
+    line-height: 18px;
+    background: rgba(#000, 0.5);
+    transform: translateY(-100%);
+    transition: all 0.4s 0.4s;
   }
   &__name {
     display: block;
