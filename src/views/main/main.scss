@@ -8,12 +8,4 @@
   &__aside-bar {
     flex-shrink: 0;
   }
-  &__content {
-    overflow: scroll;
-    flex-grow: 1;
-    padding: 0 30px;
-    min-width: 762px;
-    font-size: 14px;
-    line-height: 18px;
-  }
 }

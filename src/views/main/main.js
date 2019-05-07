@@ -3,14 +3,15 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 
 import './main.scss'
 
-import AsideBar from '../aside-bar/aside-bar'
-import Discover from '../discover/discover'
-import PersonalFm from '../personal-fm/personal-fm'
-import Video from '../video/video'
-import Friend from '../friend/friend'
-import LocalMusic from '../local-music/local-music'
-import Download from '../download/download'
-import Like from '../like/like'
+import AsideBar from '@/views/aside-bar/aside-bar'
+import Discover from '@/views/discover/discover'
+import PersonalFm from '@/views/personal-fm/personal-fm'
+import Video from '@/views/video/video'
+import Friend from '@/views/friend/friend'
+import LocalMusic from '@/views/local-music/local-music'
+import Download from '@/views/download/download'
+import Like from '@/views/like/like'
+import Playlist from '@/views/playlist/playlist'
 
 class Main extends Component {
   constructor (props) {
@@ -124,26 +125,28 @@ class Main extends Component {
           titles={asideTitles}
           menus={{ recommendMenus, myMusicMenus, createdSongSheetMenus }}
         ></AsideBar>
-        <div className="main__content">
-          <Switch>
-            <Redirect exact from="/" to={recommendMenus[0].path}></Redirect>
-            {
-              [
-                ...recommendMenus,
-                ...myMusicMenus,
-                ...createdSongSheetMenus
-              ].map(({ path, component }, index) => {
-                return (
-                  <Route
-                    key={index}
-                    path={path}
-                    component={component}
-                  ></Route>
-                )
-              })
-            }
-          </Switch>
-        </div>
+        <Switch>
+          <Redirect exact from="/" to={recommendMenus[0].path}></Redirect>
+          {
+            [
+              ...recommendMenus,
+              ...myMusicMenus,
+              ...createdSongSheetMenus
+            ].map(({ path, component }, index) => {
+              return (
+                <Route
+                  key={index}
+                  path={path}
+                  component={component}
+                ></Route>
+              )
+            })
+          }
+          <Route
+            path="/playlist"
+            component={Playlist}
+          ></Route>
+        </Switch>
       </main>
     )
   }
