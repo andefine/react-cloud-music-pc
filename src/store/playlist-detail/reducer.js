@@ -17,8 +17,10 @@ const isFetching = (state = initialState.isFetching, action) => {
   switch (action.type) {
     case GET_PLAYLIST_DETAIL:
       return true
-    default:
+    case RECEIVE_PLAYLIST_DETAIL:
       return false
+    default:
+      return state
   }
 }
 

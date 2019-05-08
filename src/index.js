@@ -18,10 +18,10 @@ import '@/styles/index.scss'
 
 import Layout from '@/views/layout/layout'
 
-// store.dispatch(getBanners())
-// store.dispatch(getRecommendPlaylists())
-// store.dispatch(getPrivateContents())
-// store.dispatch(getLatestMusics())
+store.dispatch(getBanners())
+store.dispatch(getRecommendPlaylists())
+store.dispatch(getPrivateContents())
+store.dispatch(getLatestMusics())
 
 ReactDOM.render(
   <Provider store={store}>
