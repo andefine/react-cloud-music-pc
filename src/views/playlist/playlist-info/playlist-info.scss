@@ -1,0 +1,15 @@
+.playlist-info {
+  display: flex;
+  padding: 30px;
+
+  &__cover-img {
+    width: 198px;
+    height: 198px;
+  }
+
+  &__avatar-img {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+  }
+}
