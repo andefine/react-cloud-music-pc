@@ -3,6 +3,8 @@
   padding: 30px;
 
   &__cover-img {
+    flex-shrink: 0;
+    margin-right: 30px;
     width: 198px;
     height: 198px;
   }

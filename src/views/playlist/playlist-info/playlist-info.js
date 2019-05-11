@@ -37,10 +37,14 @@ const PlaylistInfo = ({ playlist }) => {
     coverImgUrl,
     name,
     creator,
-    createTime
+    createTime,
+    tags,
+    description
   } = playlist
 
   const { avatarUrl, nickname } = creator
+  const arr = description.split('\n')
+  console.log(arr)
   
   return (
     <div className="playlist-info">
@@ -64,10 +68,23 @@ const PlaylistInfo = ({ playlist }) => {
         </div>
 
         <div className="playlist-info__btns">
+          <IconButton icon="btn-play">播放全部</IconButton>
           <IconButton icon="yibaocun">已收藏</IconButton>
           <IconButton icon="share">分享</IconButton>
           <IconButton icon="download">下载全部</IconButton>
         </div>
+
+        <div className="tags">
+          标签： {
+            tags.join('/')
+          }
+        </div>
+
+        <div
+          className="desc"
+          // 这里的简介可能会出现换行的情况
+          dangerouslySetInnerHTML={{ __html: `简介： ${description.replace(/\n/g, '<br>')}` }}
+        ></div>
 
       </div>
       
