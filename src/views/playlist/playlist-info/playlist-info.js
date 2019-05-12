@@ -4,6 +4,7 @@ import './playlist-info.scss'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import IconButton from '@/components/icon-button/icon-button'
+import { numToTenThousand } from '@/utils'
 
 /**
  * 将个位数添零
@@ -39,7 +40,9 @@ const PlaylistInfo = ({ playlist }) => {
     creator,
     createTime,
     tags,
-    description
+    description,
+    trackCount,
+    playCount
   } = playlist
 
   const { avatarUrl, nickname } = creator
@@ -53,8 +56,22 @@ const PlaylistInfo = ({ playlist }) => {
       <div className="playlist-info__right">
 
         <div className="playlist-info__title">
-          <div className="playlist-info__title-tag">歌单</div>
-          {name}
+          <span className="playlist-info__title-tag">歌单</span>
+          <span className="playlist-info__title-label">{name}</span>
+          <div className="playlist-info__count">
+            <div className="playlist-info__count-item">
+              <span className="playlist-info__count-label">歌曲数</span>
+              <span className="playlist-info__count-num">
+                {numToTenThousand(trackCount)}
+              </span>
+            </div>
+            <div className="playlist-info__count-item">
+              <span className="playlist-info__count-label">播放数</span>
+              <span className="playlist-info__count-num">
+                {numToTenThousand(playCount)}万
+              </span>
+            </div>
+          </div>
         </div>
 
         <div className="playlist-info__creator">
@@ -75,15 +92,15 @@ const PlaylistInfo = ({ playlist }) => {
         </div>
 
         <div className="tags">
-          标签： {
-            tags.join('/')
-          }
+          标签： {tags.join('/')}
         </div>
 
         <div
           className="desc"
           // 这里的简介可能会出现换行的情况
-          dangerouslySetInnerHTML={{ __html: `简介： ${description.replace(/\n/g, '<br>')}` }}
+          dangerouslySetInnerHTML={
+            { __html: `简介： ${description.replace(/\n/g, '<br>')}` }
+          }
         ></div>
 
       </div>
