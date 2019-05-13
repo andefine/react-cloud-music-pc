@@ -1,5 +1,25 @@
+@import "@/styles/variable.scss";
+
+$bg: #2c2e32;
+
 .icon-button {
-  outline: none;
-  border: 0;
-  background: #25272b;
+  border-radius: 4px;
+  padding: 0 10px;
+  line-height: 24px;
+  color: $font;
+  background: rgba($color: $bg, $alpha: 0.7);
+  cursor: pointer;
+
+  &:hover {
+    background: $bg;
+  }
+  &:hover .icon-button__icon {
+    opacity: $font-opacity;
+  }
+  
+  &__icon {
+    margin-right: 5px;
+    font-size: 14px;
+    opacity: 0.6;
+  }
 }

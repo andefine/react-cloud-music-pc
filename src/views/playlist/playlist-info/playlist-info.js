@@ -1,8 +1,9 @@
 // 歌单详情页，头部的信息部分
-import React from 'react'
-import './playlist-info.scss'
+import React, { Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import './playlist-info.scss'
 import IconButton from '@/components/icon-button/icon-button'
 import { numToTenThousand } from '@/utils'
 
@@ -37,12 +38,14 @@ const PlaylistInfo = ({ playlist }) => {
   const {
     coverImgUrl,
     name,
+    trackCount,
+    playCount,
     creator,
     createTime,
+    subscribedCount,
+    shareCount,
     tags,
-    description,
-    trackCount,
-    playCount
+    description
   } = playlist
 
   const { avatarUrl, nickname } = creator
@@ -85,18 +88,42 @@ const PlaylistInfo = ({ playlist }) => {
         </div>
 
         <div className="playlist-info__btns">
-          <IconButton icon="btn-play">播放全部</IconButton>
-          <IconButton icon="yibaocun">已收藏</IconButton>
-          <IconButton icon="share">分享</IconButton>
-          <IconButton icon="download">下载全部</IconButton>
+          <IconButton
+            className="playlist-info__btn-item"
+            icon="btn-play"
+          >播放全部</IconButton>
+          <IconButton
+            className="playlist-info__btn-item"
+            icon="yibaocun"
+          >已收藏({subscribedCount})</IconButton>
+          <IconButton
+            className="playlist-info__btn-item"
+            icon="share"
+          >分享({shareCount})</IconButton>
+          <IconButton
+            className="playlist-info__btn-item"
+            icon="download"
+          >下载全部</IconButton>
         </div>
 
-        <div className="tags">
-          标签： {tags.join('/')}
+        <div className="playlist-info__tags">
+          标签： {
+            tags.map((item, index) => {
+              return (
+                <Fragment key={index}>
+                  {index === 0 ? '' : ' / '}
+                  <Link
+                    className="playlist-info__tags-item"
+                    to=""
+                  >{item}</Link>
+                </Fragment>
+              )
+            })
+          }
         </div>
 
         <div
-          className="desc"
+          className="playlist-info__desc"
           // 这里的简介可能会出现换行的情况
           dangerouslySetInnerHTML={
             { __html: `简介： ${description.replace(/\n/g, '<br>')}` }

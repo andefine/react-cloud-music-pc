@@ -17,7 +17,7 @@
   }
   &__title-tag {
     flex-shrink: 0;
-    margin: 4px 6px 0 0;
+    margin: 5px 6px 0 0;
     box-sizing: border-box;
     border-radius: 1px;
     border: 1px solid $light-theme;
@@ -36,6 +36,7 @@
   &__count {
     flex-shrink: 0;
     display: flex;
+    margin-top: 4px;
   }
   &__count-item {
     display: flex;
@@ -55,9 +56,43 @@
     font-size: 11px;
   }
 
+  &__creator {
+    display: flex;
+    align-items: center;
+    margin-top: 9px;
+  }
   &__avatar-img {
     border-radius: 50%;
     width: 30px;
     height: 30px;
+  }
+  &__nickname {
+    margin-left: 9px;
+    font-size: 13px;  
+    color: $gray-font;
+  }
+  &__create-time {
+    margin-left: 16px;
+    color: $gray-font;
+    opacity: 0.6;
+  }
+
+  &__btns {
+    margin-top: 18px;
+  }
+  &__btn-item {
+    margin-right: 11px;
+  }
+
+  &__tags {
+    margin-top: 24px;
+  }
+  &__tags-item {
+    color: $blue;
+  }
+
+  &__desc {
+    margin-top: 12px;
+    line-height: 16px;
   }
 }
