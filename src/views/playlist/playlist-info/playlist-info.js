@@ -5,20 +5,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import './playlist-info.scss'
 import IconButton from '@/components/icon-button/icon-button'
-import { numToTenThousand } from '@/utils'
-
-/**
- * 将个位数添零
- *
- * @param {*} num
- * @returns {String}
- */
-const addZero = (num) => {
-  if (num > 9) {
-    return '' + num
-  }
-  return '0' + num
-}
+import { addZero, numToTenThousand } from '@/utils'
 
 /**
  * 将时间戳生成 年月日 字符串。

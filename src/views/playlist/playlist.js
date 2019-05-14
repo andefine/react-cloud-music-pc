@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import './playlist.scss'
 import { getPlaylistDetailIfNeeded } from '@/store/playlist-detail/actions'
 import PlaylistInfo from './playlist-info/playlist-info'
 import PlaylistTab from './playlist-tab/playlist-tab'
+import PlaylistTable from './playlist-table/playlist-table'
+import './playlist.scss'
 
 class Playlist extends Component {
   componentDidMount () {
@@ -38,6 +39,7 @@ class Playlist extends Component {
       <div className="playlist">
         <PlaylistInfo></PlaylistInfo>
         <PlaylistTab></PlaylistTab>
+        <PlaylistTable></PlaylistTable>
       </div>
     )
   }
