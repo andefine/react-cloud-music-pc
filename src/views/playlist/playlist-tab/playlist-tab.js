@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import Search from '@/components/search/search'
 import './playlist-tab.scss'
 
 const PlaylistTab = ({ commentCount }) => (
@@ -20,6 +21,11 @@ const PlaylistTab = ({ commentCount }) => (
         to=""
       >收藏者</Link>
     </div>
+
+    <Search
+      className="playlist-tab__search"
+      placeholder="搜索歌单音乐"
+    ></Search>
   </div>
 )
 

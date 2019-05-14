@@ -1,0 +1,42 @@
+@import "@/styles/variable.scss";
+
+$height: 22px;
+$bg: #161618;
+
+.search {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 22px;
+  height: $height;
+  min-width: 100px;
+  font-size: 12px;
+  background: $bg;
+  &__input {
+    box-sizing: border-box;
+    border: 0;
+    padding: 0 30px 0 10px;
+    height: 100%;
+    width: 100%;
+    font-size: inherit;
+    color: inherit;
+    background: transparent;
+    &::placeholder {
+      color: $placeholder;
+    }
+  }
+  &__i {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    font-size: 13px;
+    color: #fff;
+    opacity: 0.3;
+    transform: translateY(-50%);
+    cursor: pointer;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}

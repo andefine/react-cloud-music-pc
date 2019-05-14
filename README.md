@@ -115,3 +115,5 @@ alias: {
 #### `state` `redux store` `this` `static`
 
 #### can React support feature like keep-alive in Vue? [#12039](https://github.com/facebook/react/issues/12039)
+
+#### 自定义组件使用 className ，引用时注意顺序，才能覆盖组件内部样式
