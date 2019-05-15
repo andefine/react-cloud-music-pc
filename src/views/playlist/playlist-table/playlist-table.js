@@ -30,8 +30,11 @@ const PlaylistTable = ({ tracks }) => (
         tracks.map((item, index) => {
           return (
             <tr key={item.id}>
-              <td>{index}</td>
-              <td>{'ops'}</td>
+              <td>{addZero(index)}</td>
+              <td>
+                <i className="playlist-table__like iconfont icon-like"></i>
+                <i className="playlist-table__download iconfont icon-download"></i>
+              </td>
               <td>{item.name}</td>
               <td>{item.ar[0].name}</td>
               <td>{item.al.name}</td>

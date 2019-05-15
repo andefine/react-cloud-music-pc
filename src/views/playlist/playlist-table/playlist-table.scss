@@ -1,0 +1,86 @@
+@import "@/styles/variable.scss";
+
+$table-border: #23262c;
+
+$table-row-bg: #1a1c20;
+$table-row-hover-bg: #232529;
+
+.playlist-table {
+  border-collapse: collapse;
+  width: 100%;
+  color: $gray-font;
+
+  thead {
+    tr {
+      th {
+        box-sizing: border-box;
+        border: 1px solid $table-border;
+        padding-left: 9px;
+        height: 28px;
+        font-weight: normal;
+        text-align: left;
+        &:nth-of-type(1) {
+          border-left: 0;
+          width: 50px;
+        }
+        &:nth-of-type(2) {
+          width: 57px;
+        }
+        &:last-of-type {
+          border-right: 0;
+        }
+      }
+    }
+  }
+
+  tbody {
+    tr {
+
+      &:nth-of-type(2n) {
+        background: $table-row-bg;
+      }
+
+      &:hover {
+        background: $table-row-hover-bg;
+
+        td:nth-of-type(4), td:nth-of-type(5) {
+          color: $font;
+        }
+      }
+
+      td {
+        height: 28px;
+        &:nth-of-type(n+3) {
+          padding-left: 9px;
+        }
+        &:nth-of-type(1) {
+          padding-right: 7px;
+          text-align: right;
+        }
+        &:nth-of-type(2) {
+          text-align: center;
+        }
+        &:nth-of-type(3) {
+          color: $font;
+        }
+        &:nth-of-type(4) {
+          cursor: pointer;
+        }
+        &:nth-of-type(5) {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  &__like, &__download {
+    font-size: 12px;
+    cursor: pointer;
+    &:hover {
+      color: rgba($font, 0.7);
+    }
+  }
+  &__download {
+    margin-left: 8px;
+  }
+}
