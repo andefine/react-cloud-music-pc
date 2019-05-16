@@ -1,14 +1,19 @@
 @import "@/styles/variable.scss";
+@import "@/styles/mixin.scss";
 
 .header-menu {
   border-right: 1px solid $dark-bg;
   padding-right: 18px;
   height: 20px;
   &__i {
+    @include hoverable-gray;
     margin-right: 26px;
     font-size: 16px;
     &:last-of-type {
       margin-right: 0;
     }
+  }
+  &__right {
+    padding-left: 18px;
   }
 }

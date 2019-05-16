@@ -19,6 +19,7 @@ export default class HomeHeader extends Component {
         <div className="main-header__right">
           <UserAvatar></UserAvatar>
           <HeaderMenu className="main-header__menu"></HeaderMenu>
+          
         </div>
       </header>
     )

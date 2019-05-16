@@ -1,6 +1,6 @@
 /**** 颜色变量 ****/
 
-// 下面三个就是三种红色，由深到浅
+// 三种红色，由深到浅
 $dark-theme: #660404;
 $theme: #b82525; // 一般红色都用这个
 $light-theme: #cd2929; // 一般 hover 的红色用这个
@@ -31,4 +31,9 @@ $blue: #2e6bb0;
 
 /**** 长度变量 ****/
 
-$tab-content-width: 1040px;
+// 最小状态下的宽高
+$app-min-width: 1022px;
+$app-min-height: 670px;
+
+// 像 `个性推荐` `歌单` 这种 tab 下主要内容的最大宽度
+$tab-content-max-width: 1040px;

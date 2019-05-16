@@ -1,4 +1,5 @@
 @import "@/styles/variable.scss";
+@import "@/styles/mixin.scss";
 
 $height: 22px;
 $bg: #161618;
@@ -27,16 +28,11 @@ $bg: #161618;
     }
   }
   &__i {
+    @include hoverable-gray;
     position: absolute;
     top: 50%;
     right: 10px;
     font-size: 13px;
-    color: #fff;
-    opacity: 0.3;
     transform: translateY(-50%);
-    cursor: pointer;
-    &:hover {
-      opacity: 0.7;
-    }
   }
 }
