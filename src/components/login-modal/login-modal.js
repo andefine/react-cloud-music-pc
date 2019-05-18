@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import './login-modal.scss'
 
 class LoginModal extends Component {
   render () {
+    const { isLoginShow } = this.props
+
+    if (!isLoginShow) {
+      return null
+    }
+    
     return (
       <div className="login">
         <div className="login__input-area">
@@ -29,4 +36,10 @@ class LoginModal extends Component {
   }
 }
 
-export default LoginModal
+const mapStateToProps = ({ user: { isLoginShow } }) => ({
+  isLoginShow
+})
+
+export default connect(
+  mapStateToProps
+)(LoginModal)

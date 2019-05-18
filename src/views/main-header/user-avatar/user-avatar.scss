@@ -7,12 +7,13 @@ $avatar-color: #e1e3e4;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: $size;
 
   &:hover {
     cursor: pointer;
   }
   
-  &__i {
+  &__i, &__avatar {
     display: block;
     border-radius: 100%;
     width: $size;
@@ -26,6 +27,7 @@ $avatar-color: #e1e3e4;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
     &:hover {
       .user-avatar__triangle {
         border-top-color: $font;
@@ -43,7 +45,7 @@ $avatar-color: #e1e3e4;
   &__triangle {
     width: 0;
     height: 0;
-    border-top: 4px solid $gray-font;
+    border-top: 4px solid rgba($font, $font-opacity);
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
   }
