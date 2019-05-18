@@ -10,7 +10,10 @@ if (process.env.NODE_ENV === 'production') {
 
 const http = axios.create({
   // 超时时间，单位 ms ，默认为 0
-  timeout: 10000
+  timeout: 10000,
+  // 是否带上 credentials，默认为 false。
+  // 这个很重要，一定要这样设置
+  withCredentials: true
 })
 
 // 添加请求拦截器

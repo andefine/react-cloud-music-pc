@@ -8,8 +8,9 @@ class UserAvatar extends Component {
   static propTypes = {
     profile: PropTypes.shape({
       avatarUrl: PropTypes.string,
-      nickname: PropTypes.string
-    })
+      nickname: PropTypes.string,
+    }),
+    showLoginModal: PropTypes.func.isRequired
   }
   
   render () {

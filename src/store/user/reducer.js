@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import {
   SHOW_LOGIN_MODAL,
   HIDE_LOGIN_MODAL,
-  RECEIVE_LOGIN_INFO
+  RECEIVE_PROFILE
 } from './action-types'
 
 const initialState = {
@@ -33,11 +33,11 @@ const isLoginShow = (state = initialState.isLoginShow, { type }) => {
 //   }
 // }
 
-const profile = (state = initialState.profile, { type, payload }) => {
+const profile = (state = initialState.profile, { type, profile }) => {
   switch (type) {
-    case RECEIVE_LOGIN_INFO:
+    case RECEIVE_PROFILE:
       return {
-        ...payload.profile
+        ...profile
       }
     default:
       return state
