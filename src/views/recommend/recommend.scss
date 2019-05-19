@@ -2,6 +2,11 @@
 
 .recommend {
   @include tab-content;
+
+  &__loading {
+    margin-top: 200px;
+  }
+  
   &__only-title {
     margin-top: 10px;
   }

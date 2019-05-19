@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { numToTenThousand } from '@/utils'
+import { formatPlayCount } from '@/utils'
 import './playlist-card.scss'
 
 const PlaylistCard = ({ id, name, picUrl, playCount, copywriter }) => (
@@ -13,7 +13,7 @@ const PlaylistCard = ({ id, name, picUrl, playCount, copywriter }) => (
       <img className="playlist-card__img" src={picUrl} alt=""/>
       <div className="playlist-card__count">
         <i className="playlist-card__count-icon iconfont icon-earphone"></i>
-        <span className="playlist-card__count-num">{numToTenThousand(playCount)}万</span>
+        <span className="playlist-card__count-num">{formatPlayCount(playCount)}</span>
       </div>
       <span className="playlist-card__copywriter">{copywriter}</span>
       <i className="playlist-card__play iconfont icon-play"></i>

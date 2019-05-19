@@ -22,7 +22,12 @@ class Recommend extends Component {
     const { banners } = this.props
 
     if (banners.length === 0) {
-      return <Loading text="正在为你生成个性推荐..."></Loading>
+      return (
+        <Loading
+          className="recommend__loading"
+          text="正在为你生成个性推荐..."
+        ></Loading>
+      )
     }
   
     return (

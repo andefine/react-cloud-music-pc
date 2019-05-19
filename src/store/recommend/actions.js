@@ -25,14 +25,12 @@ export const getRecommendData = () => async (dispatch) => {
     api.getPrivateContents(),
     api.getLatestMusics()
   ])
-  console.time('reqs')
   const [
     { banners },
     { result: playlists },
     { result: privateContents },
     { result: latestMusics }
   ] = await reqs
-  console.timeEnd('reqs')
 
   dispatch(receiveData({
     banners,

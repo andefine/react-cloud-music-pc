@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import './playlist-info.scss'
 import IconButton from '@/components/icon-button/icon-button'
-import { addZero, numToTenThousand } from '@/utils'
+import { addZero, formatPlayCount } from '@/utils'
 
 /**
  * 将时间戳生成 年月日 字符串。
@@ -50,13 +50,13 @@ const PlaylistInfo = ({ playlist }) => {
             <div className="playlist-info__count-item">
               <span className="playlist-info__count-label">歌曲数</span>
               <span className="playlist-info__count-num">
-                {numToTenThousand(trackCount)}
+                {trackCount}
               </span>
             </div>
             <div className="playlist-info__count-item">
               <span className="playlist-info__count-label">播放数</span>
               <span className="playlist-info__count-num">
-                {numToTenThousand(playCount)}万
+                {formatPlayCount(playCount)}
               </span>
             </div>
           </div>
