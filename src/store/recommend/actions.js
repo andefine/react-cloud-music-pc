@@ -1,108 +1,43 @@
 import * as api from '@/api'
 import {
-  RECEIVE_BANNERS,
-  RECEIVE_PLAYLISTS,
-  RECEIVE_PRIVATE_CONTENTS,
-  RECEIVE_LATEST_MUSICS
+  RECEIVE_DATA
 } from './action-types'
 
-/**
- * 保存 banner( 轮播图 ) 数据
- *
- * @param {Array} banners
- */
-const receiveBanners = (banners) => ({
-  type: RECEIVE_BANNERS,
-  banners
-})
-
-/**
- * 异步获取 banner( 轮播图 ) 数据。
- * 如果数据已存在，无需请求，不作任何操作。
- *
- */
-export const getBanners = () => async (dispatch, getState) => {
-  const { banners } = getState().recommend
-  
-  if (banners.length > 0) {
-    return
-  }
-
-  const { banners: newBanners } = await api.getBanners()
-  dispatch(receiveBanners(newBanners))
-}
-
-/**
- * 保存 推荐歌单
- *
- * @param {*} playlists
- */
-const receivePlaylists = (playlists) => ({
-  type: RECEIVE_PLAYLISTS,
-  playlists
-})
-
-/**
- * 异步获取 推荐歌单。
- * 如果数据已经存在，无需请求，不作任何操作
- *
- */
-export const getPlaylists = () => async (dispatch, getState) => {
-  const { playlists } = getState().recommend
-  if (playlists.length > 0) {
-    return
-  }
-
-  const { result } = await api.getRecommendPlaylist()
-  dispatch(receivePlaylists(result))
-}
-
-/**
- * 保存 独家放送 数据
- *
- * @param {*} privateContents
- */
-const receivePrivateContents = (privateContents) => ({
-  type: RECEIVE_PRIVATE_CONTENTS,
-  privateContents
-})
-
-/**
- * 异步获取 独家放送 数据。
- * 如果数据已存在，不作请求
- *
- */
-export const getPrivateContents = () => async (dispatch, getState) => {
-  const { privateContents } = getState().recommend
-  if (privateContents.length > 0) {
-    return
-  }
-
-  const { result } = await api.getPrivateContents()
-  dispatch(receivePrivateContents(result))
-}
-
-/**
- * 保存 最新音乐 数组
- *
- * @param {*} latestMusics
- */
-const receiveLatestMusics = (latestMusics) => ({
-  type: RECEIVE_LATEST_MUSICS,
+const receiveData = ({
+  banners,
+  playlists,
+  privateContents,
   latestMusics
+}) => ({
+  type: RECEIVE_DATA,
+  payload: {
+    banners,
+    playlists,
+    privateContents,
+    latestMusics
+  }
 })
 
-/**
- * 异步获取 最新音乐。
- * 如果已存在，不作请求
- *
- */
-export const getLatestMusics = () => async (dispatch, getState) => {
-  const { latestMusics } = getState().recommend
-  if (latestMusics.length > 0) {
-    return
-  }
+export const getRecommendData = () => async (dispatch) => {
+  const reqs = Promise.all([
+    api.getBanners(),
+    api.getRecommendPlaylist(),
+    api.getPrivateContents(),
+    api.getLatestMusics()
+  ])
+  console.time('reqs')
+  const [
+    { banners },
+    { result: playlists },
+    { result: privateContents },
+    { result: latestMusics }
+  ] = await reqs
+  console.timeEnd('reqs')
 
-  const { result } = await api.getLatestMusics()
-  dispatch(receiveLatestMusics(result))
+  dispatch(receiveData({
+    banners,
+    playlists,
+    privateContents,
+    latestMusics
+  }))
 }

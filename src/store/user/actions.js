@@ -1,8 +1,7 @@
 import {
   SHOW_LOGIN_MODAL,
   HIDE_LOGIN_MODAL,
-  RECEIVE_PROFILE,
-  RECEIVE_LOGIN_INFO
+  RECEIVE_PROFILE
 } from './action-types'
 import * as api from '@/api'
 
@@ -13,14 +12,6 @@ export const showLoginModal = () => ({
 export const hideLoginModal = () => ({
   type: HIDE_LOGIN_MODAL
 })
-
-// const receiveLoginInfo = (account, profile) => ({
-//   type: RECEIVE_LOGIN_INFO,
-//   payload: {
-//     account,
-//     profile
-//   }
-// })
 
 const receiveProfile = (profile) => ({
   type: RECEIVE_PROFILE,

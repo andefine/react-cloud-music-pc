@@ -1,10 +1,7 @@
 import { combineReducers } from 'redux'
 
 import {
-  RECEIVE_BANNERS,
-  RECEIVE_PLAYLISTS,
-  RECEIVE_PRIVATE_CONTENTS,
-  RECEIVE_LATEST_MUSICS
+  RECEIVE_DATA
 } from './action-types'
 
 const initialState = {
@@ -14,48 +11,48 @@ const initialState = {
   latestMusics: []
 }
 
-const banners = (state = initialState.banners, action) => {
-  switch (action.type) {
-    case RECEIVE_BANNERS:
+const banners = (state = initialState.banners, { type, payload }) => {
+  switch (type) {
+    case RECEIVE_DATA:
       return [
         ...state,
-        ...action.banners
+        ...payload.banners
       ]
     default:
       return state
   }
 }
 
-const playlists = (state = initialState.playlists, action) => {
-  switch (action.type) {
-    case RECEIVE_PLAYLISTS:
+const playlists = (state = initialState.playlists, { type, payload }) => {
+  switch (type) {
+    case RECEIVE_DATA:
       return [
         ...state,
-        ...action.playlists
+        ...payload.playlists
       ]
     default:
       return state
   }
 }
 
-const privateContents = (state = initialState.privateContents, action) => {
-  switch (action.type) {
-    case RECEIVE_PRIVATE_CONTENTS:
+const privateContents = (state = initialState.privateContents, { type, payload }) => {
+  switch (type) {
+    case RECEIVE_DATA:
       return [
         ...state,
-        ...action.privateContents
+        ...payload.privateContents
       ]
     default:
       return state
   }
 }
 
-const latestMusics = (state = initialState.latestMusics, action) => {
-  switch (action.type) {
-    case RECEIVE_LATEST_MUSICS:
+const latestMusics = (state = initialState.latestMusics, { type, payload }) => {
+  switch (type) {
+    case RECEIVE_DATA:
       return [
         ...state,
-        ...action.latestMusics
+        ...payload.latestMusics
       ]
     default:
       return state

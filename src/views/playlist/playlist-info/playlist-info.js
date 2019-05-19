@@ -36,8 +36,6 @@ const PlaylistInfo = ({ playlist }) => {
   } = playlist
 
   const { avatarUrl, nickname } = creator
-  const arr = description.split('\n')
-  console.log(arr)
   
   return (
     <div className="playlist-info">

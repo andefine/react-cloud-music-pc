@@ -7,7 +7,6 @@ import {
 
 const initialState = {
   isLoginShow: false,
-  // account: {},
   profile: {}
 }
 
@@ -21,17 +20,6 @@ const isLoginShow = (state = initialState.isLoginShow, { type }) => {
       return state
   }
 }
-
-// const account = (state = initialState.account, { type, payload }) => {
-//   switch (type) {
-//     case RECEIVE_LOGIN_INFO:
-//       return {
-//         ...payload.account
-//       }
-//     default:
-//       return state
-//   }
-// }
 
 const profile = (state = initialState.profile, { type, profile }) => {
   switch (type) {
