@@ -5,12 +5,15 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import { Provider } from 'react-redux'
 import store from '@/store'
+import { loginStraight } from '@/store/user/actions'
 
 import 'normalize.css'
 import '@/iconfont/iconfont.css'
 import '@/styles/index.scss'
 
 import Layout from '@/views/layout/layout'
+
+store.dispatch(loginStraight())
 
 ReactDOM.render(
   <Provider store={store}>

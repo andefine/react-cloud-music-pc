@@ -21,7 +21,7 @@ export default class extends Component {
     
     return (
       <div
-        className={ className ? `search ${className}` : 'search' }
+        className={ `search ${className || ''}` }
       >
         <input
           className="search__input"

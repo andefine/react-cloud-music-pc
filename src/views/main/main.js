@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
-
-import './main.scss'
-
+import FooterPlay from '@/components/footer-play/footer-play'
 import AsideBar from '@/views/aside-bar/aside-bar'
 import Discover from '@/views/discover/discover'
 import PersonalFm from '@/views/personal-fm/personal-fm'
@@ -12,6 +10,7 @@ import LocalMusic from '@/views/local-music/local-music'
 import Download from '@/views/download/download'
 import Like from '@/views/like/like'
 import Playlist from '@/views/playlist/playlist'
+import './main.scss'
 
 class Main extends Component {
   constructor (props) {
@@ -116,37 +115,45 @@ class Main extends Component {
   }
   
   render () {
-    const { asideTitles, recommendMenus, myMusicMenus, createdSongSheetMenus } = this.state
+    const {
+      asideTitles,
+      recommendMenus,
+      myMusicMenus,
+      createdSongSheetMenus
+    } = this.state
 
     return (
       <main className="main">
-        <AsideBar
-          className="main__aside-bar"
-          titles={asideTitles}
-          menus={{ recommendMenus, myMusicMenus, createdSongSheetMenus }}
-        ></AsideBar>
-        <Switch>
-          <Redirect exact from="/" to={recommendMenus[0].path}></Redirect>
-          {
-            [
-              ...recommendMenus,
-              ...myMusicMenus,
-              ...createdSongSheetMenus
-            ].map(({ path, component }, index) => {
-              return (
-                <Route
-                  key={index}
-                  path={path}
-                  component={component}
-                ></Route>
-              )
-            })
-          }
-          <Route
-            path="/playlist"
-            component={Playlist}
-          ></Route>
-        </Switch>
+        <div className="main__area">
+          <AsideBar
+            className="main__aside-bar"
+            titles={asideTitles}
+            menus={{ recommendMenus, myMusicMenus, createdSongSheetMenus }}
+          ></AsideBar>
+          <Switch>
+            <Redirect exact from="/" to={recommendMenus[0].path}></Redirect>
+            {
+              [
+                ...recommendMenus,
+                ...myMusicMenus,
+                ...createdSongSheetMenus
+              ].map(({ path, component }, index) => {
+                return (
+                  <Route
+                    key={index}
+                    path={path}
+                    component={component}
+                  ></Route>
+                )
+              })
+            }
+            <Route
+              path="/playlist"
+              component={Playlist}
+            ></Route>
+          </Switch>
+        </div>
+        <FooterPlay></FooterPlay>
       </main>
     )
   }

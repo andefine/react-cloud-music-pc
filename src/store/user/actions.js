@@ -23,18 +23,14 @@ export const loginByPhone = (phone, password) => async () => {
 }
 
 export const loginStraight = () => async (dispatch) => {
-  const { code, profile: profileTemp } = await api.getLoginStatus()
-
-  // 表示未登录
-  if (code === 301) {
+  let userId = -1
+  try {
+    const { profile } = await api.getLoginStatus()
+    userId = profile.userId
+  } catch (err) {
     return
   }
 
-  if (code !== 200) {
-    return
-  }
-
-  const { userId } = profileTemp
   const { profile } = await api.getUserDetail(userId)
   dispatch(receiveProfile(profile))
 }

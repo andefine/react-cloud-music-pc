@@ -19,6 +19,7 @@ class Recommend extends Component {
   }
   
   render () {
+    // return null
     const { banners } = this.props
 
     if (banners.length === 0) {
