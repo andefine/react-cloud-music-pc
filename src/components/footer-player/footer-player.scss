@@ -1,6 +1,8 @@
 @import "@/styles/variable.scss";
 
-.footer-play {
+.footer-player {
+  display: flex;
+  align-items: center;
   border-top: 1px solid $line-color;
   height: 48px;
   background: $header-bg;
@@ -13,5 +15,9 @@
     padding: 0 27px 0 30px;
     width: 200px;
     height: 100%;
+  }
+
+  &__progress {
+    flex-grow: 1;
   }
 }

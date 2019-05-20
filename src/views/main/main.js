@@ -153,7 +153,7 @@ class Main extends Component {
             ></Route>
           </Switch>
         </div>
-        <FooterPlayer></FooterPlayer>
+        <FooterPlayer className="main__footer-player"></FooterPlayer>
       </main>
     )
   }

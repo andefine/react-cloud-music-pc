@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './control-btn.scss'
 
-const ControlBtn = ({ className, icon, size = 32, onClick }) => {
+const ControlBtn = ({ className, icon, size = 30, onClick }) => {
   size = parseInt(size)
   return (
     <i

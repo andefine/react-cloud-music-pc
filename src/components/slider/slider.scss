@@ -1,0 +1,14 @@
+@import "../../styles/variable.scss";
+
+$bg-dark: #171719;
+$bg-gray: #454546;
+
+.slider {
+  height: 4px;
+  background: $bg-dark;
+
+  &--radius {
+    @extend .slider;
+    border-radius: 2px;
+  }
+}
