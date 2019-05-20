@@ -1,0 +1,17 @@
+@import "@/styles/variable.scss";
+
+.footer-play {
+  border-top: 1px solid $line-color;
+  height: 48px;
+  background: $header-bg;
+
+  &__left {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 27px 0 30px;
+    width: 200px;
+    height: 100%;
+  }
+}

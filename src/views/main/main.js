@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
-import FooterPlay from '@/components/footer-play/footer-play'
+import FooterPlayer from '@/components/footer-player/footer-player'
 import AsideBar from '@/views/aside-bar/aside-bar'
 import Discover from '@/views/discover/discover'
 import PersonalFm from '@/views/personal-fm/personal-fm'
@@ -153,7 +153,7 @@ class Main extends Component {
             ></Route>
           </Switch>
         </div>
-        <FooterPlay></FooterPlay>
+        <FooterPlayer></FooterPlayer>
       </main>
     )
   }

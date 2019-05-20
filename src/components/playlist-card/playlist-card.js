@@ -16,7 +16,7 @@ const PlaylistCard = ({ id, name, picUrl, playCount, copywriter }) => (
         <span className="playlist-card__count-num">{formatPlayCount(playCount)}</span>
       </div>
       <span className="playlist-card__copywriter">{copywriter}</span>
-      <i className="playlist-card__play iconfont icon-play"></i>
+      <i className="playlist-card__play iconfont icon-play-big"></i>
     </Link>
     <div className="playlist-card__name">
       <Link to={`/playlist?id=${id}`}>{name}</Link>
