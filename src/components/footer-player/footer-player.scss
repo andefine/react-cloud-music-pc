@@ -20,4 +20,19 @@
   &__progress {
     flex-grow: 1;
   }
+
+  &__cur-time, &__duration {
+    box-sizing: border-box;
+    width: 46px;
+  }
+  &__cur-time {
+    padding-left: 4px;
+  }
+  &__duration {
+    padding-left: 7px;
+  }
+
+  &__volume {
+    margin-left: 16px;
+  }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ControlBtn from '@/components/control-btn/control-btn'
 import Slider from '@/components/slider/slider'
+import Volume from '@/components/volume/volume'
 import './footer-player.scss'
 
 class FooterPlay extends Component {
@@ -13,8 +14,24 @@ class FooterPlay extends Component {
     super(props)
 
     this.state = {
-      isPlaying: false
+      isPlaying: false,
+      progress: 0,
+      volume: 50
     }
+  }
+
+  componentDidMount () {
+    const timer = setInterval(() => {
+      let { progress } = this.state
+      progress += 0.003
+      if (progress >= 1) {
+        progress = 1
+        clearInterval(timer)
+      }
+      this.setState({
+        progress
+      })
+    }, 100);
   }
 
   handlePlay = () => {
@@ -31,7 +48,7 @@ class FooterPlay extends Component {
   
   render () {
     const { className } = this.props
-    const { isPlaying } = this.state
+    const { isPlaying, progress, volume } = this.state
     
     return (
       <footer className={`footer-player ${className || ''}`}>
@@ -67,9 +84,21 @@ class FooterPlay extends Component {
           <ControlBtn icon="next-track"></ControlBtn>
         </div>
 
-        <span style={{ paddingRight: 10, width: 38 }}>00:12</span>
-        <Slider className="footer-player__progress"></Slider>
-        <span style={{ paddingLeft: 10, width: 38 }}>03:45</span>
+        <span className="footer-player__cur-time">00:12</span>
+        <Slider
+          className="footer-player__progress"
+          progress={progress}
+        ></Slider>
+        <span className="footer-player__duration">03:45</span>
+        <Volume
+          className="footer-player__volume"
+          volume={volume}
+          onChange={(percent) => {
+            this.setState({
+              volume: percent * 100
+            })
+          }}
+        ></Volume>
       </footer>
     )
   }  
