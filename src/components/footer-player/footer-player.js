@@ -16,7 +16,7 @@ class FooterPlay extends Component {
     this.state = {
       isPlaying: false,
       progress: 0,
-      volume: 50
+      volume: 0.5
     }
   }
 
@@ -93,9 +93,9 @@ class FooterPlay extends Component {
         <Volume
           className="footer-player__volume"
           volume={volume}
-          onChange={(percent) => {
+          onChange={(vol) => {
             this.setState({
-              volume: percent * 100
+              volume: vol
             })
           }}
         ></Volume>

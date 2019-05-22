@@ -1,4 +1,5 @@
 @import "@/styles/variable.scss";
+@import "@/styles/mixin.scss";
 
 $bg-dark: #171719;
 $dot-height: 14px;
@@ -13,8 +14,8 @@ $width: 100px;
     width: 19px;
   }
   &__icon {
+    @include hoverable-gray;
     font-size: 12px;
-    color: $gray-font;
   }
 
   &-slider {
@@ -23,6 +24,11 @@ $width: 100px;
     border-radius: $rail-height / 2;
     width: $width;
     height: $dot-height;
+    &:hover {
+      .volume-slider__dot {
+        opacity: 1;
+      }
+    }
 
     &__rail, &__track {
       position: absolute;
@@ -52,6 +58,8 @@ $width: 100px;
       width: $dot-height;
       height: $dot-height;
       background: $theme;
+      opacity: 0;
+      transition: opacity 0.1s;
       cursor: pointer;
     }
   }

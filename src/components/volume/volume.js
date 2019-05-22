@@ -11,16 +11,31 @@ class Volume extends Component {
 
   static defaultProps = {
     className: '',
-    volume: 50
+    volume: 0.5
   }
 
-  handleDotMouse = (event) => {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      ratio: props.volume,
+      lastRatio: props.volume
+    }
+  }
+
+  handleDotMouseDown = (event) => {
     event.persist()
     this.offsetCenterOnDown = event.clientX - 
     (this.dot.getBoundingClientRect().left + this.dot.offsetWidth / 2)
+    this.setState(state => ({
+      lastRatio: state.ratio
+    }))
+
     document.addEventListener('mousemove', this.onDocumentMouseMove)
     document.addEventListener('mouseup', this.onDocumentMouseUp)
+
     event.preventDefault()
+    event.stopPropagation()
   }
 
   onDocumentMouseMove = (event) => {
@@ -34,30 +49,67 @@ class Volume extends Component {
       left = this.rail.offsetWidth
     }
 
-    this.leftPrecentage = left / this.rail.offsetWidth
-    this.dot.style.left = this.leftPrecentage * 100 + '%'
-    this.track.style.width = this.leftPrecentage * 100 + '%'
-
-    const { onChange } = this.props
-    onChange && onChange(this.leftPrecentage)
+    this.changeRatioByLeft(left)
   }
 
   onDocumentMouseUp = () => {
-    const { onChange } = this.props
-    onChange && onChange(this.leftPrecentage)
     document.removeEventListener('mousemove', this.onDocumentMouseMove)
     document.removeEventListener('mouseup', this.onDocumentMouseUp)
   }
+
+  handleSliderMouseDown = (event) => {
+    const left = event.clientX - this.rail.getBoundingClientRect().left
+    this.setState(state => ({
+      lastRatio: state.ratio
+    }))
+    this.changeRatioByLeft(left)
+  }
+
+  handleIconClick = () => {
+    const { ratio } = this.state
+    if (ratio > 0) {
+      this.setState(state => ({
+        ratio: 0,
+        lastRatio: state.ratio
+      }), this.triggerChange)
+    }
+    if (ratio === 0) {
+      this.setState(state => ({
+        ratio: state.lastRatio,
+        lastRatio: 0
+      }), this.triggerChange)
+    }
+  }
+
+  changeRatioByLeft = (left) => {
+    this.setState({
+      ratio: left / this.rail.offsetWidth
+    }, this.triggerChange)
+  }
+
+  triggerChange = () => {
+    const { onChange } = this.props
+    onChange && onChange(this.state.ratio)
+  }
   
   render () {
-    const { className, volume } = this.props
+    const { className } = this.props
+    const { ratio } = this.state
     
     return (
       <div className={`volume ${className}`}>
         <div className="volume__i">
-          <i className="volume__icon iconfont icon-volume"></i>
+          <i
+            className={
+              `volume__icon iconfont icon-${ratio === 0 ? 'mute' : 'volume'}`
+            }
+            onClick={this.handleIconClick}
+          ></i>
         </div>
-        <div className="volume-slider">
+        <div
+          className="volume-slider"
+          onMouseDown={this.handleSliderMouseDown}
+        >
           <div
             className="volume-slider__rail"
             ref={rail => this.rail = rail}
@@ -65,17 +117,17 @@ class Volume extends Component {
           <div
             className="volume-slider__track"
             style={{
-              width: volume + '%'
+              width: ratio * 100 + '%'
             }}
             ref={track => this.track = track}
           ></div>
           <div
             className="volume-slider__dot"
             style={{
-              left: volume + '%'
+              left: ratio * 100 + '%'
             }}
             ref={dot => this.dot = dot}
-            onMouseDown={this.handleDotMouse}
+            onMouseDown={this.handleDotMouseDown}
           ></div>
         </div>
       </div>
