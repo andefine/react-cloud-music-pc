@@ -5,6 +5,13 @@ import Slider from '@/components/slider/slider'
 import Volume from '@/components/volume/volume'
 import './footer-player.scss'
 
+const manners = [
+  'shunxubofang',
+  'liebiaoxunhuan',
+  'danquxunhuan',
+  'suijibofang'
+]
+
 class FooterPlay extends Component {
   static propTypes = {
     className: PropTypes.string
@@ -16,7 +23,8 @@ class FooterPlay extends Component {
     this.state = {
       isPlaying: false,
       progress: 0,
-      volume: 0.5
+      volume: 0.5,
+      playManner: manners[0]
     }
   }
 
@@ -45,10 +53,18 @@ class FooterPlay extends Component {
       isPlaying: false
     })
   }
+
+  handleSequenceClick = () => {
+    const { playManner } = this.state
+    const index = manners.indexOf(playManner)
+    this.setState({
+      playManner: manners[(index + 1) % manners.length]
+    })
+  }
   
   render () {
     const { className } = this.props
-    const { isPlaying, progress, volume } = this.state
+    const { isPlaying, progress, volume, playManner } = this.state
     
     return (
       <footer className={`footer-player ${className || ''}`}>
@@ -90,6 +106,7 @@ class FooterPlay extends Component {
           progress={progress}
         ></Slider>
         <span className="footer-player__duration">03:45</span>
+
         <Volume
           className="footer-player__volume"
           volume={volume}
@@ -99,6 +116,17 @@ class FooterPlay extends Component {
             })
           }}
         ></Volume>
+
+        <div className="footer-player__right">
+          <i
+            className={`footer-player__right-i iconfont icon-${playManner}`}
+            onClick={this.handleSequenceClick}
+          ></i>
+          <div className="footer-player__list-i">
+            <i className="footer-player__list-i-icon iconfont icon-bofangliebiao"></i>
+            <span className="footer-player__list-i-num">24</span>
+          </div>
+        </div>
       </footer>
     )
   }  

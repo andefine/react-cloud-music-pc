@@ -1,9 +1,11 @@
 @import "@/styles/variable.scss";
+@import "@/styles/mixin.scss";
 
 .footer-player {
   display: flex;
   align-items: center;
   border-top: 1px solid $line-color;
+  padding-right: 14px;
   height: 48px;
   background: $header-bg;
 
@@ -34,5 +36,41 @@
 
   &__volume {
     margin-left: 16px;
+  }
+  
+  &__right {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+  }
+  &__right-i {
+    @include hoverable-gray;
+    margin-right: 15px;
+    font-size: 16px;
+  }
+  &__list-i {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    width: 48px;
+    height: 18px;
+  }
+  &__list-i-icon {
+    @include hoverable-gray;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 16px;
+    font-size: 16px;
+  }
+  &__list-i-num {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    width: 32px;
+    height: 16px;
+    text-align: center;
+    line-height: 16px;
+    background: #2d2d30;
+    cursor: pointer;
   }
 }
