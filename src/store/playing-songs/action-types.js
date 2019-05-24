@@ -1,0 +1,1 @@
+export const RECEIVE_SONGS = 'RECEIVE_SONGS'

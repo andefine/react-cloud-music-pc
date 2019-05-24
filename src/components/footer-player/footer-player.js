@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { getTracksByIds } from '@/store/playing-songs/actions'
 import ControlBtn from '@/components/control-btn/control-btn'
 import Slider from '@/components/slider/slider'
 import Volume from '@/components/volume/volume'
@@ -28,6 +30,11 @@ class FooterPlay extends Component {
     }
   }
 
+  componentWillMount () {
+    const { dispatch } = this.props
+    dispatch(getTracksByIds())
+  }
+
   componentDidMount () {
     const timer = setInterval(() => {
       let { progress } = this.state
@@ -39,7 +46,10 @@ class FooterPlay extends Component {
       this.setState({
         progress
       })
-    }, 100);
+    }, 100)
+
+    this.audio.volume = 0.1
+    console.dir(this.audio)
   }
 
   handlePlay = () => {
@@ -63,14 +73,16 @@ class FooterPlay extends Component {
   }
   
   render () {
-    const { className } = this.props
+    const { className, idsOfSongs } = this.props
     const { isPlaying, progress, volume, playManner } = this.state
     
     return (
       <footer className={`footer-player ${className || ''}`}>
         <audio
+          autoPlay={true}
           controls={false}
           preload='auto'
+          ref={audio => this.audio = audio}
         >
           <source
             src="https://music.163.com/song/media/outer/url?id=524148143.mp3"
@@ -124,7 +136,7 @@ class FooterPlay extends Component {
           ></i>
           <div className="footer-player__list-i">
             <i className="footer-player__list-i-icon iconfont icon-bofangliebiao"></i>
-            <span className="footer-player__list-i-num">24</span>
+            <span className="footer-player__list-i-num">{idsOfSongs.length}</span>
           </div>
         </div>
       </footer>
@@ -132,4 +144,11 @@ class FooterPlay extends Component {
   }  
 }
 
-export default FooterPlay
+const mapStateToProps = ({ playingSongs: { idsOfSongs, songsById } }) => ({
+  idsOfSongs,
+  songsById
+})
+
+export default connect(
+  mapStateToProps
+)(FooterPlay)
