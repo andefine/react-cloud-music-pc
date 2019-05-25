@@ -23,8 +23,8 @@ class FooterPlay extends Component {
     this.state = {
       isPlaying: true,
       curStamp: 0,
-      timeProgress: 0,
-      progress: 0,
+      playProgress: 0,
+      loadProgress: 0,
       volume: 0.5
     }
   }
@@ -45,51 +45,93 @@ class FooterPlay extends Component {
       musicUrl
     })
     this.source.src = musicUrl
-    this.audio.load()
+    fetch(musicUrl)
+
+    try {
+      this.audio.load()
+    } catch (err) {
+      console.log(err)
+    }
 
     this.audio.volume = 0.1
   }
 
-  handleCanplayThrough = (event) => {
-    this.audio.play()
+  handleCanplayThrough = async (event) => {
+    try {
+      await this.audio.play()
+    } catch (err) {
+      console.log(err)
+      return
+    }
+
+    this.audio.addEventListener('timeupdate', this.onTimeUpdate)
     // event.persist()
     // setTimeout(() => {
     //   const load = this.audio.buffered.end(this.audio.buffered.length-1)
     //   console.log(load)
     //   const { curIndex, idsOfSongs, songsById } = this.props
     //   const { dt } = songsById[idsOfSongs[curIndex]]
-    //   const progress = load * 1000 / dt
+    //   const loadProgress = load * 1000 / dt
     //   this.setState({
-    //     progress
+    //     loadProgress
     //   })
     // }, 2000)
   }
 
   handleProgress = (event) => {
-    // if (this.audio.buffered.length < 1) return
-    // const load = this.audio.buffered.end(this.audio.buffered.length-1)
-    // console.log(load)
-    // const { curIndex, idsOfSongs, songsById } = this.props
-    // const { dt } = songsById[idsOfSongs[curIndex]]
-    // const progress = load * 1000 / dt
-    // this.setState({
-    //   progress
-    // })
+    if (this.audio.buffered.length < 1) {
+      this.delaySetProgress()
+      return
+    }
+    this.setProgress()
   }
 
-  handleTimeupdate = (event) => {
-    event.persist()
-    const { curIndex, idsOfSongs, songsById } = this.props
-    const { dt } = songsById[idsOfSongs[curIndex]]
-    const timeProgress = event.timeStamp / dt
+  delaySetProgress = () => {
+    if (this.audio.buffered.length > 0) {
+      this.setProgress()
+      return
+    }
+    clearInterval(this.timer)
+    this.timer = setInterval(() => {
+      this.delaySetProgress()
+    }, 1000)
+  }
+
+  setProgress = () => {
+    const load = this.audio.buffered.end(this.audio.buffered.length - 1)
+    const { song } = this.props
+    const { dt } = song
+    const loadProgress = load * 1000 / dt
     this.setState({
-      curStamp: event.timeStamp,
-      timeProgress
+      loadProgress
+    })
+  }
+
+  // handleTimeupdate = (event) => {
+  //   event.persist()
+  //   const { curIndex, idsOfSongs, songsById } = this.props
+  //   const { dt } = songsById[idsOfSongs[curIndex]]
+  //   const playProgress = event.timeStamp / dt
+  //   this.setState({
+  //     curStamp: event.timeStamp,
+  //     playProgress
+  //   })
+  // }
+
+  onTimeUpdate = (event) => {
+    const { song } = this.props
+    const { dt } = song
+    const curStamp = this.audio.currentTime * 1000
+    const playProgress = curStamp / dt
+    this.setState({
+      curStamp,
+      playProgress
     })
   }
 
   handlePlay = async () => {
     await this.audio.play()
+    this.audio.addEventListener('timeupdate', this.onTimeUpdate)
     this.setState({
       isPlaying: true
     })
@@ -97,9 +139,21 @@ class FooterPlay extends Component {
 
   handlePause = async () => {
     await this.audio.pause()
+    this.audio.removeEventListener('timeupdate', this.onTimeUpdate)
     this.setState({
       isPlaying: false
     })
+  }
+
+  handleNextSong = () => {
+  }
+
+  handleSliderChange = (percentage) => {
+    const { song } = this.props
+    const { dt } = song
+    const curTime = dt / 1000 * percentage
+
+    this.audio.currentTime = curTime
   }
 
   handleMannerClick = () => {
@@ -115,7 +169,7 @@ class FooterPlay extends Component {
       idsOfSongs,
       songsById
     } = this.props
-    const { isPlaying, curStamp, timeProgress, progress, volume } = this.state
+    const { isPlaying, curStamp, playProgress, loadProgress, volume } = this.state
 
     const song = songsById[idsOfSongs[curIndex]]
     const durationStamp = song ? song.dt : 0
@@ -123,11 +177,10 @@ class FooterPlay extends Component {
     return (
       <footer className={`footer-player ${className || ''}`}>
         <audio
-          controls={false}
+          preload="auto"
           ref={audio => this.audio = audio}
           onCanPlayThrough={this.handleCanplayThrough}
           onProgress={this.handleProgress}
-          onTimeUpdate={this.handleTimeupdate}
         >
           <source
             type="audio/mpeg"
@@ -154,7 +207,10 @@ class FooterPlay extends Component {
               ></ControlBtn>
             )
           }
-          <ControlBtn icon="next-track"></ControlBtn>
+          <ControlBtn
+            icon="next-track"
+            onClick={this.handleNextSong}
+          ></ControlBtn>
         </div>
 
         <span className="footer-player__cur-time">
@@ -162,8 +218,9 @@ class FooterPlay extends Component {
         </span>
         <Slider
           className="footer-player__progress"
-          timeProgress={timeProgress}
-          progress={progress}
+          playProgress={playProgress}
+          loadProgress={loadProgress}
+          onChange={this.handleSliderChange}
         ></Slider>
         <span className="footer-player__duration">
           {formatDurationTime(durationStamp)}
@@ -205,7 +262,8 @@ const mapStateToProps = ({
   playManner,
   curIndex,
   idsOfSongs,
-  songsById
+  songsById,
+  song: songsById[idsOfSongs[curIndex]]
 })
 
 export default connect(

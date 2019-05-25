@@ -6,15 +6,16 @@ class Slider extends Component {
   static propTypes = {
     className: PropTypes.string,
     radius: PropTypes.bool,
-    timeProgress: PropTypes.number,
-    progress: PropTypes.number
+    playProgress: PropTypes.number,
+    loadProgress: PropTypes.number,
+    onChange: PropTypes.func
   }
 
   static defaultProps = {
     className: '',
     radius: true,
-    timeProgress: 0,
-    progress: 0
+    playProgress: 0,
+    loadProgress: 0
   }
 
   handleDotMouseDown = (event) => {
@@ -24,6 +25,7 @@ class Slider extends Component {
     document.addEventListener('mousemove', this.onDocumentMouseMove)
     document.addEventListener('mouseup', this.onDocumentMouseUp)
     event.preventDefault()
+    event.stopPropagation()
   }
 
   onDocumentMouseMove = (event) => {
@@ -37,44 +39,65 @@ class Slider extends Component {
       left = this.rail.offsetWidth
     }
 
-    const leftPercentage = left / this.rail.offsetWidth * 100 + '%'
-    this.dot.style.left = leftPercentage
-    this.track.style.width = leftPercentage
+    this.leftPercentage = left / this.rail.offsetWidth
+    this.dot.style.left = this.leftPercentage * 100 + '%'
+    this.track.style.width = this.leftPercentage * 100 + '%'
   }
 
   onDocumentMouseUp = () => {
+    const { onChange } = this.props
+    onChange && onChange(this.leftPercentage)
     document.removeEventListener('mousemove', this.onDocumentMouseMove)
     document.removeEventListener('mouseup', this.onDocumentMouseUp)
+  }
+
+  handleSliderClick = (event) => {
+    event.persist()
+    let left = event.clientX - this.rail.getBoundingClientRect().left
+
+    this.leftPercentage = left / this.rail.offsetWidth
+    this.dot.style.left = this.leftPercentage * 100 + '%'
+    this.track.style.width = this.leftPercentage * 100 + '%'
+
+    const { onChange } = this.props
+    onChange && onChange(this.leftPercentage)
   }
   
   render () {
     const {
       className,
       radius,
-      timeProgress,
-      progress
+      playProgress,
+      loadProgress
     } = this.props
     
     return (
-      <div className={`slider${radius ? '--radius' : ''} ${className}`}>
+      <div
+        className={`slider${radius ? '--radius' : ''} ${className}`}
+        onClick={this.handleSliderClick}
+      >
         <div
           className="slider__rail"
           ref={rail => this.rail = rail}
+          // onClick={this.handleRailClick}
         ></div>
         <div
           className="slider__progress"
           style={{
-            width: progress * 100 + '%'
+            width: loadProgress * 100 + '%'
           }}
         ></div>
         <div
           className="slider__track"
+          style={{
+            width: playProgress * 100 + '%'
+          }}
           ref={track => this.track = track}
         ></div>
         <div
           className="slider__dot"
           style={{
-            left: timeProgress * 100 + '%'
+            left: playProgress * 100 + '%'
           }}
           ref={dot => this.dot = dot}
           onMouseDown={this.handleDotMouseDown}
