@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
   changePlayManner,
-  getSongsByIds
+  getSongsByIds,
+  autoToNext
 } from '@/store/playing-songs/actions'
 import * as api from '@/api'
 import { formatDurationTime } from '@/utils/time'
@@ -119,6 +120,7 @@ class FooterPlay extends Component {
   // }
 
   onTimeUpdate = (event) => {
+    console.log(this.audio.ended)
     const { song } = this.props
     const { dt } = song
     const curStamp = this.audio.currentTime * 1000
@@ -127,6 +129,11 @@ class FooterPlay extends Component {
       curStamp,
       playProgress
     })
+
+    if (this.audio.ended) {
+      // 这一首播放结束
+      
+    }
   }
 
   handlePlay = async () => {
@@ -146,6 +153,8 @@ class FooterPlay extends Component {
   }
 
   handleNextSong = () => {
+    const { dispatch } = this.props
+    dispatch(autoToNext())
   }
 
   handleSliderChange = (percentage) => {
