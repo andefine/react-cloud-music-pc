@@ -1,3 +1,5 @@
+import { addZero } from './index'
+
 /**
  * 将日期对象的 day 转化为汉字中的礼拜。
  *
@@ -23,4 +25,12 @@ export const dayToWeekday = (day) => {
     default:
       return ''
   }
+}
+
+export const formatDurationTime = (stamp) => {
+  const date = new Date(stamp)
+  const minutes = date.getMinutes()
+  const seconds = date.getSeconds()
+
+  return `${addZero(minutes)}:${addZero(seconds)}`
 }

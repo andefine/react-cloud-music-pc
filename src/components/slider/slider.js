@@ -6,12 +6,14 @@ class Slider extends Component {
   static propTypes = {
     className: PropTypes.string,
     radius: PropTypes.bool,
+    timeProgress: PropTypes.number,
     progress: PropTypes.number
   }
 
   static defaultProps = {
     className: '',
     radius: true,
+    timeProgress: 0,
     progress: 0
   }
 
@@ -49,6 +51,7 @@ class Slider extends Component {
     const {
       className,
       radius,
+      timeProgress,
       progress
     } = this.props
     
@@ -70,6 +73,9 @@ class Slider extends Component {
         ></div>
         <div
           className="slider__dot"
+          style={{
+            left: timeProgress * 100 + '%'
+          }}
           ref={dot => this.dot = dot}
           onMouseDown={this.handleDotMouseDown}
         ></div>

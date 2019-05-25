@@ -1,15 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addZero } from '@/utils'
+import { formatDurationTime } from '@/utils/time'
 import './playlist-table.scss'
-
-const formatDurationTime = (stamp) => {
-  const date = new Date(stamp)
-  const minutes = date.getMinutes()
-  const seconds = date.getSeconds()
-
-  return `${addZero(minutes)}:${addZero(seconds)}`
-}
 
 const PlaylistTable = ({ tracks }) => (
   <table className="playlist-table">

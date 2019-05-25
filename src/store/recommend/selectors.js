@@ -9,7 +9,7 @@ export const getShowPlaylists = (playlists) => {
     ...firstTwo,
     ...rest.slice(start, end)
   ]
-  flag++
+  // flag++
 
   return result
 }
