@@ -11,6 +11,10 @@
     height: 198px;
   }
 
+  &__right {
+    flex-grow: 1;
+  }
+
   &__title {
     display: flex;
     justify-content: space-between;

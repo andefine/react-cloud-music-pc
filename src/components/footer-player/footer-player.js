@@ -49,6 +49,9 @@ class FooterPlay extends Component {
     fetch(musicUrl)
 
     try {
+      // 有时候会出现这个错误，
+      // Uncaught (in promise) DOMException
+      // here is the explanation  `https://developers.google.com/web/updates/2017/06/play-request-was-interrupted#error`
       this.audio.load()
     } catch (err) {
       console.log(err)
@@ -57,8 +60,14 @@ class FooterPlay extends Component {
     this.audio.volume = 0.1
   }
 
+  componentWillUnmount () {
+    // alert('componentWillUnmount')
+  }
+
   handleCanplayThrough = async (event) => {
     try {
+      // 有时候会出现这个错误，
+      // Uncaught (in promise) DOMException
       await this.audio.play()
     } catch (err) {
       console.log(err)
@@ -120,7 +129,6 @@ class FooterPlay extends Component {
   // }
 
   onTimeUpdate = (event) => {
-    console.log(this.audio.ended)
     const { song } = this.props
     const { dt } = song
     const curStamp = this.audio.currentTime * 1000
@@ -132,7 +140,7 @@ class FooterPlay extends Component {
 
     if (this.audio.ended) {
       // 这一首播放结束
-      
+      console.log('ended')
     }
   }
 
