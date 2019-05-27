@@ -100,6 +100,11 @@ alias: {
 
 将*以iconfont为文件名* *以`css` `eot` `svg` `ttf` `woff`为后缀的这五个文件* 放到一个文件夹下，再在入口文件中引入 `iconfont.css` 就行啦，非常简单
 
+### js
+
+#### URLSearchParams
+ie 11 都不支持
+
 ### react
 
 #### 自定义组件使用 className ，引用时注意顺序，才能覆盖组件内部样式

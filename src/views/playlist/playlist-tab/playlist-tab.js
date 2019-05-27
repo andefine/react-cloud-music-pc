@@ -7,22 +7,25 @@ import './playlist-tab.scss'
 
 class PlaylistTab extends Component {
   render () {
-    const { commentCount } = this.props
+    const { commentCount, tab, pathname } = this.props
     
     return (
       <div className="playlist-tab">
         <div className="playlist-tab__left">
           <Link
-            className="playlist-tab__link--active"
-            to=""
+            className={'playlist-tab__link' + (!tab ? '--active' : '')}
+            to={pathname}
+            replace
           >歌曲列表</Link>
           <Link
-            className="playlist-tab__link"
-            to=""
+            className={'playlist-tab__link' + (tab === 'comment' ? '--active' : '')}
+            to={pathname + '?tab=comment'}
+            replace
           >评论({commentCount})</Link>
           <Link
-            className="playlist-tab__link"
-            to=""
+            className={'playlist-tab__link' + (tab === 'subscriber' ? '--active' : '')}
+            to={pathname + '?tab=subscriber'}
+            replace
           >收藏者</Link>
         </div>
     

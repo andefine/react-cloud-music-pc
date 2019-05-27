@@ -5,17 +5,28 @@ import { getPlaylistDetailIfNeeded } from '@/store/playlist/actions'
 import PlaylistInfo from './playlist-info/playlist-info'
 import PlaylistTab from './playlist-tab/playlist-tab'
 import PlaylistTable from './playlist-table/playlist-table'
+import PlaylistComment from './playlist-comment/playlist-comment'
+import PlaylistSubscriber from './playlist-subscriber/playlist-subscriber'
 import './playlist.scss'
 
 class Playlist extends Component {
   componentWillMount () {
-    const { match: { params: { id } }, dispatch } = this.props
+    const {
+      match: { params: { id } },
+      dispatch
+    } = this.props
     dispatch(getPlaylistDetailIfNeeded(id))
   }
   
   render () {
-    const { playlistDetail, match: { params: { id } } } = this.props
-    
+    const {
+      playlistDetail,
+      match: { params: { id } },
+      location: { search, pathname }
+    } = this.props
+    // 注意这里，如果 search 参数中没有 p, 会返回 null
+    const tab = new URLSearchParams(search).get('tab')
+
     // 有两种情况我们不能渲染任何东西，
     // 当然这两种情况都只存在于非常短暂的时间。
     // 1. 防止第一次进入渲染时，playlistDetail 啥都没有，
@@ -32,8 +43,10 @@ class Playlist extends Component {
     return (
       <div className="playlist">
         <PlaylistInfo></PlaylistInfo>
-        <PlaylistTab></PlaylistTab>
-        <PlaylistTable></PlaylistTable>
+        <PlaylistTab tab={tab} pathname={pathname}></PlaylistTab>
+        {!tab && <PlaylistTable></PlaylistTable>}
+        {tab === 'comment' && <PlaylistComment id={id}></PlaylistComment>}
+        {tab === 'subscriber' && <PlaylistSubscriber></PlaylistSubscriber>}
       </div>
     )
   }

@@ -41,3 +41,7 @@ export const getPlaylistDetailIfNeeded = (id) => async (dispatch, getState) => {
 
   dispatch(getPlaylistDetail(id))
 }
+
+export const getPlaylistComments = (id, limit, offset) => () => {
+  api.getPlaylistComments(id, limit, offset)
+}

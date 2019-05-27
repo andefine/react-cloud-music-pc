@@ -7,7 +7,8 @@ import { combineReducers } from 'redux'
 
 const initialState = {
   // api 返回的 playlist 中的信息将都会放到这里
-  playlistDetail: {}
+  playlistDetail: {},
+  comments: []
 }
 
 const playlistDetail = (state = initialState.playlistDetail, { type, playlistDetail }) => {
