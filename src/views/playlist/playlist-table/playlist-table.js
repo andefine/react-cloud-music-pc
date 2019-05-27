@@ -41,8 +41,8 @@ const PlaylistTable = ({ tracks }) => (
   </table>
 )
 
-const mapStateToProps = ({ playlistDetail }) => ({
-  tracks: playlistDetail.data.tracks
+const mapStateToProps = ({ playlist: { playlistDetail } }) => ({
+  tracks: playlistDetail.tracks
 })
 
 export default connect(

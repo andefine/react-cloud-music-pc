@@ -39,8 +39,8 @@ PlaylistTab.propTypes = {
   commentCount: PropTypes.number.isRequired
 }
 
-const mapStateToProps = ({ playlistDetail }) => ({
-  commentCount: playlistDetail.data.commentCount
+const mapStateToProps = ({ playlist: { playlistDetail } }) => ({
+  commentCount: playlistDetail.commentCount
 })
 
 export default connect(

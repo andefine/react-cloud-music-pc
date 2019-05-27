@@ -8,7 +8,7 @@ const PlaylistCard = ({ id, name, picUrl, playCount, copywriter }) => (
   <div className="playlist-card">
     <Link
       className="playlist-card__img-link"
-      to={`/playlist?id=${id}`}
+      to={`/playlist/${id}`}
     >
       <img className="playlist-card__img" src={picUrl} alt=""/>
       <div className="playlist-card__count">
@@ -19,7 +19,7 @@ const PlaylistCard = ({ id, name, picUrl, playCount, copywriter }) => (
       <i className="playlist-card__play iconfont icon-play-big"></i>
     </Link>
     <div className="playlist-card__name">
-      <Link to={`/playlist?id=${id}`}>{name}</Link>
+      <Link to={`/playlist/${id}`}>{name}</Link>
     </div>
   </div>
 )

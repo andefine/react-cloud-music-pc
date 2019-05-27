@@ -148,7 +148,7 @@ class Main extends Component {
               })
             }
             <Route
-              path="/playlist"
+              path="/playlist/:id"
               component={Playlist}
             ></Route>
           </Switch>

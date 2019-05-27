@@ -21,7 +21,7 @@ const formatYearMonthDate = (stamp) => {
   return `${year}-${addZero(month)}-${addZero(dateNum)}`
 }
 
-const PlaylistInfo = ({ playlist }) => {
+const PlaylistInfo = ({ playlistDetail }) => {
   const {
     coverImgUrl,
     name,
@@ -33,7 +33,7 @@ const PlaylistInfo = ({ playlist }) => {
     shareCount,
     tags,
     description
-  } = playlist
+  } = playlistDetail
 
   const { avatarUrl, nickname } = creator
   
@@ -139,8 +139,8 @@ PlaylistInfo.propTypes = {
   })
 }
 
-const mapStateToProps = ({ playlistDetail }) => ({
-  playlist: playlistDetail.data
+const mapStateToProps = ({ playlist: { playlistDetail } }) => ({
+  playlistDetail
 })
 
 export default connect(
