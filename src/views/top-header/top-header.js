@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './main-header.scss'
+import './top-header.scss'
 
 import Logo from  './logo/logo'
 import BackForward from './back-forward/back-forward'
@@ -10,15 +10,15 @@ import HeaderMenu from './header-menu/header-menu'
 export default class HomeHeader extends Component {
   render () {
     return (
-      <header className="main-header">
-        <div className="main-header__left">
+      <header className="top-header">
+        <div className="top-header__left">
           <Logo></Logo>
-          <BackForward className="main-header__bf"></BackForward>
-          <Search className="main-header__search"></Search>
+          <BackForward className="top-header__bf"></BackForward>
+          <Search className="top-header__search"></Search>
         </div>
-        <div className="main-header__right">
+        <div className="top-header__right">
           <UserAvatar></UserAvatar>
-          <HeaderMenu className="main-header__menu"></HeaderMenu>
+          <HeaderMenu className="top-header__menu"></HeaderMenu>
           
         </div>
       </header>

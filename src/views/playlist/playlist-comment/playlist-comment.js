@@ -18,10 +18,6 @@ class PlaylistCommment extends Component {
   }
 }
 
-const mapStateToProps = ({ playlist: comments }) => ({
-  comments
-})
-
 export default connect(
   
 )(PlaylistCommment)

@@ -25,7 +25,7 @@ class Playlist extends Component {
       location: { search, pathname }
     } = this.props
     // 注意这里，如果 search 参数中没有 p, 会返回 null
-    const tab = new URLSearchParams(search).get('tab')
+    const tab = new URLSearchParams(search).get('t')
 
     // 有两种情况我们不能渲染任何东西，
     // 当然这两种情况都只存在于非常短暂的时间。

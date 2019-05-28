@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import LoginModal from '@/components/login-modal/login-modal'
 import './layout.scss'
 
-import MainHeader from '@/views/main-header/main-header'
+import TopHeader from '@/views/top-header/top-header'
 import Main from '@/views/main/main'
 
 const Layout = ({ size }) => (
   <div className={`app--${size}`}>
-    <MainHeader></MainHeader>
+    <TopHeader></TopHeader>
     <Main></Main>
 
     <LoginModal></LoginModal>

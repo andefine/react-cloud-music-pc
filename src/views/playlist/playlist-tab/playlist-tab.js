@@ -19,12 +19,12 @@ class PlaylistTab extends Component {
           >歌曲列表</Link>
           <Link
             className={'playlist-tab__link' + (tab === 'comment' ? '--active' : '')}
-            to={pathname + '?tab=comment'}
+            to={pathname + '?t=comment'}
             replace
           >评论({commentCount})</Link>
           <Link
             className={'playlist-tab__link' + (tab === 'subscriber' ? '--active' : '')}
-            to={pathname + '?tab=subscriber'}
+            to={pathname + '?t=subscriber'}
             replace
           >收藏者</Link>
         </div>

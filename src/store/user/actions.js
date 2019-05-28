@@ -1,7 +1,7 @@
 import {
   SHOW_LOGIN_MODAL,
   HIDE_LOGIN_MODAL,
-  RECEIVE_PROFILE
+  RECEIVE_USER
 } from './action-types'
 import * as api from '@/api'
 
@@ -13,24 +13,31 @@ export const hideLoginModal = () => ({
   type: HIDE_LOGIN_MODAL
 })
 
-const receiveProfile = (profile) => ({
-  type: RECEIVE_PROFILE,
-  profile
+const receiveUser = ({ profile, playlists}) => ({
+  type: RECEIVE_USER,
+  payload: {
+    profile,
+    playlists
+  }
 })
 
+/**
+ * 通过电话号码登录。
+ * 虽然这个异步可以直接在页面中调用，但是为了统一，还是放在这里
+ * @param {*} phone 
+ * @param {*} password 
+ */
 export const loginByPhone = (phone, password) => async () => {
   return await api.loginByPhone(phone, password)
 }
 
 export const loginStraight = () => async (dispatch) => {
-  let userId = -1
   try {
-    const { profile } = await api.getLoginStatus()
-    userId = profile.userId
-  } catch (err) {
-    return
-  }
-
-  const { profile } = await api.getUserDetail(userId)
-  dispatch(receiveProfile(profile))
+    const { profile: { userId } } = await api.getLoginStatus()
+    const { profile } = await api.getUserDetail(userId)
+    // 注意这里获取到的 playlist 列表，
+    // 包含了创建的和收藏的
+    const { playlist: playlists } = await api.getUserPlaylist(userId)
+    dispatch(receiveUser({ profile, playlists }))
+  } catch (err) {}
 }

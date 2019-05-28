@@ -19,7 +19,7 @@ export const loginByPhone = (phone, password) => http({
 
 /**
  * 调用此接口,可获取登录状态。
- * 已登录的话会返回 profile 等信息，
+ * 浏览器保存了之前的 Cookies 的话会返回 profile 等信息，
  * 否则 301 
  */
 export const getLoginStatus = () => http({
@@ -28,11 +28,19 @@ export const getLoginStatus = () => http({
 
 /**
  * 登录后调用此接口 , 传入用户 id, 可以获取用户详情
- * @param {number} uid 用户 id
+ * @param {number|string} uid 用户 id
  */
 export const getUserDetail = (uid) => http({
   url: '/user/detail',
-  params: {
-    uid
-  }
+  params: { uid }
+})
+
+/**
+ * 获取用户歌单，
+ * 登陆后调用此接口 , 传入用户 id, 可以获取用户歌单
+ * @param {number|string} uid 用户 id
+ */
+export const getUserPlaylist = (uid) => http({
+  url: '/user/playlist',
+  params: { uid }
 })
