@@ -15,6 +15,9 @@
     display: flex;
     align-items: center;
   }
+  &__right {
+    height: 100%;
+  }
   &__bf {
     margin-left: 64px;
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { showLoginModal } from '@/store/user/actions'
+import DropUser from './drop-user/drop-user'
 import './user-avatar.scss'
 
 class UserAvatar extends Component {
@@ -11,6 +12,10 @@ class UserAvatar extends Component {
       nickname: PropTypes.string,
     }),
     showLoginModal: PropTypes.func.isRequired
+  }
+
+  showDropUser = () => {
+
   }
   
   render () {
@@ -22,11 +27,19 @@ class UserAvatar extends Component {
       
       return (
         <div className="user-avatar">
-          <img className="user-avatar__avatar" src={avatarUrl} alt=""/>
-          <div className="user-avatar__drop">
+          <img
+            className="user-avatar__avatar"
+            src={avatarUrl}
+            alt=""
+          />
+          <div
+            className="user-avatar__drop"
+            onClick={this.showDropUser}
+          >
             <span className="user-avatar__username">{nickname}</span>
             <div className="user-avatar__triangle"></div>
           </div>
+          <DropUser className="user-avatar__drop-modal"></DropUser>
         </div>
       )
     }
@@ -50,8 +63,8 @@ class UserAvatar extends Component {
   }
 }
 
-const mapStateToProps = ({ user }) => ({
-  profile: user.profile
+const mapStateToProps = ({ user: { profile } }) => ({
+  profile
 })
 
 const mapDispatchToProps = (dispatch) => ({

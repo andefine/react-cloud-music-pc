@@ -7,6 +7,7 @@ import {
 
 const initialState = {
   isLoginShow: false,
+  detail: {},
   profile: {},
   playlists: []
 }
@@ -17,6 +18,16 @@ const isLoginShow = (state = initialState.isLoginShow, { type }) => {
       return true
     case HIDE_LOGIN_MODAL:
       return false
+    default:
+      return state
+  }
+}
+
+const detail = (state = initialState.detail, { type, payload }) => {
+  switch (type) {
+    case RECEIVE_USER:
+      const { detail } = payload
+      return detail
     default:
       return state
   }
@@ -44,6 +55,7 @@ const playlists = (state = initialState.playlists, { type, payload }) => {
 
 export default combineReducers({
   isLoginShow,
+  detail,
   profile,
   playlists
 })

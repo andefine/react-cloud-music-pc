@@ -13,9 +13,10 @@ export const hideLoginModal = () => ({
   type: HIDE_LOGIN_MODAL
 })
 
-const receiveUser = ({ profile, playlists}) => ({
+const receiveUser = ({ detail, profile, playlists}) => ({
   type: RECEIVE_USER,
   payload: {
+    detail,
     profile,
     playlists
   }
@@ -33,17 +34,18 @@ export const loginByPhone = (phone, password) => async () => {
 
 export const loginStraight = () => async (dispatch) => {
   try {
+    // 注意这里，如果 cookie 中没有登录信息，
+    // api.getLoginStatus() 将会抛出 301 错误，
+    // 这条语句后面的语句也不会执行。
     const { profile: { userId } } = await api.getLoginStatus()
-    // const { profile } = await api.getUserDetail(userId)
-    // const { playlist: playlists } = await api.getUserPlaylists(userId)
 
     const [
-      { profile },
+      { profile, ...detail },
       { playlist: playlists }
     ] = await Promise.all([
       api.getUserDetail(userId),
       api.getUserPlaylists(userId)
     ])
-    dispatch(receiveUser({ profile, playlists }))
+    dispatch(receiveUser({ detail, profile, playlists }))
   } catch (err) {}
 }

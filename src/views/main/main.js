@@ -64,13 +64,6 @@ class Main extends Component {
 
   computeCreatedMenus (createdPlaylists) {
     let menus = []
-    if (createdPlaylists.length === 0) {
-      menus.push({
-        label: '我喜欢的音乐',
-        icon: 'like',
-        path: '/playlist/my-like'
-      })
-    }
     if (createdPlaylists.length > 0) {
       menus = createdPlaylists.map(({ name, id }, index) => {
         return index === 0 ? ({
