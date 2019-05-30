@@ -111,7 +111,7 @@ const PlaylistInfo = ({ playlistDetail }) => {
           className="playlist-info__desc"
           // 这里的简介可能会出现换行的情况
           dangerouslySetInnerHTML={
-            { __html: `简介： ${description.replace(/\n/g, '<br>')}` }
+            { __html: description && `简介： ${description.replace(/\n/g, '<br>')}` }
           }
         ></div>
 

@@ -14,6 +14,18 @@
   
   &__aside-bar {
     flex-shrink: 0;
+    overflow-y: auto;
+    box-sizing: border-box;
+    border-right: 1px solid $line-color;
+    width: 200px;
+    height: 100%;
+    background: $aside-bg;
+  }
+  &__aside-group {
+    margin-bottom: 12px;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
   }
 
   &__footer-player {

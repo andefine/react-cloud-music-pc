@@ -34,10 +34,16 @@ export const loginByPhone = (phone, password) => async () => {
 export const loginStraight = () => async (dispatch) => {
   try {
     const { profile: { userId } } = await api.getLoginStatus()
-    const { profile } = await api.getUserDetail(userId)
-    // 注意这里获取到的 playlist 列表，
-    // 包含了创建的和收藏的
-    const { playlist: playlists } = await api.getUserPlaylist(userId)
+    // const { profile } = await api.getUserDetail(userId)
+    // const { playlist: playlists } = await api.getUserPlaylists(userId)
+
+    const [
+      { profile },
+      { playlist: playlists }
+    ] = await Promise.all([
+      api.getUserDetail(userId),
+      api.getUserPlaylists(userId)
+    ])
     dispatch(receiveUser({ profile, playlists }))
   } catch (err) {}
 }

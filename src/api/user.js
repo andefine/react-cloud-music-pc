@@ -37,10 +37,11 @@ export const getUserDetail = (uid) => http({
 
 /**
  * 获取用户歌单，
- * 登陆后调用此接口 , 传入用户 id, 可以获取用户歌单
+ * 登陆后调用此接口 , 传入用户 id, 可以获取用户歌单。
+ * 包括 创建的歌单 和 收藏的歌单
  * @param {number|string} uid 用户 id
  */
-export const getUserPlaylist = (uid) => http({
+export const getUserPlaylists = (uid) => http({
   url: '/user/playlist',
   params: { uid }
 })

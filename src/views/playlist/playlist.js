@@ -17,6 +17,20 @@ class Playlist extends Component {
     } = this.props
     dispatch(getPlaylistDetailIfNeeded(id))
   }
+
+  componentDidUpdate (prevProps) {
+    const {
+      match: { params: { id: prevId } }
+    } = prevProps
+    const {
+      match: { params: { id } },
+      dispatch
+    } = this.props
+
+    if (id !== prevId) {
+      dispatch(getPlaylistDetailIfNeeded(id))
+    }
+  }
   
   render () {
     const {

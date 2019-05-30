@@ -122,6 +122,8 @@ ie 11 都不支持
 #### `BrowserRouter` vs `HashRouter`
 #### `history` object
 #### location 和 match
+#### 路由参数变化时，比如 playlist/:id 变化时如何重新请求数据，更新页面
+  之前使用 componentWillReceiveProps，现在react不推荐，使用 componentDidUpdate
 
 
 
