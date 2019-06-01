@@ -1,0 +1,15 @@
+.avatar {
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  &--radius {
+    @extend .avatar;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+  }
+}
