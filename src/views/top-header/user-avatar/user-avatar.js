@@ -14,12 +14,30 @@ class UserAvatar extends Component {
     showLoginModal: PropTypes.func.isRequired
   }
 
-  showDropUser = () => {
+  state = {
+    isDropUserShow: false
+  }
 
+  showDropUser = () => {
+    if (!this.state.isDropUserShow) {
+      this.setState({
+        isDropUserShow: true
+      })
+  
+      document.addEventListener('click', this.closeDropUser)
+    }
+  }
+
+  closeDropUser = () => {
+    this.setState({
+      isDropUserShow: false
+    })
+    document.removeEventListener('click', this.closeDropUser)
   }
   
   render () {
     const { profile } = this.props
+    const { isDropUserShow } = this.state
     const isLogged = Object.keys(profile).length > 0
 
     if (isLogged) {
@@ -39,7 +57,11 @@ class UserAvatar extends Component {
             <span className="user-avatar__username">{nickname}</span>
             <div className="user-avatar__triangle"></div>
           </div>
-          <DropUser className="user-avatar__drop-modal"></DropUser>
+          {
+            isDropUserShow ? (
+              <DropUser className="user-avatar__drop-modal"></DropUser>
+            ) : null
+          }
         </div>
       )
     }
