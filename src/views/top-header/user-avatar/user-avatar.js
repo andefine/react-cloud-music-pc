@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { showLoginModal } from '@/store/user/actions'
+import { showLoginModal } from '@/store/account/actions'
 import DropUser from './drop-user/drop-user'
 import './user-avatar.scss'
 

@@ -27,6 +27,14 @@ export const getLoginStatus = () => http({
 })
 
 /**
+ * 退出登录。
+ * 说明 : 调用此接口 , 可退出登录
+ */
+export const logout = () => http({
+  url: '/logout'
+})
+
+/**
  * 登录后调用此接口 , 传入用户 id, 可以获取用户详情
  * @param {number|string} uid 用户 id
  */

@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import { Provider } from 'react-redux'
 import store from '@/store'
-import { loginStraight } from '@/store/user/actions'
+import { loginStraight } from '@/store/account/actions'
 
 import 'normalize.css'
 import '@/iconfont/iconfont.css'

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { logout } from '@/store/account/actions'
 import Avatar from '@/components/avatar/avatar'
 import SignBtn from './sign-btn/sign-btn'
 import DropItem from './drop-item/drop-item'
@@ -24,6 +25,11 @@ class DropUser extends Component {
   handleSign = () => {
     // TO DO 签到
     console.log('handleSign')
+  }
+
+  handleLogout = () => {
+    const { dispatch } = this.props
+    dispatch(logout())
   }
   
   render () {
@@ -104,6 +110,7 @@ class DropUser extends Component {
           icon="off"
           text="退出登录"
           arrow={false}
+          onClick={this.handleLogout}
         ></DropItem>
       </div>
     )

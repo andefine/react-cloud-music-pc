@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import user from './user/reducer'
+import user from './account/reducer'
 import size from './size/reducer'
 import recommend from './recommend/reducer'
 import playlist from './playlist/reducer'

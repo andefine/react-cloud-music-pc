@@ -2,7 +2,9 @@ import { combineReducers } from 'redux'
 import {
   SHOW_LOGIN_MODAL,
   HIDE_LOGIN_MODAL,
-  RECEIVE_USER
+  RECEIVE_ACCOUNT_DETAIL,
+  RECEIVE_ACCOUNT_PLAYLISTS,
+  LOGOUT_ACTION
 } from './action-types'
 
 const initialState = {
@@ -25,9 +27,11 @@ const isLoginShow = (state = initialState.isLoginShow, { type }) => {
 
 const detail = (state = initialState.detail, { type, payload }) => {
   switch (type) {
-    case RECEIVE_USER:
+    case RECEIVE_ACCOUNT_DETAIL:
       const { detail } = payload
       return detail
+    case LOGOUT_ACTION:
+      return {}
     default:
       return state
   }
@@ -35,19 +39,22 @@ const detail = (state = initialState.detail, { type, payload }) => {
 
 const profile = (state = initialState.profile, { type, payload }) => {
   switch (type) {
-    case RECEIVE_USER:
+    case RECEIVE_ACCOUNT_DETAIL:
       const { profile } = payload
       return profile
+    case LOGOUT_ACTION:
+      return {}
     default:
       return state
   }
 }
 
-const playlists = (state = initialState.playlists, { type, payload }) => {
+const playlists = (state = initialState.playlists, { type, playlists }) => {
   switch (type) {
-    case RECEIVE_USER:
-      const { playlists } = payload
+    case RECEIVE_ACCOUNT_PLAYLISTS:
       return playlists
+    case LOGOUT_ACTION:
+      return []
     default:
       return state
   }

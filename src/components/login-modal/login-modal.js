@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { loginByPhone, loginStraight, hideLoginModal } from '@/store/user/actions'
+import { loginByPhone, loginStraight, hideLoginModal } from '@/store/account/actions'
 import './login-modal.scss'
 
 class LoginModal extends Component {
