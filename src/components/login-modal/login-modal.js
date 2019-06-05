@@ -73,7 +73,7 @@ class LoginModal extends Component {
   }
 }
 
-const mapStateToProps = ({ user: { isLoginShow } }) => ({
+const mapStateToProps = ({ account: { isLoginShow } }) => ({
   isLoginShow
 })
 

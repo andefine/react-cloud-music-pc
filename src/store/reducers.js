@@ -1,14 +1,16 @@
 import { combineReducers } from 'redux'
-import user from './account/reducer'
+import account from './account/reducer'
 import size from './size/reducer'
 import recommend from './recommend/reducer'
 import playlist from './playlist/reducer'
 import playingSongs from './playing-songs/reducer'
+import user from './user/reducer'
 
 export default combineReducers({
-  user,
+  account,
   size,
   recommend,
   playlist,
-  playingSongs
+  playingSongs,
+  user
 })

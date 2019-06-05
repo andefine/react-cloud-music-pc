@@ -10,6 +10,7 @@ import Friend from '@/views/friend/friend'
 import LocalMusic from '@/views/local-music/local-music'
 import Download from '@/views/download/download'
 import Playlist from '@/views/playlist/playlist'
+import User from '@/views/user/user'
 import './main.scss'
 
 class Main extends Component {
@@ -156,6 +157,10 @@ class Main extends Component {
               path="/playlist/:id"
               component={Playlist}
             ></Route>
+            <Route
+              path="/user/:id"
+              component={User}
+            ></Route>
           </Switch>
         </div>
         <FooterPlayer className="main__footer-player"></FooterPlayer>
@@ -164,7 +169,7 @@ class Main extends Component {
   }
 }
 
-const mapStateToProps = ({ user: { profile, playlists } }) => {
+const mapStateToProps = ({ account: { profile, playlists } }) => {
   const { userId } = profile
   const createdPlaylists = []
   const subscribedPlaylists = []

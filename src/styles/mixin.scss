@@ -1,5 +1,10 @@
 @import "./variable.scss";
 
+@mixin big-title {
+  font-size: 22px;
+  line-height: 30px;
+}
+
 // 图标或文字，正常状态下灰色，
 // hover 状态下呈白色
 @mixin hoverable-gray {

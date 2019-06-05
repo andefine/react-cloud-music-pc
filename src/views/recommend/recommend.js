@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getRecommendData } from '@/store/recommend/actions'
-import Loading from '@/components/loading/loading'
+import LoadingText from '@/components/loading-text/loading-text'
 import TopSwiper from '@/components/top-swiper/top-swiper'
 import CardTitle from '@/components/card-list-title/card-list-title'
 import RecommendPlaylist from './recommend-playlist/recommend-playlist'
@@ -24,10 +24,10 @@ class Recommend extends Component {
 
     if (banners.length === 0) {
       return (
-        <Loading
+        <LoadingText
           className="recommend__loading"
           text="正在为你生成个性推荐..."
-        ></Loading>
+        ></LoadingText>
       )
     }
   

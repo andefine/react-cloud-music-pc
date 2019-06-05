@@ -85,7 +85,7 @@ class UserAvatar extends Component {
   }
 }
 
-const mapStateToProps = ({ user: { profile } }) => ({
+const mapStateToProps = ({ account: { profile } }) => ({
   profile
 })
 

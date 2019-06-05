@@ -1,4 +1,5 @@
 @import "@/styles/variable.scss";
+@import "@/styles/mixin.scss";
 
 .playlist-info {
   display: flex;
@@ -32,9 +33,8 @@
     color: $light-theme;
   }
   &__title-label {
+    @include big-title;
     flex-grow: 1;
-    font-size: 22px;
-    line-height: 30px;
   }
 
   &__count {

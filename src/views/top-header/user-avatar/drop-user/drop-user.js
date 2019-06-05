@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { logout } from '@/store/account/actions'
 import Avatar from '@/components/avatar/avatar'
@@ -37,6 +38,7 @@ class DropUser extends Component {
       className,
       userDetail: { level, pcSign },
       profile: {
+        userId,
         avatarUrl,
         nickname,
         eventCount,
@@ -50,11 +52,16 @@ class DropUser extends Component {
         <div className="drop-user__triangle"></div>
         
         <div className="drop-user__top">
-          <Avatar
-            className="drop-user__avatar"
-            avatarUrl={avatarUrl}
-          ></Avatar>
-          <div className="drop-user__nickname">{nickname}</div>
+          <Link
+            className="drop-user__account"
+            to={`/user/${userId}`}
+          >
+            <Avatar
+              className="drop-user__avatar"
+              avatarUrl={avatarUrl}
+            ></Avatar>
+            <div className="drop-user__nickname">{nickname}</div>
+          </Link>
           <SignBtn
             active={!pcSign}
             onClick={pcSign ? null : this.handleSign}
@@ -117,7 +124,7 @@ class DropUser extends Component {
   }
 }
 
-const mapStateToProps = ({ user: { detail: userDetail, profile } }) => ({
+const mapStateToProps = ({ account: { detail: userDetail, profile } }) => ({
   userDetail,
   profile
 })
