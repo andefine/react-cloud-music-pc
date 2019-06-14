@@ -8,11 +8,25 @@ const receiveUser = (detail, profile) => ({
   payload: { detail, profile }
 })
 
-export const loadUser = (userId) => async (dispatch) => {
+export const loadUser = (userId) => async (dispatch, getState) => {
+  const {
+    user: {
+      created: {
+        limit: createdLimit,
+        offset: createdOffset
+      }
+    }
+  } = getState()
+  
   try {
-    const { profile, ...detail } = await api.getUserDetail(userId)
+    const [
+      { profile, ...detail },
+      // { more, playlist }
+    ] = await Promise.all([
+      api.getUserDetail(userId),
+      api.getUserPlaylists(userId, createdLimit, createdOffset)
+    ])
     dispatch(receiveUser(detail, profile))
   } catch (err) {
-    console.log(err)
   }
 }

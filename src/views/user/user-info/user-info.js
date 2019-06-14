@@ -23,7 +23,11 @@ class UserInfo extends Component {
       profile: {
         avatarUrl,
         nickname,
-        gender
+        gender,
+        eventCount,
+        follows,
+        followeds,
+        signature
       }
     } = this.props
 
@@ -35,6 +39,7 @@ class UserInfo extends Component {
           <img src={avatarUrl} alt=""/>
         </div>
         <div className="user-info__right">
+
           <div className="user-info__title">
             <div className="user-info__nickname">{nickname}</div>
             {
@@ -50,6 +55,34 @@ class UserInfo extends Component {
             <IconButton className="user-info__title-btn" icon="xinfeng">发私信</IconButton>
             <IconButton className="user-info__title-btn--subscribe" icon="plus">关注</IconButton>
             <IconButton className="user-info__title-btn">· · ·</IconButton>
+          </div>
+
+          <div className="user-info__relations">
+            <div className="user-info__relations-item">
+              <div className="user-info__relations-count">{eventCount}</div>
+              <div className="user-info__relations-label">动态</div>
+            </div>
+            <div className="user-info__relations-item">
+              <div className="user-info__relations-count">{follows}</div>
+              <div className="user-info__relations-label">关注</div>
+            </div>
+            <div className="user-info__relations-item">
+              <div className="user-info__relations-count">{followeds}</div>
+              <div className="user-info__relations-label">粉丝</div>
+            </div>
+          </div>
+
+          <div className="user-info__social">
+            社交网络：
+            <span className="user-info__social-content">nothing</span>
+          </div>
+          <div className="user-info__origin">
+            所在地区：
+            <span className="user-info__origin-content">nothing</span>
+          </div>
+          <div className="user-info__desc">
+            个人介绍：
+            <span className="user-info__desc-content">{signature || '暂无介绍'}</span>
           </div>
         </div>
       </div>

@@ -35,7 +35,8 @@ export const logout = () => http({
 })
 
 /**
- * 登录后调用此接口 , 传入用户 id, 可以获取用户详情
+ * 登录后调用此接口 , 传入用户 id, 可以获取用户详情。
+ * 其中 profile 字段内容是一个对象，包含很多信息。
  * @param {number|string} uid 用户 id
  */
 export const getUserDetail = (uid) => http({
@@ -46,10 +47,24 @@ export const getUserDetail = (uid) => http({
 /**
  * 获取用户歌单，
  * 登陆后调用此接口 , 传入用户 id, 可以获取用户歌单。
- * 包括 创建的歌单 和 收藏的歌单
+ * 包括 创建的歌单 和 收藏的歌单。
+ * 注意：按照返回结果来看，会将 创建的歌单 排在
+ * 前面，而 收藏的歌单 排在后面。所以我们在请求
+ * 这两个类型的歌单的时候一定要注意 offset 偏移量，
+ * 尤其是在请求 收藏的歌单 的时候，要加上创建歌单总数量。
  * @param {number|string} uid 用户 id
+ * @param {number} [limit=30]
+ * @param {number} [offset=0]
  */
-export const getUserPlaylists = (uid) => http({
+export const getUserPlaylists = (
+  uid,
+  limit = 30,
+  offset = 0
+) => http({
   url: '/user/playlist',
-  params: { uid }
+  params: {
+    uid,
+    limit,
+    offset
+  }
 })

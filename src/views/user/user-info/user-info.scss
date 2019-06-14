@@ -6,10 +6,12 @@ $male-icon: #13648d;
 
 .user-info {
   display: flex;
+  box-sizing: border-box;
   padding: 20px 30px;
   min-height: 272px;
 
   &__avatar {
+    flex-shrink: 0;
     width: 198px;
     height: 198px;
     img {
@@ -66,5 +68,47 @@ $male-icon: #13648d;
         color: $theme;
       }
     }
+  }
+
+  &__relations {
+    display: flex;
+    margin-top: 8px;
+  }
+  &__relations-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 20px;
+    border-right: 1px solid $line-color;
+    width: 66px;
+    height: 40px;
+    cursor: pointer;
+    &:last-of-type {
+      border-right: 0;
+    }
+    &:hover {
+      .user-info__relations-label {
+        color: $font;
+      }
+    }
+  }
+  &__relations-count {
+    font-size: 22px;
+  }
+  &__relations-label {
+    color: $gray-font;
+  }
+
+  &__social {
+    margin-top: 20px;
+  }
+  &__origin {
+    margin-top: 12px;
+  }
+  &__desc {
+    margin-top: 12px;
+  }
+  &__social-content, &__origin-content {
+    color: $gray-font;
   }
 }
