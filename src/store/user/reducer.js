@@ -6,18 +6,14 @@ import { combineReducers } from 'redux'
 const initialState = {
   detail: {},
   profile: {},
+  // 歌单单页数量限制。
+  // 创建的和收藏的歌单 单页数量都一样，
+  // 而且不会提供给用户修改，所以我们不用修改它。
+  limit: 20,
   // 创建的歌单
-  created: {
-    // 单页数量限制
-    limit: 20,
-    // 偏移量，即第几页，0 表示第一页
-    offset: 0,
-    // 表示在当前页之后是否还有数据
-    more: false,
-    // 注意这里只会保存当前页的，而不是所有
-    playlists: []
-  },
-  
+  createdPlaylists: [],
+  // 收藏的歌单
+  subscribedPlaylists: []
 }
 
 const detail = (state = initialState.detail, { type, payload }) => {
@@ -40,8 +36,31 @@ const profile = (state = initialState.profile, { type, payload }) => {
   }
 }
 
-const created = (state = initialState.created, { type }) => {
+const limit = (state = initialState.limit) => {
+  return state
+}
+
+const createdPlaylists = (
+  state = initialState.createdPlaylists,
+  { type, payload }
+) => {
   switch (type) {
+    case RECEIVE_USER:
+      const { createdPlaylists } = payload
+      return createdPlaylists
+    default:
+      return state
+  }
+}
+
+const subscribedPlaylists = (
+  state = initialState.subscribedPlaylists,
+  { type, payload }
+) => {
+  switch (type) {
+    case RECEIVE_USER:
+      const { subscribedPlaylists } = payload
+      return subscribedPlaylists
     default:
       return state
   }
@@ -50,5 +69,7 @@ const created = (state = initialState.created, { type }) => {
 export default combineReducers({
   detail,
   profile,
-  created
+  limit,
+  createdPlaylists,
+  subscribedPlaylists
 })
