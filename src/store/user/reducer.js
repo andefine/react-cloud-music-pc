@@ -13,7 +13,9 @@ const initialState = {
   // 创建的歌单
   createdPlaylists: [],
   // 收藏的歌单
-  subscribedPlaylists: []
+  subscribedPlaylists: [],
+  // 收藏的歌单是否还有更多，因为无法得到收藏歌单总数量，我们只好用这个了
+  moreSubscribed: false
 }
 
 const detail = (state = initialState.detail, { type, payload }) => {
@@ -66,10 +68,21 @@ const subscribedPlaylists = (
   }
 }
 
+const moreSubscribed = (state = initialState.moreSubscribed, { type, payload }) => {
+  switch (type) {
+    case RECEIVE_USER:
+      const { moreSubscribed } = payload
+      return moreSubscribed
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   detail,
   profile,
   limit,
   createdPlaylists,
-  subscribedPlaylists
+  subscribedPlaylists,
+  moreSubscribed
 })

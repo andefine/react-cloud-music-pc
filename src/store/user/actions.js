@@ -7,14 +7,16 @@ const receiveUser = ({
   detail,
   profile,
   createdPlaylists,
-  subscribedPlaylists
+  subscribedPlaylists,
+  moreSubscribed
 }) => ({
   type: RECEIVE_USER,
   payload: {
     detail,
     profile,
     createdPlaylists,
-    subscribedPlaylists
+    subscribedPlaylists,
+    moreSubscribed
   }
 })
 
@@ -36,6 +38,7 @@ export const loadUser = (
       playlist: createdPlaylists
     },
     {
+      more: moreSubscribed,
       playlist: subscribedPlaylists
     }
   ] = await Promise.all([
@@ -56,10 +59,15 @@ export const loadUser = (
     detail,
     profile,
     createdPlaylists,
-    subscribedPlaylists
+    subscribedPlaylists,
+    moreSubscribed
   }))
 }
 
+/**
+ * 普通函数，并不是异步 action
+ * @param {*} param0 
+ */
 const loadCreatedPlaylists = async ({
   detail,
   profile,
@@ -102,7 +110,8 @@ const loadCreatedPlaylists = async ({
 }
 
 /**
- * 根据 第几页 和 单页数量 来获取该页收藏的歌单
+ * 根据 第几页 和 单页数量 来获取该页收藏的歌单。
+ * 普通函数，并不是异步 action
  * @param {Object} param
  * @param {Object} param.profile
  * @param {number} param.page 第几页，从 1 开始

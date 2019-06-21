@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import UserPlTitle from '../user-pl-title/user-pl-title'
+import PlaylistCard from '@/components/playlist-card/playlist-card'
 import './user-pl-created.scss'
 
 class UserPlCreated extends Component {
@@ -9,7 +10,9 @@ class UserPlCreated extends Component {
       isSelf,
       profile: {
         playlistCount
-      }
+      },
+      createdPlaylists,
+      subscribedPlaylists
     } = this.props
     
     return (
@@ -19,6 +22,27 @@ class UserPlCreated extends Component {
             `${isSelf ? '我创建的歌单' : '歌单'} (${playlistCount})`
           }
         ></UserPlTitle>
+        <div className="user-pl-created__list">
+          {
+            createdPlaylists.map(({
+              id,
+              name,
+              coverImgUrl,
+              playCount,
+              trackCount
+            }) => (
+              <PlaylistCard
+                className='user-pl-created__list-item'
+                key={id}
+                id={id}
+                name={name}
+                picUrl={coverImgUrl}
+                playCount={playCount}
+                trackCount={trackCount}
+              ></PlaylistCard>
+            ))
+          }
+        </div>
       </div>
     )
   }
@@ -27,14 +51,18 @@ class UserPlCreated extends Component {
 const mapStateToProps = ({
   account,
   user: {
-    profile
+    profile,
+    createdPlaylists,
+    subscribedPlaylists
   }
 }) => {
   const isSelf = (profile && profile.userId) === (account.profile && account.profile.userId)
 
   return {
     isSelf,
-    profile
+    profile,
+    createdPlaylists,
+    subscribedPlaylists
   }
 }
 

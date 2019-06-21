@@ -1,17 +1,19 @@
+@import "@/styles/mixin.scss";
+
 .playlist-card {
-  position: relative;
-  padding-top: 100%;
+  max-width: 300px;
+
   &__img-link {
+    display: block;
     overflow: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
+    padding-top: 100%;
     width: 100%;
     &:hover {
       .playlist-card__play {
         opacity: 1;
       }
-      .playlist-card__count {
+      .playlist-card__count--copywriter {
         opacity: 0;
       }
       .playlist-card__copywriter {
@@ -19,9 +21,14 @@
       }
     }
   }
+
   &__img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
   }
+
   &__count {
     position: absolute;
     top: 0;
@@ -30,22 +37,28 @@
     padding-right: 6px;
     width: 100%;
     height: 20px;
-    text-align: right;
     font-size: 12px;
+    line-height: 20px;
+    text-align: right;
     background: linear-gradient(to right, rgba(#000, 0) 0%, rgba(#000, 0) 40%, rgba(#000, 0.3) 100%);
-    transition-property: opacity;
-    transition-delay: 0.4s;
+    &--copywriter {
+      @extend .playlist-card__count;
+      transition: opacity 0s 0.4s;
+    }
   }
   &__count-icon {
     font-size: 12px;
+    line-height: 20px;
   }
   &__count-num {
     margin-left: 5px;
   }
+
   &__copywriter {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 1;
     box-sizing: border-box;
     padding: 6px 8px;
     width: 100%;
@@ -55,6 +68,7 @@
     transform: translateY(-100%);
     transition: all 0.4s 0.4s;
   }
+
   &__play {
     position: absolute;
     right: 5px;
@@ -66,13 +80,20 @@
     opacity: 0;
     transition: all 0.2s 0.1s;
     &:hover {
-      background: rgba(#000, 0.5);
+      background: rgba(#000, 0.6);
     }
   }
+
   &__name {
     display: block;
     box-sizing: border-box;
-    padding-top: 8px;
-    height: 76px;
+    padding: 8px 0 34px;
+    min-height: 76px;
+    font-size: 13px;
+    line-height: 18px;
+  }
+  &__track-count {
+    @include gray-font;
+    margin-top: 8px;
   }
 }
