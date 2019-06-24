@@ -4,11 +4,11 @@ import { connect } from 'react-redux'
 import { loadUser } from '@/store/user/actions'
 import LoadingText from '@/components/loading-text/loading-text'
 import UserInfo from './user-info/user-info'
-import UserPlCreated from './user-pl-created/user-pl-created'
+import UserPl from './user-pl/user-pl'
 import './user.scss'
 
 class User extends Component {
-  componentWillMount () {
+  componentDidMount () {
     const {
       match: { params: { id } },
       profile,
@@ -36,7 +36,7 @@ class User extends Component {
           ) : (
             <>
               <UserInfo></UserInfo>
-              <UserPlCreated></UserPlCreated>
+              <UserPl></UserPl>
             </>
           )
         }

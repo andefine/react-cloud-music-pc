@@ -65,7 +65,8 @@ export const loadUser = (
 }
 
 /**
- * 普通函数，并不是异步 action
+ * 普通异步函数，并不是异步 action。
+ * 这一块属于业务代码，因 api 介绍不是特别详细，不必在意其中实现
  * @param {*} param0 
  */
 const loadCreatedPlaylists = async ({
@@ -96,6 +97,9 @@ const loadCreatedPlaylists = async ({
   if (realPage === 1) {
     realLimit = peopleCanSeeMyPlayRecord ? (realLimit - 2) : (realLimit - 1)
   }
+  if (realPage === maxPage) {
+    realLimit = realCount % limit
+  }
 
   let offset = 0
   if (realPage > 1) {
@@ -106,7 +110,13 @@ const loadCreatedPlaylists = async ({
     )
   }
   
-  return await api.getUserPlaylists(userId, realLimit, offset)
+  const { playlist, ...rest } = await api.getUserPlaylists(userId, realLimit, offset)
+
+  if (realPage === maxPage) {
+    const list = playlist.filter(val => val.userId === userId)
+    return { playlist: list, ...rest }
+  }
+  return { playlist, rest }
 }
 
 /**
