@@ -1,5 +1,3 @@
-[NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -45,33 +43,16 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
 
+[NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)
 
 ## records
+
+### 创建项目
+```sh
+npx create-react-app my-app --typescript
+```
 
 ### 使用 `sass` [文档地址Adding a Sass Stylesheet](https://facebook.github.io/create-react-app/docs/adding-a-sass-stylesheet)
 ```shell
@@ -79,18 +60,77 @@ yarn add node-sass
 ```
 
 ### 配置 `alias`
-- `yarn eject`
-- 找到 `webpack.config.js`
-```js
-// webpack.config.js
-alias: {
-  // Support React Native Web
-  // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
-  'react-native': 'react-native-web',
-  // 添加这一行
-  '@': paths.appSrc
-}
-```
+
+* 方式一
+  - `yarn eject`
+  - 找到 `webpack.config.js`
+  ```js
+  // webpack.config.js
+  alias: {
+    // Support React Native Web
+    // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
+    'react-native': 'react-native-web',
+    // 添加这一行
+    '@': paths.appSrc
+  }
+  ```
+
+* 方式二
+
+  + 安装这 [`react-app-rewired`](https://github.com/timarney/react-app-rewired) [`customize-cra`](https://github.com/arackaf/customize-cra) 两个依赖
+  ```sh
+  yarn add react-app-rewired customize-cra
+  ```
+  + 修改 `package.json·`
+  ```json
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  }
+  ```
+  就是将 `start` `build` `test` 的 `react-scripts` 改成 `react-app-rewired`，`eject` 的不用改
+  + 根目录下添加 `config-overrides.js`
+  ```js
+  const { override, addWebpackAlias } = require('customize-cra')
+  const path = require('path')
+
+  module.exports = override(
+    addWebpackAlias({
+      '@': path.resolve(__dirname, './src')
+    })
+  )
+  ```
+
+  **注意**
+
+  到这一步为止，如果创建项目时没有加 `--typescript`，在文件中使用 `@` 路径别名，重新 `yarn start` 便可以运行(但是 `vscode` 这样就不支持路径的智能提示，需要配置 `jsconfig.json`)。但是我们的项目是 `--typescript` 的，所以创建完项目，根目录下就存在一个 `tsconfig.json` 文件，我们需要在这里做些配置，才可以运行起 `yarn start`，并且 `vscode` 可以智能提示路径
+
+  + 配置 `tsconfig.json`
+
+  根目录下添加 tsconfig.paths.json 文件
+  ```json
+  {
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "@/*": ["src/*"]
+      }
+    }
+  }
+  ```
+
+  在 `tsconfig.json` 添加
+  ```json
+  "extends": "./tsconfig.paths.json"
+  ```
+
+  这样便大功告成。关于配置别名这里可以往这儿看：[jjenzz's solution](https://github.com/facebook/create-react-app/issues/5118#issuecomment-464025389)
+
+### 关于安装依赖
+之前我们如果没上 `ts` 的情况下，直接下载依赖即可，但是现在我们可能还需要添加另一个文件。
+例如：安装 `react-router-dom` 之后，我们还需要安装 `@types/react-router-dom`。但是有些不用，比如 `redux`
 
 ### 使用 `iconfont`
 

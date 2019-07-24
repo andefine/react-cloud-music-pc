@@ -78,8 +78,12 @@ const mapStateToProps = ({
   account,
   user: {
     profile,
-    createdPlaylists,
-    subscribedPlaylists
+    // createdPlaylists,
+    // subscribedPlaylists,
+    playlists: {
+      created: createdPlaylists,
+      subscribed: subscribedPlaylists,
+    }
   }
 }) => {
   const isSelf = (profile && profile.userId) === (account.profile && account.profile.userId)
