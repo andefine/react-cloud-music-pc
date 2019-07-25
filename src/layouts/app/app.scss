@@ -1,0 +1,24 @@
+@import '@/styles/variable.scss';
+
+.app {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+
+  // 最小状态下我们规定宽高
+  &--min {
+    @extend .app;
+    width: $app-min-width;
+    height: $app-min-height;
+    box-shadow: 0 0 100px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  // 最大状态下直接 100%
+  &--max {
+    @extend .app;
+    width: 100%;
+    min-width: $app-min-width;
+    height: 100%;
+    min-height: $app-min-height;
+  }
+}

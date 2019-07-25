@@ -1,0 +1,61 @@
+@import "@/styles/variable.scss";
+
+$size: 26px;
+$avatar-color: #e1e3e4;
+
+.user-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100%;
+
+  &:hover {
+    cursor: pointer;
+  }
+  
+  &__i, &__avatar {
+    display: block;
+    border-radius: 100%;
+    width: $size;
+    height: $size;
+    line-height: $size;
+    font-size: $size;
+    color: $avatar-color;
+    background: #fff;
+  }
+
+  &__drop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $size;
+    &:hover {
+      .user-avatar__triangle {
+        border-top-color: $font;
+      }
+    }
+  }
+  &__username {
+    margin-left: 6px;
+    color: rgba($font, 0.8);
+  }
+  &__triangle {
+    margin-left: 9px;
+  }
+  // 不解释，直接搜 `css 下三角`
+  &__triangle {
+    width: 0;
+    height: 0;
+    border-top: 4px solid rgba($font, $font-opacity);
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+  }
+
+  &__drop-modal {
+    position: absolute;
+    bottom: -2px;
+    z-index: 10000;
+    transform: translateY(100%);
+  }
+}

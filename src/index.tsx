@@ -11,14 +11,14 @@ import 'normalize.css'
 import '@/iconfont/iconfont.css'
 import '@/styles/index.scss'
 
-import Layout from '@/views/layout/layout'
+import App from '@/layouts/app/app'
 
 store.dispatch(loginStraight())
 
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <Layout />
+      <App />
     </Router>
   </Provider>,
   document.getElementById('root')
