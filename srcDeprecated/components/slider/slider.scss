@@ -1,0 +1,52 @@
+@import "../../styles/variable.scss";
+
+$bg-dark: #171719;
+$bg-gray: #454546;
+$dot-height: 14px;
+$rail-height: 4px;
+
+.slider {
+  position: relative;
+  margin: 0 $dot-height / 2;
+  height: $dot-height;
+
+  &--radius {
+    @extend .slider;
+    border-radius: $rail-height / 2;
+  }
+
+  &__rail, &__progress, &__track {
+    position: absolute;
+    top: $dot-height / 2 - $rail-height / 2;
+    left: 0;
+    border-radius: inherit;
+    height: $rail-height;
+  }
+
+  &__rail {
+    width: 100%;
+    background: $bg-dark;
+  }
+
+  &__progress {
+    background: $bg-gray;
+  }
+
+  &__track {
+    background: $theme;
+  }
+
+  &__dot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: -$dot-height / 2;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    width: $dot-height;
+    height: $dot-height;
+    background: $theme;
+    cursor: pointer;
+  }
+}

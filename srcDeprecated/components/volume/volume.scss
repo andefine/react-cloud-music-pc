@@ -1,0 +1,67 @@
+@import "@/styles/variable.scss";
+@import "@/styles/mixin.scss";
+
+$bg-dark: #171719;
+$dot-height: 14px;
+$rail-height: 4px;
+$width: 100px;
+
+.volume {
+  display: flex;
+  align-items: center;
+
+  &__i {
+    width: 19px;
+  }
+  &__icon {
+    @include hoverable-gray;
+    font-size: 12px;
+  }
+
+  &-slider {
+    position: relative;
+    margin: $dot-height / 2;
+    border-radius: $rail-height / 2;
+    width: $width;
+    height: $dot-height;
+    &:hover {
+      .volume-slider__dot {
+        opacity: 1;
+      }
+    }
+
+    &__rail, &__track {
+      position: absolute;
+      top: $dot-height / 2 - $rail-height / 2;
+      left: 0;
+      border-radius: inherit;
+      height: $rail-height;
+    }
+
+    &__rail {
+      width: 100%;
+      background: $bg-dark;
+    }
+  
+    &__track {
+      background: $theme;
+    }
+
+    &__dot {
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin-left: -$dot-height / 2;
+      box-sizing: border-box;
+      border-radius: 50%;
+      border: 5px solid #fff;
+      width: $dot-height;
+      height: $dot-height;
+      background: $theme;
+      opacity: 0;
+      transition: opacity 0.1s;
+      cursor: pointer;
+    }
+  }
+
+}

@@ -22,5 +22,8 @@
   "include": [
     "src"
   ],
+  "exclude": [
+    "srcDeprecated"
+  ],
   "extends": "./tsconfig.paths.json"
 }

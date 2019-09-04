@@ -1,3 +1,0 @@
-export const CHANGE_PLAY_MANNER = 'CHANGE_PLAY_MANNER'
-export const RECEIVE_SONGS = 'RECEIVE_SONGS'
-export const AUTO_TO_NEXT = 'AUTO_TO_NEXT'
