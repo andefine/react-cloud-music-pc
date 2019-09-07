@@ -1,0 +1,38 @@
+@import "./variable.scss";
+
+@mixin big-title {
+  font-size: 22px;
+  line-height: 30px;
+}
+
+@mixin gray-font {
+  color: $gray-font;
+}
+
+// 图标或文字，正常状态下灰色，
+// hover 状态下呈白色
+@mixin hoverable-gray {
+  color: $gray-font;
+  cursor: pointer;
+  &:hover {
+    color: $font;
+  }
+}
+
+@mixin tab-content {
+  margin: 20px auto 0;
+  max-width: $tab-content-max-width;
+}
+
+// @mixin media-content-width {
+//   margin: 0 auto;
+//   // 下面的 1040 是内容区域的最大宽度，
+//   // 在 1040 这个临界点，浏览器的宽度正好是 1300
+//   // @media screen and (max-width: 1300px) {
+//   //   width: 100%;
+//   // }
+//   // @media screen and (min-width: 1300px) {
+//   //   width: 1040px;
+//   // }
+//   max-width: 1040px;
+// }

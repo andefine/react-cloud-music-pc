@@ -1,18 +1,17 @@
-import { combineReducers, Reducer } from 'redux'
+import { Reducer } from 'redux'
 
 import { GlobalState } from './types'
 
-const iniState: GlobalState = {
-  test: 'test',
+const initialState: GlobalState = {
+  test: 'teststring',
+  size: 'min',
 }
 
-const test: Reducer<GlobalState> = (state = iniState, action) => {
+const reducer: Reducer<GlobalState> = (state = initialState, action) => {
   switch (action.type) {
     default:
       return state
   }
 }
 
-export default combineReducers({
-  test
-})
+export default reducer
