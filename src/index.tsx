@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
-import 'normalize.css'
-
 import store from '@/store'
 
 import App from '@/layouts/App'
+
+import 'normalize.css'
+import '@/iconfont/iconfont.css'
+import '@/styles/index.scss'
 
 ReactDOM.render(
   <Provider store={store}>
