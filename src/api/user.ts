@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import { AxiosPromise } from 'axios'
+import axios, { AxiosPromise } from 'axios'
 
 /**
  * 完成登录后 , 会在浏览器保存一个 Cookies 用作登录凭证 ,

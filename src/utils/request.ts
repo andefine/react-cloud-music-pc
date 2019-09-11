@@ -1,3 +1,5 @@
+// 1. How to use Axios with TypeScript when using response interceptors (AxiosResponse issue)   https://github.com/axios/axios/issues/1510
+
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 // 全局默认配置
@@ -24,11 +26,7 @@ instance.interceptors.request.use((config: AxiosRequestConfig) => {
 })
 
 instance.interceptors.response.use((response: AxiosResponse) => {
-  if (response.status === 200) {
-    return response.data
-  }
-
-  return response
+  return response.data
 }, err => {
   return Promise.reject(err)
 })
