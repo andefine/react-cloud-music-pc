@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { RootState } from '@/store'
+import { IRootState } from '@/store/rootReducer'
 
 import TopHeader from '@/layouts/TopHeader'
 
@@ -19,7 +19,7 @@ const App: React.FC<Props> = ({ size }) => (
   </div>
 )
 
-const mapStateToProps = ({ global }: RootState) => ({
+const mapStateToProps = ({ global }: IRootState) => ({
   size: global.size,
 })
 

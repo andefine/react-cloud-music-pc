@@ -1,4 +1,4 @@
-export interface GlobalState {
+export interface IGlobalState {
   test: string
   size: 'min' | 'max'
 }

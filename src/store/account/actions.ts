@@ -28,5 +28,4 @@ export const loginStraight = () => async (dispatch: Dispatch) => {
 
 export const loadAccountDetail = (userId: number | string) => async (dispatch: Dispatch) => {
   const res = await userApi.getUserDetail(userId)
-  res
 }

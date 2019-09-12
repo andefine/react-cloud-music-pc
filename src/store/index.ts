@@ -1,11 +1,9 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux'
-import thunk from 'redux-thunk'
+import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-import global from './global/reducer'
-
-import { GlobalState } from './global/types'
+import rootReducer from './rootReducer'
+import rootSaga from './rootSaga'
 
 const sagaMiddleware = createSagaMiddleware()
 // const middleware = [thunk]
@@ -15,15 +13,8 @@ const sagaMiddleware = createSagaMiddleware()
 //   middleware.push(logger)
 // }
 
-const rootReducer = combineReducers({
-  global,
-})
 
 const composeEnhancers = composeWithDevTools({})
-
-export interface RootState {
-  global: GlobalState
-}
 
 const store = createStore(
   rootReducer,
@@ -33,6 +24,6 @@ const store = createStore(
   ),
 )
 
-sagaMiddleware.run()
+sagaMiddleware.run(rootSaga)
 
 export default store

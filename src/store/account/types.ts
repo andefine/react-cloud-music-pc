@@ -10,7 +10,7 @@ export interface IPlaylist {
   [key: string]: any
 }
 
-export interface AccountState {
+export interface IAccountState {
   readonly isLoginShow: boolean
   readonly detail: IDetail
   readonly profile: IProfile

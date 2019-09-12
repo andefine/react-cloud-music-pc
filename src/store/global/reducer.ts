@@ -1,13 +1,13 @@
 import { Reducer } from 'redux'
 
-import { GlobalState } from './types'
+import { IGlobalState } from './types'
 
-const initialState: GlobalState = {
+const initialState: IGlobalState = {
   test: 'teststring',
   size: 'min',
 }
 
-const reducer: Reducer<GlobalState> = (state = initialState, action) => {
+const reducer: Reducer<IGlobalState> = (state = initialState, action) => {
   switch (action.type) {
     default:
       return state
