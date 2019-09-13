@@ -30,16 +30,16 @@ interface IState {
 }
 
 class Main extends React.Component<{}, IState> {
-  state = {
+  readonly state: IState = {
     recommendMenus: {
       title: '推荐',
       menus: [
-        {
-          label: '发现音乐',
-          icon: 'music',
-          path: '/discover',
-          component: Discover,
-        },
+        // {
+        //   label: '发现音乐',
+        //   icon: 'music',
+        //   path: '/discover',
+        //   component: Discover,
+        // },
         {
           label: '私人FM',
           icon: 'FM',
