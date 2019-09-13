@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { IRootState } from '@/store/rootReducer'
 
 import TopHeader from '@/layouts/TopHeader'
+import Main from '@/layouts/Main'
 
 import './index.scss'
 
@@ -16,6 +17,7 @@ type Props = PropsFromState
 const App: React.FC<Props> = ({ size }) => (
   <div className={`app--${size}`}>
     <TopHeader></TopHeader>
+    <Main></Main>
   </div>
 )
 
