@@ -16,7 +16,7 @@ export interface IMenu {
   label: string
   icon: string
   path: string
-  component: React.ComponentType
+  component: React.ComponentType<any>
 }
 
 interface IFirstMenu {
@@ -34,12 +34,12 @@ class Main extends React.Component<{}, IState> {
     recommendMenus: {
       title: '推荐',
       menus: [
-        // {
-        //   label: '发现音乐',
-        //   icon: 'music',
-        //   path: '/discover',
-        //   component: Discover,
-        // },
+        {
+          label: '发现音乐',
+          icon: 'music',
+          path: '/discover',
+          component: Discover,
+        },
         {
           label: '私人FM',
           icon: 'FM',

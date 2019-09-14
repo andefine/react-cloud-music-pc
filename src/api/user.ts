@@ -49,7 +49,9 @@ interface IUserDetail {
  * @param uid 用户 id
  */
 
-export const getUserDetail = (uid: number | string): AxiosPromise<IUserDetail> =>
+export const getUserDetail = (
+  uid: number | string,
+): AxiosPromise<IUserDetail> =>
   request({
     url: '/user/detail',
     params: { uid },
