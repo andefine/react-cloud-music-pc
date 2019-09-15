@@ -1,10 +1,14 @@
 export interface IBanner {
-  id: number
+  imageUrl: string
   [key: string]: any
 }
 
 export interface IPlaylist {
   id: number
+  name: string
+  picUrl: string
+  playCount: number
+  copywriter: string
   [key: string]: any
 }
 

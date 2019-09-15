@@ -8,9 +8,9 @@ import {
 
 interface ISavedData {
   banners: IBanner[]
-  // playlists: IPlaylist[]
-  // privateContents: IPrivateContent[]
-  // latestMusics: ILatestMusic[]
+  playlists: IPlaylist[]
+  privateContents: IPrivateContent[]
+  latestMusics: ILatestMusic[]
 }
 
 export const saveData = (data: ISavedData) => ({

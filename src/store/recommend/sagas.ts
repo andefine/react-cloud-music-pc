@@ -1,12 +1,26 @@
-import { call, takeEvery, all, fork, put } from 'redux-saga/effects'
+import { call, takeEvery, fork, put, all } from 'redux-saga/effects'
 import * as recommendApi from '@/api/recommend'
 import { RecommendActionTypes } from './types'
 import { saveData } from './actions'
 
 function* handleLoadData() {
-  const { banners } = yield call(recommendApi.getBanners)
+  const res = yield all([
+    call(recommendApi.getBanners),
+    call(recommendApi.getPlaylist),
+    call(recommendApi.getPrivateContent),
+    call(recommendApi.getLatestMusics),
+  ])
+  const [
+    { banners },
+    { result: playlists },
+    { result: privateContents },
+    { result: latestMusics },
+  ] = res
   yield put(saveData({
-    banners
+    banners,
+    playlists,
+    privateContents,
+    latestMusics,
   }))
 }
 
@@ -15,7 +29,5 @@ function* watchLoadData() {
 }
 
 export default function* recommendSaga() {
-  yield all([
-    fork(watchLoadData),
-  ])
+  yield fork(watchLoadData)
 }

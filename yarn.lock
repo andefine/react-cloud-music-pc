@@ -1429,6 +1429,11 @@
   resolved "https://registry.npm.taobao.org/@types/stack-utils/download/@types/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
   integrity sha1-CoUdO9lkmPolwzq3J47TvWXwbD4=
 
+"@types/swiper@^4.4.5":
+  version "4.4.5"
+  resolved "https://registry.npm.taobao.org/@types/swiper/download/@types/swiper-4.4.5.tgz#49e864ca955b2bc11556831d55722c96836b3ef5"
+  integrity sha1-SehkypVbK8EVVoMdVXIsloNrPvU=
+
 "@types/yargs@^12.0.2", "@types/yargs@^12.0.9":
   version "12.0.12"
   resolved "https://registry.npm.taobao.org/@types/yargs/download/@types/yargs-12.0.12.tgz#45dd1d0638e8c8f153e87d296907659296873916"
