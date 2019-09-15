@@ -9,6 +9,7 @@ import LoadingText from '@/components/LoadingText'
 import TopSwiper from '@/components/TopSwiper'
 import CardListTitle from '@/components/CardListTitle'
 import RecommendPlaylist from './RecommendPlaylist'
+import PrivateContent from './PrivateContent'
 
 import './index.scss'
 
@@ -43,6 +44,11 @@ class Recommend extends React.Component<Props> {
         <TopSwiper list={banners}></TopSwiper>
         <CardListTitle title="推荐歌单"></CardListTitle>
         <RecommendPlaylist></RecommendPlaylist>
+        <CardListTitle
+          className="recommend__only-title"
+          title="独家放送"
+        ></CardListTitle>
+        <PrivateContent></PrivateContent>
       </div>
     )
   }

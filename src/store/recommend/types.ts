@@ -14,6 +14,8 @@ export interface IPlaylist {
 
 export interface IPrivateContent {
   id: number
+  copywriter: string
+  sPicUrl: string
   [key: string]: any
 }
 

@@ -1,0 +1,16 @@
+.private-content-card {
+  position: relative;
+  padding-top: 56.12%;
+  &__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  &__text {
+    display: block;
+    box-sizing: border-box;
+    padding-top: 8px;
+    height: 68px;
+  }
+}
