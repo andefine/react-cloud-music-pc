@@ -5,11 +5,7 @@ import AsideGroup from '@/layouts/AsideGroup'
 import FooterPlayer from '@/layouts/FooterPlayer'
 
 import Discover from '@/pages/Discover'
-import PersonalFm from '@/pages/PersonalFm'
-import Video from '@/pages/Video'
-import Friend from '@/pages/Friend'
-import LocalMusic from '@/pages/LocalMusic'
-import Download from '@/pages/Download'
+import EmptyPage from '@/pages/EmptyPage'
 
 import './index.scss'
 
@@ -17,7 +13,7 @@ export interface IMenu {
   label: string
   icon: string
   path: string
-  component: React.ComponentType<any>
+  component?: React.ComponentType<any>
 }
 
 interface IFirstMenu {
@@ -45,19 +41,16 @@ class Main extends React.Component<{}, IState> {
           label: '私人FM',
           icon: 'FM',
           path: '/personal-fm',
-          component: PersonalFm,
         },
         {
           label: '视频',
           icon: 'video',
           path: '/video',
-          component: Video,
         },
         {
           label: '朋友',
           icon: 'friend',
           path: '/friend',
-          component: Friend,
         },
       ],
     },
@@ -68,13 +61,11 @@ class Main extends React.Component<{}, IState> {
           label: '本地音乐',
           icon: 'local-music',
           path: '/local-music',
-          component: LocalMusic,
         },
         {
           label: '下载管理',
           icon: 'download',
           path: '/download',
-          component: Download,
         },
       ],
     },
@@ -105,9 +96,15 @@ class Main extends React.Component<{}, IState> {
             ></Redirect>
             {[...recommendMenus.menus, ...myMusicMenus.menus].map(
               (item, index) => {
-                const { path, component } = item
-                return (
+                const { label, path, component } = item
+                return component ? (
                   <Route key={index} path={path} component={component}></Route>
+                ) : (
+                  <Route
+                    key={index}
+                    path={path}
+                    render={() => <EmptyPage text={label}></EmptyPage>}
+                  ></Route>
                 )
               },
             )}
