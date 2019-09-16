@@ -10,6 +10,7 @@ import TopSwiper from '@/components/TopSwiper'
 import CardListTitle from '@/components/CardListTitle'
 import RecommendPlaylist from './RecommendPlaylist'
 import PrivateContent from './PrivateContent'
+import LatestMusic from './LatestMusic'
 
 import './index.scss'
 
@@ -49,6 +50,8 @@ class Recommend extends React.Component<Props> {
           title="独家放送"
         ></CardListTitle>
         <PrivateContent></PrivateContent>
+        <CardListTitle title="最新音乐"></CardListTitle>
+        <LatestMusic></LatestMusic>
       </div>
     )
   }

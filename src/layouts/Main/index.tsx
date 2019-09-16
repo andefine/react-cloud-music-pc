@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch, Redirect, Route } from 'react-router-dom'
 
 import AsideGroup from '@/layouts/AsideGroup'
+import FooterPlayer from '@/layouts/FooterPlayer'
 
 import Discover from '@/pages/Discover'
 import PersonalFm from '@/pages/PersonalFm'
@@ -112,6 +113,7 @@ class Main extends React.Component<{}, IState> {
             )}
           </Switch>
         </div>
+        <FooterPlayer></FooterPlayer>
       </main>
     )
   }
