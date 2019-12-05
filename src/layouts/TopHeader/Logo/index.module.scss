@@ -1,0 +1,26 @@
+@import '@/styles/variable.scss';
+
+$icon-size: 24px;
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: $icon-size;
+  height: $icon-size;
+  font-size: $icon-size * 0.8;
+  text-align: center;
+  background: #fff;
+}
+
+.title {
+  margin-left: 6px;
+  font-size: 18px;
+  color: #fff;
+}

@@ -1,0 +1,42 @@
+@import '@/styles/variable.scss';
+
+.bf {
+  display: flex;
+  border: 1px solid $dark-bg;
+  border-radius: 2px;
+  width: 51px;
+  height: 20px;
+}
+
+.back,
+.forward {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 20px;
+}
+.forward {
+  border-left: 1px solid $dark-bg;
+}
+
+.back-icon,
+.forward-icon {
+  font-size: 12px;
+  color: $font;
+  opacity: 0.5;
+}
+.forward-icon {
+  transform: rotate(180deg);
+}
+
+.back-icon--active,
+.forward-icon--active {
+  opacity: 1;
+}
+.back-icon--active {
+  @extend .back-icon;
+}
+.forward-icon--active {
+  @extend .forward-icon;
+}

@@ -1,13 +1,13 @@
 import React from 'react'
 
-import './index.scss'
+import styles from './index.module.scss'
 
 const Logo: React.FC<{}> = () => (
-  <div className="logo">
-    <div className="logo__icon">
-      <i className="logo__i iconfont icon-netease"></i>
+  <div className={styles.logo}>
+    <div className={styles.icon}>
+      <i className="iconfont icon-netease"></i>
     </div>
-    <h3 className="logo__title">网易云音乐</h3>
+    <h3 className={styles.title}>网易云音乐</h3>
   </div>
 )
 

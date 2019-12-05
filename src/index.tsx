@@ -5,11 +5,11 @@ import { Provider } from 'react-redux'
 
 import store from '@/store'
 
-import App from '@/layouts/App'
-
 import 'normalize.css'
 import '@/iconfont/iconfont.css'
 import '@/styles/index.scss'
+
+import App from '@/layouts/App'
 
 ReactDOM.render(
   <Provider store={store}>
@@ -17,5 +17,5 @@ ReactDOM.render(
       <App></App>
     </BrowserRouter>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 )

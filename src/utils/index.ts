@@ -2,9 +2,9 @@
  * 将播放数按一定规则转换。
  * 大于 100000，除以 10000，
  * 否则不转换。
- * @param num 
+ * @param num
  */
-export const formatPlayCount= (num: number): string => {
+export const formatPlayCount = (num: number): string => {
   if (num > 100000) {
     return `${Math.floor(num / 10000)}万`
   }

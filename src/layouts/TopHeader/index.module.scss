@@ -1,0 +1,35 @@
+@import '@/styles/variable.scss';
+
+.header {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(
+    to right,
+    $dark-theme 0%,
+    $theme 50%,
+    $dark-theme 100%
+  );
+  border-image-slice: 2;
+  padding: 0 16px 0 16px;
+  height: 48px;
+  background: $header-bg;
+}
+
+.bf {
+  margin-left: 64px;
+}
+
+.search {
+  margin-left: 10px;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.menu {
+  margin-left: 26px;
+}

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './index.scss'
+import styles from './index.module.scss'
 
 interface Props {
   className?: string
@@ -11,25 +11,29 @@ interface State {
 }
 
 class Search extends React.Component<Props, State> {
+  static defaultProps = {
+    className: '',
+  }
+
   constructor(props: Props) {
     super(props)
 
     this.state = {
-      placeholder: '搜索音乐，视频，歌词，电台'
+      placeholder: '搜索音乐，视频，歌词，电台',
     }
   }
 
   render() {
+    const { className } = this.props
+
     return (
-      <div
-        className={ this.props.className ? `search ${this.props.className}` : 'search' }
-      >
+      <div className={`${styles.search} ${className}`}>
         <input
-          className="search__input"
+          className={styles.input}
           type="text"
           placeholder={this.state.placeholder}
         />
-        <i className="search__i iconfont icon-search"></i>
+        <i className={`iconfont icon-search ${styles.i}`}></i>
       </div>
     )
   }
