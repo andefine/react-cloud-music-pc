@@ -1,16 +1,25 @@
 import { combineReducers } from 'redux'
 
-import { IGlobalState } from './global/types'
-import global from './global/reducer'
-import { IRecommendState } from './recommend/types'
-import recommend from './recommend/reducer'
+import appReducer from './app/reducer'
+// import { GlobalState } from './global/types'
+// import globalReducer from './global/reducer'
+import accountReducer from './account/reducer'
+// import { IRecommendState } from './recommend/types'
+import recommendReducer from './recommend/reducer'
 
-export interface IRootState {
-  global: IGlobalState,
-  recommend: IRecommendState,
-}
+/** 这里可以使用这种比较笨的方式，一个个的添加。比较方便的是使用后面的 ReturnType */
+// export interface IRootState {
+//   global: GlobalState
+//   recommend: IRecommendState
+// }
 
-export default combineReducers({
-  global,
-  recommend,
+const rootReducer = combineReducers({
+  app: appReducer,
+  // global: globalReducer,
+  account: accountReducer,
+  recommend: recommendReducer,
 })
+
+export default rootReducer
+
+export type RootState = ReturnType<typeof rootReducer>

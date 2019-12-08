@@ -1,8 +1,10 @@
 import React from 'react'
 
-import Logo from './Logo'
-import BackForward from './BackForward'
-import Search from './Search'
+import Logo from './components/Logo'
+import BackForward from './components/BackForward'
+import Search from './components/Search'
+import UserAvatar from './components/UserAvatar'
+import Menu from './components/Menu'
 
 import styles from './index.module.scss'
 
@@ -12,12 +14,8 @@ const TopHeader: React.FC<{}> = () => (
     <BackForward className={styles.bf}></BackForward>
     <Search className={styles.search}></Search>
     <div className={styles['flex-grow']}></div>
-    {/* <div className={styles.left}>
-    </div>
-    <div className={styles.right}>
-      <UserAvatar></UserAvatar>
-          <HeaderMenu className="top-header__menu"></HeaderMenu>
-    </div> */}
+    <UserAvatar></UserAvatar>
+    <Menu></Menu>
   </header>
 )
 

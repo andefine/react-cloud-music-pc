@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect, DispatchProp } from 'react-redux'
 
-import { IRootState } from '@/store/rootReducer'
+import { RootState } from '@/store/rootReducer'
 import { loadData } from '@/store/recommend/actions'
 import { IBanner } from '@/store/recommend/types'
 
@@ -57,7 +57,7 @@ class Recommend extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = ({ recommend }: IRootState) => ({
+const mapStateToProps = ({ recommend }: RootState) => ({
   banners: recommend.banners,
 })
 

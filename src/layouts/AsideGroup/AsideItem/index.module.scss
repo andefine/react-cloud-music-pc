@@ -1,8 +1,8 @@
-@import "@/styles/variable.scss";
+@import '@/styles/variable.scss';
 
 $active-bg: #26282c;
 
-.aside-item {
+.root {
   display: flex;
   align-items: center;
   box-sizing: border-box;
@@ -14,17 +14,19 @@ $active-bg: #26282c;
   &:hover {
     opacity: 1;
   }
+
   &--active {
-    @extend .aside-item;
+    @extend .root;
     border-color: $theme;
     background: $active-bg;
     opacity: 1;
   }
-  &__text {
-    flex-grow: 1;
-    overflow: hidden;
-    margin-left: 10px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+}
+
+.text {
+  flex-grow: 1;
+  overflow: hidden;
+  margin-left: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

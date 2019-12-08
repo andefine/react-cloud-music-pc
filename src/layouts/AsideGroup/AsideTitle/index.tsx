@@ -1,9 +1,9 @@
 import React from 'react'
 
-import './index.scss'
+import styles from './index.module.scss'
 
 const AsideTitle: React.FC<{}> = ({ children }) => (
-  <div className="aside-title">{children}</div>
+  <div className={styles.root}>{children}</div>
 )
 
 export default AsideTitle

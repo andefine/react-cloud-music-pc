@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { IRootState } from '@/store/rootReducer'
+import { RootState } from '@/store/rootReducer'
 import { IPrivateContent } from '@/store/recommend/types'
 
 import PrivateContentCard from '@/components/PrivateContentCard'
@@ -28,7 +28,7 @@ const PrivateContent: React.FC<IProps> = ({ privateContents }) => (
   </div>
 )
 
-const mapStateToProps = ({ recommend }: IRootState) => ({
+const mapStateToProps = ({ recommend }: RootState) => ({
   privateContents: recommend.privateContents,
 })
 

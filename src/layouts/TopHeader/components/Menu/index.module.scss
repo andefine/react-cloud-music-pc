@@ -1,0 +1,22 @@
+@import '@/styles/variable.scss';
+@import '@/styles/mixin.scss';
+
+.left {
+  margin-left: 26px;
+  border-right: 1px solid $dark-bg;
+  padding-right: 18px;
+  height: 20px;
+}
+
+.icon {
+  @include hoverable-gray;
+  margin-right: 26px;
+  font-size: 16px;
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.right {
+  padding-left: 18px;
+}

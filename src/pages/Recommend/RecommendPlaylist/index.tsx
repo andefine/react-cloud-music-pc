@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { IRootState } from '@/store/rootReducer'
+import { RootState } from '@/store/rootReducer'
 import { IPlaylist } from '@/store/recommend/types'
 import { getShowPlaylists } from '@/store/recommend/selectors'
 
@@ -34,7 +34,7 @@ const RecommendPlaylist: React.FC<Props> = ({ playlists }) => (
   </div>
 )
 
-const mapStateToProps = ({ recommend }: IRootState) => ({
+const mapStateToProps = ({ recommend }: RootState) => ({
   playlists: getShowPlaylists(recommend.playlists),
 })
 

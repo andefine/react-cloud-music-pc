@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom'
 
-import './index.scss'
+import styles from './index.module.scss'
 
 interface IProps {
   label: string
@@ -15,12 +15,12 @@ const AsideItem: React.FC<IProps> = ({ label, icon, to }) => {
       path={to}
       children={({ match }) => (
         <Link
-          className={`aside-item${match ? '--active' : ''}`}
+          className={match ? styles['root--active'] : styles.root}
           to={to}
           replace={!!match}
         >
-          <i className={`aside-item__i iconfont icon-${icon}`}></i>
-          <span className="aside-item__text">{label}</span>
+          <i className={`iconfont icon-${icon}`}></i>
+          <span className={styles.text}>{label}</span>
         </Link>
       )}
     ></Route>
