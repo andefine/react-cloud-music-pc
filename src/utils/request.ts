@@ -18,18 +18,44 @@ const instance = axios.create({
   withCredentials: true,
 })
 
-// 添加请求拦截器
-instance.interceptors.request.use((config: AxiosRequestConfig) => {
-  return config
-}, (err) => {
-  return Promise.reject(err)
-})
+interface jsonObj {
+  [key: string]: any
+}
+/** json 转 querystring */
+const objToQueryStr = (obj: jsonObj) => {
+  let str = ''
+  for (const key in obj) {
+    const value = obj[key]
+    // 过滤掉空值
+    if (value === null || value === void 0) {
+      continue
+    }
+    str += `${key}=${value}&`
+  }
+  return str.slice(0, str.length - 1)
+}
 
-instance.interceptors.response.use((response: AxiosResponse) => {
-  return response.data
-}, err => {
-  return Promise.reject(err)
-})
+// 添加请求拦截器
+instance.interceptors.request.use(
+  (config: AxiosRequestConfig) => {
+    const { data } = config
+    const newData = objToQueryStr(data)
+
+    return { ...config, data: newData }
+  },
+  err => {
+    return Promise.reject(err)
+  },
+)
+
+instance.interceptors.response.use(
+  (response: AxiosResponse) => {
+    return response.data
+  },
+  err => {
+    return Promise.reject(err)
+  },
+)
 
 const request = instance
 export default request

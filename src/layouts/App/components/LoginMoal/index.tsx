@@ -1,8 +1,8 @@
 import React from 'react'
-import { connect, DispatchProp } from 'react-redux'
+import { connect } from 'react-redux'
 
-import { RootState } from '@/store'
-import * as appActions from '@/store/app/actions'
+import { RootState, ThunkDispatchProps } from '@/store'
+import * as appThunks from '@/store/app/thunks'
 
 import styles from './index.module.scss'
 
@@ -10,7 +10,7 @@ interface StateProps {
   isLoginShow: boolean
 }
 
-type Props = StateProps & DispatchProp
+type Props = StateProps & ThunkDispatchProps
 
 class LoginModal extends React.Component<Props> {
   // 这里看 https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#forwardrefcreateref
@@ -18,7 +18,6 @@ class LoginModal extends React.Component<Props> {
   private pwInput = React.createRef<HTMLInputElement>()
 
   handleLogin = async () => {
-    console.dir(this.accountInput.current!.value)
     const account = this.accountInput.current!.value
     const pw = this.pwInput.current!.value
 
@@ -28,7 +27,7 @@ class LoginModal extends React.Component<Props> {
 
     const { dispatch } = this.props
     try {
-      await dispatch(appActions.loginByPhone(account, pw))
+      await dispatch(appThunks.loginByPhone(account, pw))
     } catch (error) {}
   }
 

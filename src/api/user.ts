@@ -11,13 +11,7 @@ import { AxiosPromise } from 'axios'
  * @param password
  */
 export const loginByPhone = (phone: string, password: string) =>
-  request({
-    url: '/login/cellphone',
-    params: {
-      phone,
-      password,
-    },
-  })
+  request.post('/login/cellphone', { phone, password })
 
 /**
  * 调用此接口,可获取登录状态。

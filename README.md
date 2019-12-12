@@ -43,27 +43,31 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-
-
 [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)
+
+- 接口支持 GET/POST ，请按需使用
 
 ## records
 
 ### 创建项目
+
 ```sh
 npx create-react-app my-app --typescript
 ```
 
-### 使用 `sass` [文档地址Adding a Sass Stylesheet](https://facebook.github.io/create-react-app/docs/adding-a-sass-stylesheet)
+### 使用 `sass` [文档地址 Adding a Sass Stylesheet](https://facebook.github.io/create-react-app/docs/adding-a-sass-stylesheet)
+
 ```shell
 yarn add node-sass
 ```
 
 ### 配置 `alias`
 
-* 方式一
+- 方式一
+
   - `yarn eject`
   - 找到 `webpack.config.js`
+
   ```js
   // webpack.config.js
   alias: {
@@ -75,13 +79,16 @@ yarn add node-sass
   }
   ```
 
-* 方式二
+- 方式二
 
-  + 安装这 [`react-app-rewired`](https://github.com/timarney/react-app-rewired) [`customize-cra`](https://github.com/arackaf/customize-cra) 两个依赖
+  - 安装这 [`react-app-rewired`](https://github.com/timarney/react-app-rewired) [`customize-cra`](https://github.com/arackaf/customize-cra) 两个依赖
+
   ```sh
   yarn add react-app-rewired customize-cra
   ```
-  + 修改 `package.json·`
+
+  - 修改 `package.json·`
+
   ```json
   "scripts": {
     "start": "react-app-rewired start",
@@ -90,16 +97,19 @@ yarn add node-sass
     "eject": "react-scripts eject"
   }
   ```
+
   就是将 `start` `build` `test` 的 `react-scripts` 改成 `react-app-rewired`，`eject` 的不用改
-  + 根目录下添加 `config-overrides.js`
+
+  - 根目录下添加 `config-overrides.js`
+
   ```js
   const { override, addWebpackAlias } = require('customize-cra')
   const path = require('path')
 
   module.exports = override(
     addWebpackAlias({
-      '@': path.resolve(__dirname, './src')
-    })
+      '@': path.resolve(__dirname, './src'),
+    }),
   )
   ```
 
@@ -107,9 +117,10 @@ yarn add node-sass
 
   到这一步为止，如果创建项目时没有加 `--typescript`，在文件中使用 `@` 路径别名，重新 `yarn start` 便可以运行(但是 `vscode` 这样就不支持路径的智能提示，需要配置 `jsconfig.json`)。但是我们的项目是 `--typescript` 的，所以创建完项目，根目录下就存在一个 `tsconfig.json` 文件，我们需要在这里做些配置，才可以运行起 `yarn start`，并且 `vscode` 可以智能提示路径
 
-  + 配置 `tsconfig.json`
+  - 配置 `tsconfig.json`
 
   根目录下添加 tsconfig.paths.json 文件
+
   ```json
   {
     "compilerOptions": {
@@ -122,6 +133,7 @@ yarn add node-sass
   ```
 
   在 `tsconfig.json` 添加
+
   ```json
   "extends": "./tsconfig.paths.json"
   ```
@@ -129,6 +141,7 @@ yarn add node-sass
   这样便大功告成。关于配置别名这里可以往这儿看：[jjenzz's solution](https://github.com/facebook/create-react-app/issues/5118#issuecomment-464025389)
 
 ### 关于安装依赖
+
 之前我们如果没上 `ts` 的情况下，直接下载依赖即可，但是现在我们可能还需要添加另一个文件。
 例如：安装 `react-router-dom` 之后，我们还需要安装 `@types/react-router-dom`。但是有些不用，比如 `redux`
 
@@ -140,11 +153,12 @@ yarn add node-sass
 
 - 项目中引入
 
-将*以iconfont为文件名* *以`css` `eot` `svg` `ttf` `woff`为后缀的这五个文件* 放到一个文件夹下，再在入口文件中引入 `iconfont.css` 就行啦，非常简单
+将*以 iconfont 为文件名* _以`css` `eot` `svg` `ttf` `woff`为后缀的这五个文件_ 放到一个文件夹下，再在入口文件中引入 `iconfont.css` 就行啦，非常简单
 
 ### js
 
 #### URLSearchParams
+
 ie 11 都不支持
 
 ### react
@@ -154,23 +168,28 @@ ie 11 都不支持
 #### can React support feature like keep-alive in Vue? [#12039](https://github.com/facebook/react/issues/12039)
 
 #### 勤能生巧
-${className || ''} => className = ''
 
-
+\${className || ''} => className = ''
 
 ### **react-router**
 
 <!-- TODO -->
+
 #### 使用自定义 Link 来而不是在上面绑定事件触发 `history.push`
+
 具体看`main.js`中配置的路由，`aside-bar.js`和`aside-item.js`，以及 [example `Custom Link`](https://reacttraining.com/react-router/web/example/custom-link)
+
 #### `Link`是可以使用 `className` 的，所以可以自定义样式
+
 #### `BrowserRouter` vs `HashRouter`
+
 #### `history` object
+
 #### location 和 match
+
 #### 路由参数变化时，比如 playlist/:id 变化时如何重新请求数据，更新页面
-  之前使用 componentWillReceiveProps，现在react不推荐，使用 componentDidUpdate
 
-
+之前使用 componentWillReceiveProps，现在 react 不推荐，使用 componentDidUpdate
 
 ### **redux**
 
