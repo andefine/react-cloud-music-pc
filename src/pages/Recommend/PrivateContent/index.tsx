@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { RootState } from '@/store/rootReducer'
+import { RootState } from '@/store'
 import { IPrivateContent } from '@/store/recommend/types'
 
 import PrivateContentCard from '@/components/PrivateContentCard'

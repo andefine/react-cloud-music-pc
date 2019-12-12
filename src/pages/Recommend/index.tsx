@@ -1,8 +1,8 @@
 import React from 'react'
-import { connect, DispatchProp } from 'react-redux'
+import { connect } from 'react-redux'
 
-import { RootState } from '@/store/rootReducer'
-import { loadData } from '@/store/recommend/actions'
+import { RootState, ThunkDispatchProps } from '@/store'
+import { loadData } from '@/store/recommend/thunks'
 import { IBanner } from '@/store/recommend/types'
 
 import LoadingText from '@/components/LoadingText'
@@ -20,7 +20,7 @@ interface IPropsFromState {
 
 interface IProps {}
 
-type Props = IPropsFromState & DispatchProp & IProps
+type Props = IPropsFromState & ThunkDispatchProps & IProps
 
 class Recommend extends React.Component<Props> {
   componentDidMount() {

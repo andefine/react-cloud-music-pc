@@ -1,7 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { connect, DispatchProp } from 'react-redux'
 
-import { RootState } from '@/store/rootReducer'
+import { RootState } from '@/store'
+import * as appActions from '@/store/app/actions'
 
 import styles from './index.module.scss'
 
@@ -9,14 +10,26 @@ interface StateProps {
   isLoginShow: boolean
 }
 
-type Props = StateProps
+type Props = StateProps & DispatchProp
 
 class LoginModal extends React.Component<Props> {
+  // 这里看 https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#forwardrefcreateref
   private accountInput = React.createRef<HTMLInputElement>()
   private pwInput = React.createRef<HTMLInputElement>()
 
-  handleLogin = () => {
-    console.dir(this.accountInput.current && this.accountInput.current.value)
+  handleLogin = async () => {
+    console.dir(this.accountInput.current!.value)
+    const account = this.accountInput.current!.value
+    const pw = this.pwInput.current!.value
+
+    if (!account || !pw) {
+      return
+    }
+
+    const { dispatch } = this.props
+    try {
+      await dispatch(appActions.loginByPhone(account, pw))
+    } catch (error) {}
   }
 
   render() {

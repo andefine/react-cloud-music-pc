@@ -1,7 +1,7 @@
 import React from 'react'
 import { DispatchProp, connect } from 'react-redux'
 
-import { RootState } from '@/store/rootReducer'
+import { RootState } from '@/store'
 import { Profile } from '@/store/account/types'
 import * as appActions from '@/store/app/actions'
 
