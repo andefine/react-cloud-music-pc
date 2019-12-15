@@ -1,32 +1,20 @@
-import { AccountActionTypes, IDetail, Profile, IPlaylist } from './types'
-import { Dispatch } from 'redux'
-import * as userApi from '@/api/user'
+import { AccountActionTypes, AccountAction } from './types'
+import { Profile, Detail } from '@/store/user/types'
+import { Playlist } from '@/store/playlist/types'
 
-export const showLoginModal = () => ({
-  type: AccountActionTypes.SHOW_LOGIN_MODAL,
+export const saveAccountDetail = (
+  profile: Profile,
+  detail: Detail,
+): AccountAction => ({
+  type: AccountActionTypes.SAVE_ACCOUNT_DETAIL,
+  payload: { profile, detail },
 })
 
-export const hideLoginModal = () => ({
-  type: AccountActionTypes.HIDE_LOGIN_MODAL,
+export const saveAccountPlaylists = (playlists: Playlist[]): AccountAction => ({
+  type: AccountActionTypes.SAVE_ACCOUNT_PLAYLISTS,
+  payload: { playlists },
 })
 
-const receiveAccountDetail = (detail: IDetail, profile: Profile) => ({
-  type: AccountActionTypes.RECEIVE_ACCOUNT_DETAIL,
-  payload: { detail, profile },
+export const logoutSuccess = (): AccountAction => ({
+  type: AccountActionTypes.LOGOUT_SUCCESS,
 })
-
-const receiveAccountPlaylists = (playlists: IPlaylist[]) => ({
-  type: AccountActionTypes.RECEIVE_ACCOUNT_PLAYLISTS,
-  playlists,
-})
-
-export const loginStraight = () => async (dispatch: Dispatch) => {
-  // try {
-  // }
-}
-
-export const loadAccountDetail = (userId: number) => async (
-  dispatch: Dispatch,
-) => {
-  const res = await userApi.getUserDetail(userId)
-}

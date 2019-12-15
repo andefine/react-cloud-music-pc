@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { RootState, ThunkDispatchProps } from '@/store'
-import * as appThunks from '@/store/app/thunks'
+import * as accountThunks from '@/store/account/thunks'
 import * as appActions from '@/store/app/actions'
 
 import styles from './index.module.scss'
@@ -54,7 +54,7 @@ class LoginModal extends React.Component<Props, State> {
 
     const { dispatch } = this.props
     try {
-      await dispatch(appThunks.loginByPhone(account, pw))
+      await dispatch(accountThunks.loginByPhone(account, pw))
       dispatch(appActions.hideLoginModal())
     } catch (error) {}
   }

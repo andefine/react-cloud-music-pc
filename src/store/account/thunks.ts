@@ -1,5 +1,5 @@
 import { AppThunk } from '@/store'
-import { AppThunkTypes } from './types'
+import { AccountThunkTypes } from './types'
 import {
   saveAccountDetail,
   saveAccountPlaylists,
@@ -17,7 +17,7 @@ export const loginByPhone = (
   phone: string,
   password: string,
 ): AppThunk => async dispatch => {
-  dispatch({ type: AppThunkTypes.LOGIN_BY_PHONE })
+  dispatch({ type: AccountThunkTypes.LOGIN_BY_PHONE })
 
   try {
     const res = await userApi.loginByPhone(phone, password)
@@ -38,7 +38,7 @@ export const loginByPhone = (
  * 这里函数名称里虽然有一个 login，但是是需要保证浏览器中已经有了 cookie 的
  */
 export const attempLogin = (): AppThunk => async dispatch => {
-  dispatch({ type: AppThunkTypes.ATTEMP_LOGIN })
+  dispatch({ type: AccountThunkTypes.ATTEMP_LOGIN })
 
   try {
     // 注意这里，如果 cookie 中没有登录信息，
@@ -57,7 +57,7 @@ export const attempLogin = (): AppThunk => async dispatch => {
 export const loadAccountDetail = (
   userId: number,
 ): AppThunk => async dispatch => {
-  dispatch({ type: AppThunkTypes.LOAD_ACCOUNT_DETAIL })
+  dispatch({ type: AccountThunkTypes.LOAD_ACCOUNT_DETAIL })
 
   const { profile, ...detail } = await userApi.getUserDetail(userId)
   dispatch(saveAccountDetail(profile, detail))
@@ -66,14 +66,14 @@ export const loadAccountDetail = (
 export const loadAccountPlaylists = (
   userId: number,
 ): AppThunk => async dispatch => {
-  dispatch({ type: AppThunkTypes.LOAD_ACCOUNT_PLAYLISTS })
+  dispatch({ type: AccountThunkTypes.LOAD_ACCOUNT_PLAYLISTS })
 
   const { playlist: playlists } = await userApi.getUserPlaylists(userId)
   dispatch(saveAccountPlaylists(playlists))
 }
 
 export const logout = (): AppThunk => async dispatch => {
-  dispatch({ type: AppThunkTypes.LOGOUT })
+  dispatch({ type: AccountThunkTypes.LOGOUT })
   await userApi.logout()
   dispatch(logoutSuccess())
 }

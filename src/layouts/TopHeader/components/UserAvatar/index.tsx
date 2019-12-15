@@ -2,7 +2,7 @@ import React from 'react'
 import { DispatchProp, connect } from 'react-redux'
 
 import { RootState } from '@/store'
-import { Profile } from '@/store/account/types'
+import { Profile } from '@/store/user/types'
 import * as appActions from '@/store/app/actions'
 
 import DropUser from '../DropUser'
@@ -80,8 +80,8 @@ class UserAvatar extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = ({ app }: RootState) => ({
-  profile: app.profile,
+const mapStateToProps = ({ account }: RootState) => ({
+  profile: account.profile,
 })
 
 export default connect(mapStateToProps)(UserAvatar)

@@ -5,8 +5,6 @@ import { AppState, WinSize, AppActionTypes, AppAction } from './types'
 const initialState: AppState = {
   winSize: WinSize.Min,
   isLoginShow: false,
-  profile: {},
-  detail: {},
 }
 
 const reducer: Reducer<AppState> = (
@@ -23,22 +21,6 @@ const reducer: Reducer<AppState> = (
       return {
         ...state,
         isLoginShow: false,
-      }
-    case AppActionTypes.SAVE_ACCOUNT_DETAIL:
-      return {
-        ...state,
-        ...action.payload,
-      }
-    case AppActionTypes.SAVE_ACCOUNT_PLAYLISTS:
-      return {
-        ...state,
-        ...action.payload,
-      }
-    case AppActionTypes.LOGOUT_SUCCESS:
-      return {
-        ...state,
-        profile: {},
-        detail: {},
       }
 
     default:

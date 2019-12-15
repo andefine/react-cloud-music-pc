@@ -3,16 +3,16 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { RootState, ThunkDispatchProps } from '@/store'
-import * as AppThunks from '@/store/app/thunks'
+import * as accountThunks from '@/store/account/thunks'
 
 import Avatar from '@/components/Avatar'
 import MenuItem from './MenuItem'
 
 import styles from './index.module.scss'
 
-const mapStateToProps = ({ app }: RootState) => ({
-  profile: app.profile,
-  detail: app.detail,
+const mapStateToProps = ({ account }: RootState) => ({
+  profile: account.profile,
+  detail: account.detail,
 })
 
 type StateProps = ReturnType<typeof mapStateToProps>
@@ -30,7 +30,7 @@ class DropUser extends React.Component<Props> {
 
   handleLogout = () => {
     const { dispatch } = this.props
-    dispatch(AppThunks.logout())
+    dispatch(accountThunks.logout())
   }
 
   render() {

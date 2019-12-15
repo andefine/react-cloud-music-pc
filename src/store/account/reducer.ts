@@ -1,25 +1,33 @@
 import { Reducer } from 'redux'
 
-import { IAccountState, AccountActionTypes } from './types'
+import { AccountState, AccountActionTypes, AccountAction } from './types'
 
-const initialState: IAccountState = {
-  isLoginShow: false,
+const initialState: AccountState = {
   detail: {},
   profile: {},
   playlists: [],
 }
 
-const reducer: Reducer<IAccountState> = (state = initialState, action) => {
+const reducer: Reducer<AccountState> = (
+  state = initialState,
+  action: AccountAction,
+) => {
   switch (action.type) {
-    case AccountActionTypes.SHOW_LOGIN_MODAL:
+    case AccountActionTypes.SAVE_ACCOUNT_DETAIL:
       return {
         ...state,
-        isLoginShow: true,
+        ...action.payload,
       }
-    case AccountActionTypes.HIDE_LOGIN_MODAL:
+    case AccountActionTypes.SAVE_ACCOUNT_PLAYLISTS:
       return {
         ...state,
-        isLoginShow: false,
+        ...action.payload,
+      }
+    case AccountActionTypes.LOGOUT_SUCCESS:
+      return {
+        ...state,
+        profile: {},
+        detail: {},
       }
 
     default:

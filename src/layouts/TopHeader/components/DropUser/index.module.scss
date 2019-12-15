@@ -109,9 +109,6 @@ $border-color: #36383c;
     margin-top: 4px;
     color: $gray-font;
   }
-  // &__border {
-  //   border-right: 1px solid $border-color;
-  // }
 }
 
 .menu-item {
@@ -162,27 +159,3 @@ $border-color: #36383c;
     font-weight: bold;
   }
 }
-// .menu-item {
-// &:hover {
-//   background: $border-color;
-// }
-// &__level {
-//   font-family: Arial, sans-serif;
-//   font-style: italic;
-//   font-weight: bold;
-// }
-// &--first {
-//   @extend .menu-item;
-//   margin-top: 19px;
-//   border-top: 1px solid $border-color;
-// }
-// &--border {
-//   @extend .menu-item;
-//   border-top: 1px solid $border-color;
-// }
-// &--off {
-//   @extend .menu-item;
-//   border-top: 1px solid $border-color;
-//   height: 50px;
-// }
-// }

@@ -1,6 +1,6 @@
 /*
  * @Date: 2019-09-07 23:32:17
- * @LastEditTime: 2019-12-15 15:21:05
+ * @LastEditTime: 2019-12-15 22:45:21
  * @Description: 这里有许多类型声明啥的，我人晕了 (￣o￣) . z Z
  */
 import { createStore, applyMiddleware, Action } from 'redux'
@@ -10,7 +10,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 import rootReducer from './rootReducer'
 // import rootSaga from './rootSaga'
-import { attempLogin } from './app/thunks'
+import { attempLogin } from './account/thunks'
 
 // const middleware = [thunk as ThunkMiddleware<any, Action>]
 
