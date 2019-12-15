@@ -1,6 +1,6 @@
 /*
  * @Date: 2019-12-08 00:16:55
- * @LastEditTime: 2019-12-15 17:36:17
+ * @LastEditTime: 2019-12-15 21:34:03
  * @Description: 这里保存一些公共的数据，并不是 App 那个组件独有的
  */
 
@@ -25,6 +25,7 @@ export enum AppActionTypes {
   HIDE_LOGIN_MODAL = '@app/HIDE_LOGIN_MODAL',
   SAVE_ACCOUNT_DETAIL = '@app/SAVE_ACCOUNT_DETAIL',
   SAVE_ACCOUNT_PLAYLISTS = '@app/SAVE_ACCOUNT_PLAYLISTS',
+  LOGOUT_SUCCESS = '@app/LOGOUT_SUCCESS',
 }
 
 export enum AppThunkTypes {
@@ -32,6 +33,7 @@ export enum AppThunkTypes {
   ATTEMP_LOGIN = '@app/ATTEMP_LOGIN',
   LOAD_ACCOUNT_DETAIL = '@app/LOAD_ACCOUNT_DETAIL',
   LOAD_ACCOUNT_PLAYLISTS = '@app/LOAD_ACCOUNT_PLAYLISTS',
+  LOGOUT = '@app/LOGOUT',
 }
 
 /********* action type *********/
@@ -54,8 +56,13 @@ interface SaveAccountPlaylists {
   payload: { playlists: Playlist[] }
 }
 
+interface LogoutSuccess {
+  type: AppActionTypes.LOGOUT_SUCCESS
+}
+
 export type AppAction =
   | ShowLoginModal
   | HideLoginModal
   | SaveAccountDetail
   | SaveAccountPlaylists
+  | LogoutSuccess

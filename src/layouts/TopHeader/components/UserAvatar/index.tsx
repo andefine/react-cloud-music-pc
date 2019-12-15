@@ -5,19 +5,19 @@ import { RootState } from '@/store'
 import { Profile } from '@/store/account/types'
 import * as appActions from '@/store/app/actions'
 
+import DropUser from '../DropUser'
+
 import styles from './index.module.scss'
 
 interface StateProps {
   profile: Partial<Profile>
 }
 
-interface OwnProps {}
-
 interface State {
   isDropUserShow: boolean
 }
 
-type Props = StateProps & DispatchProp & OwnProps
+type Props = StateProps & DispatchProp
 
 class UserAvatar extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -28,15 +28,26 @@ class UserAvatar extends React.Component<Props, State> {
     }
   }
 
-  showDropUser = () => {
+  handleShowDropUser = () => {
     if (!this.state.isDropUserShow) {
       this.setState({ isDropUserShow: true })
+
+      // 为了在打开用户下拉信息框时点击其他地方都能够关闭它，
+      // 我们在文档上添加事件监听，记得关闭之后移除
+      document.addEventListener('click', this.closeDropUser)
     }
+  }
+
+  closeDropUser = () => {
+    this.setState({
+      isDropUserShow: false,
+    })
+    document.removeEventListener('click', this.closeDropUser)
   }
 
   render() {
     const { profile, dispatch } = this.props
-    // const { isDropUserShow } = this.state
+    const { isDropUserShow } = this.state
     const isLogged = Object.keys(profile).length > 0
 
     const { avatarUrl, nickname } = profile
@@ -44,13 +55,13 @@ class UserAvatar extends React.Component<Props, State> {
     return isLogged ? (
       <div className={styles.root}>
         <img className={styles.avatar} src={avatarUrl} alt="" />
-        <div className={styles.drop} onClick={this.showDropUser}>
+        <div className={styles.drop} onClick={this.handleShowDropUser}>
           <span className={styles.username}>{nickname}</span>
           <div className={styles.triangle}></div>
         </div>
-        {/* {isDropUserShow ? (
-            <DropUser className="user-avatar__drop-modal"></DropUser>
-          ) : null} */}
+        {isDropUserShow ? (
+          <DropUser className={styles['drop-modal']}></DropUser>
+        ) : null}
       </div>
     ) : (
       <div

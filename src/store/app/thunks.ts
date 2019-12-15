@@ -1,6 +1,10 @@
 import { AppThunk } from '@/store'
 import { AppThunkTypes } from './types'
-import { saveAccountDetail, saveAccountPlaylists } from './actions'
+import {
+  saveAccountDetail,
+  saveAccountPlaylists,
+  logoutSuccess,
+} from './actions'
 import * as userApi from '@/api/user'
 
 /**
@@ -66,4 +70,10 @@ export const loadAccountPlaylists = (
 
   const { playlist: playlists } = await userApi.getUserPlaylists(userId)
   dispatch(saveAccountPlaylists(playlists))
+}
+
+export const logout = (): AppThunk => async dispatch => {
+  dispatch({ type: AppThunkTypes.LOGOUT })
+  await userApi.logout()
+  dispatch(logoutSuccess())
 }

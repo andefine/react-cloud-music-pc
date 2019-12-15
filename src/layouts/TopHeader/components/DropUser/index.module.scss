@@ -1,0 +1,188 @@
+@import '@/styles/variable.scss';
+
+$bg: #2d2f33;
+$border-color: #36383c;
+
+.root {
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid $border-color;
+  padding-top: 2px;
+  width: 274px;
+  background: $bg;
+  box-shadow: 0 0 60px 0px rgba(#000, 0.5);
+  cursor: default;
+}
+
+.triangle {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid $bg;
+  border-left: 10px solid transparent;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 13px 0 19px;
+  height: 74px;
+  &__account {
+    flex-grow: 1;
+    display: flex;
+  }
+  &__avatar {
+    width: 40px;
+    height: 40px;
+  }
+  &__nickname {
+    flex-grow: 1;
+    overflow: hidden;
+    margin: 0 10px;
+    height: 40px;
+    line-height: 40px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+  }
+}
+
+.sign-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid #4d4e52;
+  width: 64px;
+  height: 26px;
+  color: rgba($gray-font, 0.5);
+  background: #3a3c40;
+
+  &--active {
+    @extend .sign-btn;
+    color: $gray-font;
+    background: transparent;
+    cursor: pointer;
+    &:hover {
+      border-color: #414346;
+      color: $font;
+      background: #414346;
+    }
+  }
+
+  &__icon {
+    margin-left: -4px;
+    margin-right: 4px;
+  }
+}
+
+.count {
+  display: flex;
+  padding: 0 2px;
+  height: 36px;
+  cursor: pointer;
+
+  &__item {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &:hover .count__label {
+      color: $font;
+    }
+    &:not(:last-of-type) {
+      border-right: 1px solid $border-color;
+    }
+  }
+  &__num {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  &__label {
+    margin-top: 4px;
+    color: $gray-font;
+  }
+  // &__border {
+  //   border-right: 1px solid $border-color;
+  // }
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 0 8px 0 18px;
+  height: 36px;
+  cursor: pointer;
+  &:hover {
+    background: $border-color;
+  }
+  &--first {
+    @extend .menu-item;
+    margin-top: 19px;
+    border-top: 1px solid $border-color;
+  }
+  &--border {
+    @extend .menu-item;
+    border-top: 1px solid $border-color;
+  }
+  &--off {
+    @extend .menu-item;
+    border-top: 1px solid $border-color;
+    height: 50px;
+  }
+
+  &__icon {
+    font-size: 16px;
+    color: $gray-font;
+  }
+  &__text {
+    flex-grow: 1;
+    margin-left: 10px;
+  }
+  &__label {
+    margin-right: 8px;
+    color: $gray-font;
+  }
+  &__arrow {
+    font-weight: bold;
+    color: $gray-font;
+    opacity: 0.5;
+  }
+
+  &__level-label {
+    font-family: Arial, sans-serif;
+    font-style: italic;
+    font-weight: bold;
+  }
+}
+// .menu-item {
+// &:hover {
+//   background: $border-color;
+// }
+// &__level {
+//   font-family: Arial, sans-serif;
+//   font-style: italic;
+//   font-weight: bold;
+// }
+// &--first {
+//   @extend .menu-item;
+//   margin-top: 19px;
+//   border-top: 1px solid $border-color;
+// }
+// &--border {
+//   @extend .menu-item;
+//   border-top: 1px solid $border-color;
+// }
+// &--off {
+//   @extend .menu-item;
+//   border-top: 1px solid $border-color;
+//   height: 50px;
+// }
+// }

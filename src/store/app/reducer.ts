@@ -34,6 +34,12 @@ const reducer: Reducer<AppState> = (
         ...state,
         ...action.payload,
       }
+    case AppActionTypes.LOGOUT_SUCCESS:
+      return {
+        ...state,
+        profile: {},
+        detail: {},
+      }
 
     default:
       return state

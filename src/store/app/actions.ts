@@ -22,3 +22,7 @@ export const saveAccountPlaylists = (playlists: Playlist[]): AppAction => ({
   type: AppActionTypes.SAVE_ACCOUNT_PLAYLISTS,
   payload: { playlists },
 })
+
+export const logoutSuccess = (): AppAction => ({
+  type: AppActionTypes.LOGOUT_SUCCESS,
+})

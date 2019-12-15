@@ -12,5 +12,7 @@ export interface Profile {
 }
 
 export interface Detail {
+  level: number
+  pcSign: boolean
   [key: string]: any
 }
