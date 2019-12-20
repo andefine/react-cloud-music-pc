@@ -23,3 +23,13 @@ export const dayToWeekday = (day: number): string => {
       return ''
   }
 }
+
+export const formatDurationTime = (stamp: number): string => {
+  const instance = new Date(stamp)
+  const minutes = instance.getMinutes()
+  const seconds = instance.getSeconds()
+
+  return `${minutes.toString().padStart(2, '0')}:${seconds
+    .toString()
+    .padStart(2, '0')}`
+}

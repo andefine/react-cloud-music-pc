@@ -1,0 +1,104 @@
+@import '@/styles/variable.scss';
+@import '@/styles/mixin.scss';
+
+.root {
+  display: flex;
+  padding: 30px;
+}
+
+.cover-img {
+  flex-shrink: 0;
+  margin-right: 30px;
+  width: 198px;
+  height: 198px;
+}
+
+.right {
+  flex-grow: 1;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  &__tag {
+    flex-shrink: 0;
+    margin: 5px 6px 0 0;
+    box-sizing: border-box;
+    border-radius: 1px;
+    border: 1px solid $light-theme;
+    padding: 0 6px;
+    height: 20px;
+    font-size: 12px;
+    line-height: 18px;
+    color: $light-theme;
+  }
+  &__label {
+    @include big-title;
+    flex-grow: 1;
+  }
+}
+
+.count {
+  flex-shrink: 0;
+  display: flex;
+  margin-top: 4px;
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    box-sizing: border-box;
+    padding: 0 10px;
+    height: 30px;
+    color: $gray-font;
+    &:first-of-type {
+      border-right: 1px solid $line-color;
+    }
+  }
+  &__label,
+  &__num {
+    opacity: 0.5;
+    font-size: 11px;
+  }
+}
+
+.creator {
+  display: flex;
+  align-items: center;
+  margin-top: 9px;
+  // &__avatar {}
+  &__avatar-img {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+  }
+  &__nickname {
+    margin-left: 9px;
+    font-size: 13px;
+    color: $gray-font;
+  }
+}
+.create-time {
+  margin-left: 16px;
+  color: $gray-font;
+  opacity: 0.6;
+}
+
+.btns {
+  margin-top: 18px;
+  &__item {
+    margin-right: 11px;
+  }
+}
+
+.tags {
+  margin-top: 24px;
+  &__item {
+    color: $blue;
+  }
+}
+
+.desc {
+  margin-top: 12px;
+  line-height: 16px;
+}

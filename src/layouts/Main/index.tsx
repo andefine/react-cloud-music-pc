@@ -5,6 +5,7 @@ import AsideGroup from '@/layouts/AsideGroup'
 import FooterPlayer from '@/layouts/FooterPlayer'
 
 import Discover from '@/pages/Discover'
+import PlaylistDetail from '@/pages/Playlist/Detail'
 import EmptyPage from '@/pages/EmptyPage'
 
 import './index.scss'
@@ -25,6 +26,15 @@ interface IState {
   recommendMenus: IFirstMenu
   myMusicMenus: IFirstMenu
 }
+
+// 不在左侧菜单列表，但是需要在内容区域渲染的路由组件
+const notAsideRoutes = [
+  {
+    label: '歌单详情',
+    path: '/playlist/:id',
+    component: PlaylistDetail,
+  },
+]
 
 class Main extends React.Component<{}, IState> {
   readonly state: IState = {
@@ -94,20 +104,22 @@ class Main extends React.Component<{}, IState> {
               from="/"
               to={recommendMenus.menus[0].path}
             ></Redirect>
-            {[...recommendMenus.menus, ...myMusicMenus.menus].map(
-              (item, index) => {
-                const { label, path, component } = item
-                return component ? (
-                  <Route key={index} path={path} component={component}></Route>
-                ) : (
-                  <Route
-                    key={index}
-                    path={path}
-                    render={() => <EmptyPage text={label}></EmptyPage>}
-                  ></Route>
-                )
-              },
-            )}
+            {[
+              ...recommendMenus.menus,
+              ...myMusicMenus.menus,
+              ...notAsideRoutes,
+            ].map((item, index) => {
+              const { label, path, component } = item
+              return component ? (
+                <Route key={index} path={path} component={component}></Route>
+              ) : (
+                <Route
+                  key={index}
+                  path={path}
+                  render={() => <EmptyPage text={label}></EmptyPage>}
+                ></Route>
+              )
+            })}
           </Switch>
         </div>
         <FooterPlayer></FooterPlayer>

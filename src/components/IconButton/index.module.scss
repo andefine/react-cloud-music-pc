@@ -1,0 +1,25 @@
+@import '@/styles/variable.scss';
+
+$bg: #2c2e32;
+
+.root {
+  border-radius: 4px;
+  padding: 0 10px;
+  line-height: 24px;
+  color: $font;
+  background: rgba($color: $bg, $alpha: 0.7);
+  cursor: pointer;
+
+  &:hover {
+    background: $bg;
+  }
+  &:hover .icon {
+    opacity: $font-opacity;
+  }
+}
+
+.icon {
+  margin-right: 5px;
+  font-size: 14px;
+  opacity: 0.6;
+}
