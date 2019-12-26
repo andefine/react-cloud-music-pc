@@ -1,6 +1,6 @@
 import { AccountActionTypes, AccountAction } from './types'
 import { Profile, Detail } from '@/store/user/types'
-import Playlist from '@/types/Playlist'
+import { Playlist } from '@/types/Playlist'
 
 export const saveAccountDetail = (
   profile: Profile,

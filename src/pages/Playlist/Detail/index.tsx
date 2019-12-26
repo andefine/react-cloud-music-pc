@@ -2,12 +2,13 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router'
 
-import Playlist from '@/types/Playlist'
+import { Playlist } from '@/types/Playlist'
 import * as playlistApi from '@/api/playlist'
 
 import Info from './components/Info'
 import Tab from './components/Tab'
 import Table from './components/Table'
+import Comment from './components/Comment'
 
 import styles from './index.module.scss'
 
@@ -58,6 +59,9 @@ class Detail extends React.Component<Props, State> {
         <Info playlist={playlist as Playlist}></Info>
         <Tab {...tabProps}></Tab>
         {tab === '' && <Table tracks={(playlist as Playlist).tracks}></Table>}
+        {tab === 'comment' && (
+          <Comment id={(playlist as Playlist).id}></Comment>
+        )}
       </div>
     )
   }

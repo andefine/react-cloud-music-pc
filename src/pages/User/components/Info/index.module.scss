@@ -1,0 +1,115 @@
+@import '@/styles/mixin.scss';
+@import '@/styles/variable.scss';
+
+$female-icon: #b975ab;
+$male-icon: #13648d;
+
+.root {
+  display: flex;
+  box-sizing: border-box;
+  padding: 20px 30px;
+  min-height: 272px;
+}
+
+.avatar {
+  flex-shrink: 0;
+  width: 198px;
+  height: 198px;
+  &__img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.right {
+  flex-grow: 1;
+  margin-left: 30px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $line-color;
+}
+.nickname {
+  @include big-title;
+}
+.gender {
+  margin-left: 10px;
+  font-size: 22px;
+}
+.gender.icon-female {
+  color: $female-icon;
+}
+.gender.icon-male {
+  color: $male-icon;
+}
+.level {
+  display: flex;
+  align-items: center;
+  margin-left: 9px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 1px solid $theme;
+  padding: 0 7px;
+  height: 20px;
+  font-weight: bold;
+  color: $theme;
+}
+.flex-grow {
+  flex-grow: 1;
+}
+
+.title__btn {
+  margin-left: 12px;
+  &--subscribe {
+    @extend .title__btn;
+    i {
+      color: $theme;
+    }
+  }
+}
+
+.count {
+  display: flex;
+  margin-top: 8px;
+}
+.count__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 20px;
+  border-right: 1px solid $line-color;
+  width: 66px;
+  height: 40px;
+  cursor: pointer;
+  &:last-of-type {
+    border-right: 0;
+  }
+  &:hover {
+    .count__item-label {
+      color: $font;
+    }
+  }
+}
+.count__item-num {
+  font-size: 22px;
+}
+.count__item-label {
+  color: $gray-font;
+}
+
+.social {
+  margin-top: 20px;
+}
+.origin {
+  margin-top: 12px;
+}
+.desc {
+  margin-top: 12px;
+}
+.social__content,
+.origin__content {
+  color: $gray-font;
+}

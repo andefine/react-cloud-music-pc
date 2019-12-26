@@ -6,6 +6,7 @@ import FooterPlayer from '@/layouts/FooterPlayer'
 
 import Discover from '@/pages/Discover'
 import PlaylistDetail from '@/pages/Playlist/Detail'
+import User from '@/pages/User'
 import EmptyPage from '@/pages/EmptyPage'
 
 import './index.scss'
@@ -33,6 +34,11 @@ const notAsideRoutes = [
     label: '歌单详情',
     path: '/playlist/:id',
     component: PlaylistDetail,
+  },
+  {
+    label: '用户详情',
+    path: '/user/:id',
+    component: User,
   },
 ]
 

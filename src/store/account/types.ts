@@ -1,5 +1,5 @@
 import { Profile, Detail } from '@/store/user/types'
-import Playlist from '@/types/Playlist'
+import { Playlist } from '@/types/Playlist'
 
 export interface AccountState {
   profile: Partial<Profile>

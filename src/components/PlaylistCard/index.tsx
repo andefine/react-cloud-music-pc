@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { formatPlayCount } from '@/utils'
 
-import './index.scss'
+import styles from './index.module.scss'
 
 interface IProps {
   className?: string
@@ -29,29 +29,27 @@ const PlaylistCard: React.FC<IProps> = ({
   const hasTrackCount = !(trackCount === -1)
 
   return (
-    <div className={`playlist-card ${className}`}>
-      <Link className="playlist-card__img-link" to={to}>
-        <img className="playlist-card__img" src={picUrl} alt={name} />
+    <div className={`${styles.root} ${className}`}>
+      <Link className={styles['img-link']} to={to}>
+        <img className={styles.img} src={picUrl} alt={name} />
         <div
-          className={`playlist-card__count${
-            hasCopywriter ? '--copywriter' : ''
-          }`}
+          className={hasCopywriter ? styles['count--copywriter'] : styles.count}
         >
-          <i className="playlist-card__count-icon iconfont icon-earphone"></i>
-          <span className="playlist-card__count-num">
+          <i className={`iconfont icon-earphone ${styles.count__icon}`}></i>
+          <span className={styles.count__num}>
             {formatPlayCount(playCount)}
           </span>
         </div>
-        {hasCopywriter ? (
-          <span className="playlist-card__copywriter">{copywriter}</span>
-        ) : null}
-        <i className="playlist-card__play iconfont icon-play-big"></i>
+        {hasCopywriter && (
+          <span className={styles.copywriter}>{copywriter}</span>
+        )}
+        <i className={`iconfont icon-play-big ${styles.play}`}></i>
       </Link>
-      <div className="playlist-card__name">
+      <div className={styles.name}>
         <Link to={to}>{name}</Link>
-        {hasTrackCount ? (
-          <div className="playlist-card__track-count">{trackCount}首</div>
-        ) : null}
+        {hasTrackCount && (
+          <div className={styles['track-count']}>{trackCount}首</div>
+        )}
       </div>
     </div>
   )

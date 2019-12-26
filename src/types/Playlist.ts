@@ -1,4 +1,4 @@
-import User from './User'
+import { UserProfile } from './User'
 
 export interface Track {
   id: number
@@ -9,12 +9,13 @@ export interface Track {
   [key: string]: any
 }
 
-export default interface Playlist {
+export interface Playlist {
+  id: number
   coverImgUrl: string
   name: string
   trackCount: number
   playCount: number
-  creator: User
+  creator: UserProfile
   createTime: number
   subscribedCount: number
   shareCount: number

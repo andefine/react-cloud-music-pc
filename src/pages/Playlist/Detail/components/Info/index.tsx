@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import { formatPlayCount } from '@/utils'
-import Playlist from '@/types/Playlist'
+import { Playlist } from '@/types/Playlist'
 import IconButton from '@/components/IconButton'
 
 import styles from './index.module.scss'
