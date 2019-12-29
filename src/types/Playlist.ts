@@ -11,6 +11,7 @@ export interface Track {
 
 export interface Playlist {
   id: number
+  subscribed: boolean
   coverImgUrl: string
   name: string
   trackCount: number

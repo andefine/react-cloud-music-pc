@@ -25,45 +25,69 @@ type Props = OwnProps & RouteComponentProps<{ id: string }> & StateProps
 interface State {
   profile: Partial<UserProfile>
   detail: Partial<UserDetail>
-  playlists: Playlist[]
+  createdPlaylists: Playlist[]
+  subscribedPlaylists: Playlist[]
 }
 
 class User extends React.Component<Props, State> {
+  id: number
+
   constructor(props: Props) {
     super(props)
 
+    this.id = -1
     this.state = {
       profile: {},
       detail: {},
-      playlists: [],
+      createdPlaylists: [],
+      subscribedPlaylists: [],
     }
   }
 
   componentDidMount() {
-    this.getDataByRoute()
+    this.id = Number(this.props.match.params.id) || -1
+    this.initData()
   }
 
   componentDidUpdate(prevProps: Props) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
-      this.getDataByRoute()
+      this.initData()
     }
   }
 
-  async getDataByRoute() {
-    const numId = Number(this.props.match.params.id)
-    if (!numId) {
-      return console.error('无效的 user id')
-    }
+  async initData() {
+    await Promise.all([this.getUser(), this.appendPlaylists()])
+  }
 
-    const [{ profile, ...detail }, { playlist: playlists }] = await Promise.all<
-      any
-    >([userApi.getUserDetail(numId), userApi.getUserPlaylists(numId)])
-    this.setState({ profile, detail, playlists })
+  async getUser() {
+    const { profile, ...detail } = await userApi.getUserDetail(this.id)
+    this.setState({ profile, detail })
+  }
+
+  async appendPlaylists() {
+    const { playlist: playlists } = await userApi.getUserPlaylists({
+      uid: this.id,
+      limit: 1000,
+    })
+
+    const acc = playlists.reduce<{ c: Playlist[]; s: Playlist[] }>(
+      (pre, item) => {
+        item.creator.userId === this.id ? pre.c.push(item) : pre.s.push(item)
+        return pre
+      },
+      { c: [], s: [] },
+    )
+    this.setState({ createdPlaylists: acc.c, subscribedPlaylists: acc.s })
   }
 
   render() {
     const { accountProfile } = this.props
-    const { profile, detail, playlists } = this.state
+    const {
+      profile,
+      detail,
+      createdPlaylists,
+      subscribedPlaylists,
+    } = this.state
     const isSelf = profile.userId === accountProfile.userId
 
     return (
@@ -76,7 +100,14 @@ class User extends React.Component<Props, State> {
               profile={profile as UserProfile}
               detail={detail as UserDetail}
             ></Info>
-            <UserPl {...{ isSelf, playlists }}></UserPl>
+            <UserPl
+              {...{
+                isSelf,
+                profile: profile as UserProfile,
+                createdPlaylists,
+                subscribedPlaylists,
+              }}
+            ></UserPl>
           </React.Fragment>
         )}
       </div>

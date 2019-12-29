@@ -1,4 +1,6 @@
+import { AxiosPromise } from 'axios'
 import request from '@/utils/request'
+import { Playlist } from '@/types/Playlist'
 
 /**
  * 完成登录后 , 会在浏览器保存一个 Cookies 用作登录凭证 ,
@@ -64,12 +66,14 @@ export const getUserRecord = (uid: number | string, type: number = 0) =>
  * 而且，第一个并不是从 喜欢的音乐 开始。特别要注意这一点。
  * 所以我们在请求这两个类型的歌单的时候一定要注意 offset 偏移量，
  * 尤其是在请求 收藏的歌单 的时候，要加上创建歌单总数量 - 1。
- * @param uid 用户 id
- * @param offset 偏移量，默认 0。注意不是页数
- * @param limit 单页数量，默认 30
+ * @param query
+ * @param query.uid 用户 id
+ * @param query.offset 偏移量，默认 0。注意不是页数
+ * @param query.limit 单页数量，默认 30
  */
-export const getUserPlaylists = (
-  uid: number,
-  offset: number = 0,
-  limit: number = 30,
-) => request.get('/user/playlist', { params: { uid, offset, limit } })
+export const getUserPlaylists = (query: {
+  uid: number
+  offset?: number
+  limit?: number
+}): AxiosPromise<{ playlist: Playlist[] }> =>
+  request.get('/user/playlist', { params: query })

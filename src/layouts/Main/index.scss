@@ -5,7 +5,8 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  height: 572px;
+  // height: 572px;
+  height: calc(#{$app-min-height} - 50px - 49px);
   background: $dark-bg;
 
   &__area {

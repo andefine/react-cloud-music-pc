@@ -68,7 +68,9 @@ export const loadAccountPlaylists = (
 ): AppThunk => async dispatch => {
   dispatch({ type: AccountThunkTypes.LOAD_ACCOUNT_PLAYLISTS })
 
-  const { playlist: playlists } = await userApi.getUserPlaylists(userId)
+  const { playlist: playlists } = await userApi.getUserPlaylists({
+    uid: userId,
+  })
   dispatch(saveAccountPlaylists(playlists))
 }
 

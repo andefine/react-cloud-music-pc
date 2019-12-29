@@ -33,5 +33,7 @@ export interface UserProfile {
   blacklist: boolean
   // 动态数量
   eventCount: number
+  // 创建的歌单数量，包括 `喜欢的音乐`
+  playlistCount: number
   [key: string]: any
 }
