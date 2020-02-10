@@ -8,6 +8,7 @@ import Discover from '@/pages/Discover'
 import PlaylistDetail from '@/pages/Playlist/Detail'
 import User from '@/pages/User'
 import EmptyPage from '@/pages/EmptyPage'
+import TestPage from '@/pages/TestPage'
 
 import './index.scss'
 
@@ -39,6 +40,11 @@ const notAsideRoutes = [
     label: '用户详情',
     path: '/user/:id',
     component: User,
+  },
+  {
+    label: '测试',
+    path: '/test',
+    component: TestPage,
   },
 ]
 

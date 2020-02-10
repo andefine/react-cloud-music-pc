@@ -1,15 +1,27 @@
-import { Reducer } from 'redux'
-import { PlayManner, PlayerState } from './types'
+import { PlayMode, PlayerState, PlayerAction, PlayerActionTypes } from './types'
 
 const initialState: PlayerState = {
-  curIndex: 0,
+  curIndex: -1,
+  playingTracks: [],
   idsOfSongs: [],
-  playManner: PlayManner.Order,
+  PlayMode: PlayMode.Order,
   songsById: {},
 }
 
-const reducer: Reducer<PlayerState> = (state = initialState) => {
-  return state
+// const
+
+const reducer = (state = initialState, action: PlayerAction): PlayerState => {
+  switch (action.type) {
+    case PlayerActionTypes.ADD_TO_PLAYER_LIST:
+      return {
+        ...state,
+        curIndex: 0,
+        playingTracks: action.payload.tracks,
+      }
+
+    default:
+      return state
+  }
 }
 
 export default reducer

@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 
 import styles from './index.module.scss'
 
-const IconButton: React.FC<{ className?: string; icon?: string }> = ({
+interface Props {
+  className?: string
+  icon?: string
+  onClick?: (e: MouseEvent) => void
+}
+
+const IconButton: React.FC<Props> = ({
   className = '',
   icon,
+  onClick,
   children,
 }) => (
-  <button className={`${styles.root} ${className}`}>
+  <button className={`${styles.root} ${className}`} onClick={onClick}>
     {icon ? <i className={`${styles.icon} iconfont icon-${icon}`}></i> : null}
     {children}
   </button>

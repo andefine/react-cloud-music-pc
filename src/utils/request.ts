@@ -4,10 +4,11 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 // 全局默认配置
 if (process.env.NODE_ENV === 'development') {
-  axios.defaults.baseURL = 'http://localhost:3000'
+  // axios.defaults.baseURL = 'http://47.99.212.154:3000'
 }
 if (process.env.NODE_ENV === 'production') {
-  axios.defaults.baseURL = 'http://localhost:3000'
+  // axios.defaults.baseURL = 'http://47.99.212.154:3000'
+  axios.defaults.baseURL = 'api'
 }
 
 const instance = axios.create({

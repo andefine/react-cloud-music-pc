@@ -1,5 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
+import { RootState } from '@/store'
 import { formatDurationTime } from '@/utils/time'
 
 import * as songApi from '@/api/song'
@@ -11,13 +13,21 @@ import Volume from '@/components/Volume'
 
 import styles from './index.module.scss'
 
+const mapStateToProps = ({ player }: RootState) => ({
+  curIndex: player.curIndex,
+  playingTracks: player.playingTracks,
+})
+
 interface OwnProps {}
 
-type Props = OwnProps
+type StateProps = ReturnType<typeof mapStateToProps>
+
+type Props = OwnProps & StateProps
 
 interface State {
+  src: string
   isPlaying: boolean
-  song: Partial<Track>
+  song: Track | null
   curTime: number
   curStamp: number
   playProgress: number
@@ -25,16 +35,16 @@ interface State {
   volume: number
 }
 
-class FooterPlay extends React.Component<Props, State> {
-  songId: number
+class FooterPlayer extends React.Component<Props, State> {
   audio: React.RefObject<HTMLAudioElement>
 
   constructor(props: Props) {
     super(props)
 
     this.state = {
+      src: '',
       isPlaying: false,
-      song: {},
+      song: null,
       curTime: 0,
       curStamp: 0,
       playProgress: 0,
@@ -42,18 +52,36 @@ class FooterPlay extends React.Component<Props, State> {
       volume: 0.5,
     }
 
-    this.songId = 562594267
     this.audio = React.createRef<HTMLAudioElement>()
   }
 
   async componentDidMount() {
     this.audio.current!.volume = 0.000001
-    const detailRes = await songApi.getSongDetail(this.songId)
-    this.setState({ song: detailRes.songs[0] })
-    const res = await songApi.getSongsUrl(this.songId)
-    this.audio.current!.src = res.data[0].url
+    this.refreshCurrent()
 
     this.audio.current!.addEventListener('timeupdate', this.onTimeUpdate)
+  }
+
+  async componentDidUpdate(prevProps: Props) {
+    if (this.props.curIndex !== prevProps.curIndex) {
+      this.refreshCurrent()
+    }
+  }
+
+  componentWillUnmount() {
+    this.audio.current!.removeEventListener('timeupdate', this.onTimeUpdate)
+  }
+
+  async refreshCurrent() {
+    const { curIndex, playingTracks } = this.props
+    if (playingTracks[curIndex]) {
+      const track = playingTracks[curIndex]
+      const urlRes = await songApi.getSongsUrl(track.id)
+      this.setState({
+        song: playingTracks[curIndex],
+        src: urlRes.data[0].url,
+      })
+    }
   }
 
   onTimeUpdate = () => {
@@ -64,13 +92,20 @@ class FooterPlay extends React.Component<Props, State> {
         this.audio.current!.buffered.length - 1,
       )
       const { song } = this.state
-      loadProgress = song.dt ? (load * 1000) / song.dt : 0
+      const dt = song!.dt
+      loadProgress = dt ? (load * 1000) / dt : 0
     }
     this.setState({ curStamp, loadProgress })
   }
 
+  handleVolumeChange = (volume: number) => {
+    this.setState({ volume })
+    this.audio.current!.volume = volume
+  }
+
   render() {
     const {
+      src,
       isPlaying,
       song,
       curStamp,
@@ -78,7 +113,7 @@ class FooterPlay extends React.Component<Props, State> {
       loadProgress,
       volume,
     } = this.state
-    const durationStamp = song.dt ? song.dt : 0
+    const durationStamp = song ? song.dt : 0
     const playManner = 'xx'
     const idsOfSongs = []
 
@@ -86,11 +121,8 @@ class FooterPlay extends React.Component<Props, State> {
 
     return (
       <footer className={styles.root}>
-        <audio preload="auto" autoPlay controls ref={this.audio}>
-          <source
-            type="audio/mpeg"
-            src="http://m8.music.126.net/20191228222749/8f4078aed56ee6e2654e837e05a51e34/ymusic/5852/bf3d/5f06/a2948e91763d97a0d0f5557e8c90e6eb.mp3"
-          />
+        <audio preload="auto" autoPlay controls ref={this.audio} src={src}>
+          <source type="audio/mpeg" />
         </audio>
         <div className={styles.left}>
           <ControlBtn icon="pre-track" onClick={() => {}}></ControlBtn>
@@ -113,7 +145,11 @@ class FooterPlay extends React.Component<Props, State> {
           {formatDurationTime(durationStamp)}
         </span>
 
-        <Volume className={styles.volume} volume={volume}></Volume>
+        <Volume
+          className={styles.volume}
+          volume={volume}
+          onChange={this.handleVolumeChange}
+        ></Volume>
 
         <div className={styles.right}>
           <i
@@ -133,4 +169,4 @@ class FooterPlay extends React.Component<Props, State> {
   }
 }
 
-export default FooterPlay
+export default connect(mapStateToProps)(FooterPlayer)
