@@ -63,5 +63,9 @@ $width: 100px;
     opacity: 0;
     transition: opacity 0.1s;
     cursor: pointer;
+    &--moving {
+      @extend .slider__dot;
+      opacity: 1;
+    }
   }
 }

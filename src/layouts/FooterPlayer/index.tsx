@@ -18,25 +18,25 @@ const mapStateToProps = ({ player }: RootState) => ({
   playingTracks: player.playingTracks,
 })
 
-interface OwnProps {}
-
 type StateProps = ReturnType<typeof mapStateToProps>
 
-type Props = OwnProps & StateProps
+type Props = StateProps
 
 interface State {
   src: string
   isPlaying: boolean
   song: Track | null
-  curTime: number
-  curStamp: number
+  curStampLabel: string
+  dtStampLabel: string
   playProgress: number
   loadProgress: number
   volume: number
 }
 
 class FooterPlayer extends React.Component<Props, State> {
-  audio: React.RefObject<HTMLAudioElement>
+  private audio = React.createRef<HTMLAudioElement>()
+  // 是否在移动进度条
+  private isMoving = false
 
   constructor(props: Props) {
     super(props)
@@ -45,26 +45,30 @@ class FooterPlayer extends React.Component<Props, State> {
       src: '',
       isPlaying: false,
       song: null,
-      curTime: 0,
-      curStamp: 0,
+      curStampLabel: formatDurationTime(0),
+      dtStampLabel: formatDurationTime(0),
       playProgress: 0,
       loadProgress: 0,
-      volume: 0.5,
+      volume: 0.001,
     }
+  }
 
-    this.audio = React.createRef<HTMLAudioElement>()
+  static getDerivedStateFromProps(props: Props) {
+    return {
+      song: props.playingTracks[props.curIndex] || null,
+    }
   }
 
   async componentDidMount() {
-    this.audio.current!.volume = 0.000001
-    this.refreshCurrent()
+    this.audio.current!.volume = this.state.volume
+    this.getSongData()
 
     this.audio.current!.addEventListener('timeupdate', this.onTimeUpdate)
   }
 
   async componentDidUpdate(prevProps: Props) {
     if (this.props.curIndex !== prevProps.curIndex) {
-      this.refreshCurrent()
+      this.getSongData()
     }
   }
 
@@ -72,30 +76,60 @@ class FooterPlayer extends React.Component<Props, State> {
     this.audio.current!.removeEventListener('timeupdate', this.onTimeUpdate)
   }
 
-  async refreshCurrent() {
+  async getSongData() {
     const { curIndex, playingTracks } = this.props
     if (playingTracks[curIndex]) {
       const track = playingTracks[curIndex]
       const urlRes = await songApi.getSongsUrl(track.id)
+      const song = playingTracks[curIndex]
       this.setState({
-        song: playingTracks[curIndex],
+        song,
         src: urlRes.data[0].url,
+        dtStampLabel: formatDurationTime(song.dt),
       })
     }
   }
 
   onTimeUpdate = () => {
-    const curStamp = this.audio.current!.currentTime * 1000
-    let loadProgress = 0
-    if (this.audio.current!.buffered.length > 0) {
-      const load = this.audio.current!.buffered.end(
-        this.audio.current!.buffered.length - 1,
-      )
-      const { song } = this.state
-      const dt = song!.dt
-      loadProgress = dt ? (load * 1000) / dt : 0
+    const audioNode = this.audio.current!
+    const { song } = this.state
+
+    if (!song) {
+      return
     }
-    this.setState({ curStamp, loadProgress })
+
+    let data = {}
+
+    if (!this.isMoving) {
+      const curStamp = audioNode.currentTime * 1000
+      const curStampLabel = formatDurationTime(curStamp)
+      const playProgress = curStamp / song!.dt
+      data = { ...data, curStampLabel, playProgress }
+    }
+
+    if (audioNode.buffered.length > 0) {
+      const load = audioNode.buffered.end(audioNode.buffered.length - 1)
+      const dt = song!.dt
+      const loadProgress = dt ? (load * 1000) / dt : 0
+      data = { ...data, loadProgress }
+    }
+
+    this.setState(data)
+  }
+
+  handleSliderChange = (playProgress: number) => {
+    this.isMoving = true
+    const { song } = this.state
+    const curStamp = song!.dt * playProgress
+    const curStampLabel = formatDurationTime(curStamp)
+    this.setState({ curStampLabel, playProgress })
+  }
+
+  handleAfterSliderChange = (playProgress: number) => {
+    this.isMoving = false
+    const audioNode = this.audio.current!
+    const { song } = this.state
+    audioNode.currentTime = (song!.dt * playProgress) / 1000
   }
 
   handleVolumeChange = (volume: number) => {
@@ -107,17 +141,14 @@ class FooterPlayer extends React.Component<Props, State> {
     const {
       src,
       isPlaying,
-      song,
-      curStamp,
-      // playProgress,
+      curStampLabel,
+      dtStampLabel,
+      playProgress,
       loadProgress,
       volume,
     } = this.state
-    const durationStamp = song ? song.dt : 0
     const playManner = 'xx'
     const idsOfSongs = []
-
-    const playProgress = durationStamp > 0 ? curStamp / durationStamp : 0
 
     return (
       <footer className={styles.root}>
@@ -134,16 +165,14 @@ class FooterPlayer extends React.Component<Props, State> {
           <ControlBtn icon="next-track" onClick={() => {}}></ControlBtn>
         </div>
 
-        <span className={styles['cur-time']}>
-          {formatDurationTime(curStamp)}
-        </span>
+        <span className={styles['cur-time']}>{curStampLabel}</span>
         <Slider
           className={styles.progress}
           {...{ playProgress, loadProgress }}
+          onChange={this.handleSliderChange}
+          onAfterChange={this.handleAfterSliderChange}
         ></Slider>
-        <span className={styles.duration}>
-          {formatDurationTime(durationStamp)}
-        </span>
+        <span className={styles.duration}>{dtStampLabel}</span>
 
         <Volume
           className={styles.volume}

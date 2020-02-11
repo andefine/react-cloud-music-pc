@@ -11,6 +11,7 @@ interface Props {
 interface State {
   ratio: number
   lastRatio: number
+  isMoving: boolean
 }
 
 class Volume extends React.Component<Props, State> {
@@ -21,6 +22,7 @@ class Volume extends React.Component<Props, State> {
 
   rail: React.RefObject<HTMLDivElement>
   dot: React.RefObject<HTMLDivElement>
+  // 点击圆点时鼠标位置与圆点中心的偏差
   offsetCenterOnDown: number
 
   constructor(props: Props) {
@@ -29,34 +31,35 @@ class Volume extends React.Component<Props, State> {
     this.state = {
       ratio: props.volume,
       lastRatio: props.volume,
+      isMoving: false,
     }
 
     this.rail = React.createRef()
     this.dot = React.createRef()
-    // 点击圆点鼠标位置与圆点中心的偏差
     this.offsetCenterOnDown = 0
   }
 
   handleDotMouseDown = (e: React.MouseEvent) => {
-    console.log('dot down')
     const dotNode = this.dot.current!
-    const dotCenterX =
+    // 圆点中心 x坐标
+    const dotPosX =
       dotNode.getBoundingClientRect().left + dotNode.offsetWidth / 2
-    this.offsetCenterOnDown = e.clientX - dotCenterX
+    this.offsetCenterOnDown = e.clientX - dotPosX
 
     this.setState(state => ({
       lastRatio: state.ratio,
+      isMoving: true,
     }))
 
-    document.addEventListener('mousemove', this.onDocumentMouseMove)
-    document.addEventListener('mouseup', this.onDocumentMouseUp)
+    // 在 document 上添加监听回调是为了鼠标移动的范围能够不局限于音量条
+    document.addEventListener('mousemove', this.handleDocumentMouseMove)
+    document.addEventListener('mouseup', this.handleDocumentMouseUp)
 
     // 这里加上组织默认行为，防止拖动到两边的临界状态而产生再次拖动禁止的问题
     e.preventDefault()
   }
 
-  onDocumentMouseMove = (e: MouseEvent) => {
-    console.log('document move')
+  handleDocumentMouseMove = (e: MouseEvent) => {
     const railNode = this.rail.current!
     let left =
       e.clientX -
@@ -73,10 +76,33 @@ class Volume extends React.Component<Props, State> {
     this.changeRatioByLeft(left)
   }
 
-  onDocumentMouseUp = () => {
-    console.log('document up')
-    document.removeEventListener('mousemove', this.onDocumentMouseMove)
-    document.removeEventListener('mouseup', this.onDocumentMouseUp)
+  handleDocumentMouseUp = () => {
+    this.setState({ isMoving: false })
+    document.removeEventListener('mousemove', this.handleDocumentMouseMove)
+    document.removeEventListener('mouseup', this.handleDocumentMouseUp)
+  }
+
+  handleSliderClick = (e: React.MouseEvent) => {
+    const left = e.clientX - this.rail.current!.getBoundingClientRect().left
+    this.setState(state => ({
+      lastRatio: state.ratio,
+    }))
+    this.changeRatioByLeft(left)
+  }
+
+  handleIconClick = (e: React.MouseEvent) => {
+    const { ratio, lastRatio } = this.state
+    // 这里我们判断当前音量是否为0，
+    // 如果是则需要回到上次调整的位置，
+    // 否则就设为0
+    const nextRatio = ratio === 0 ? lastRatio : 0
+    this.setState(
+      {
+        ratio: nextRatio,
+        lastRatio: ratio,
+      },
+      this.triggerChange,
+    )
   }
 
   changeRatioByLeft(left: number) {
@@ -93,11 +119,11 @@ class Volume extends React.Component<Props, State> {
 
   render() {
     const { className } = this.props
-    const { ratio } = this.state
+    const { ratio, isMoving } = this.state
 
     return (
       <div className={`${styles.root} ${className}`}>
-        <div className={styles.i}>
+        <div className={styles.i} onClick={this.handleIconClick}>
           <i
             className={`iconfont icon-${ratio === 0 ? 'mute' : 'volume'} ${
               styles.icon
@@ -105,14 +131,16 @@ class Volume extends React.Component<Props, State> {
           ></i>
         </div>
 
-        <div className={styles.slider}>
+        <div className={styles.slider} onClick={this.handleSliderClick}>
           <div className={styles.slider__rail} ref={this.rail}></div>
           <div
             className={styles.slider__track}
             style={{ width: `${ratio * 100}%` }}
           ></div>
           <div
-            className={styles.slider__dot}
+            className={
+              isMoving ? styles['slider__dot--moving'] : styles.slider__dot
+            }
             style={{ left: `${ratio * 100}%` }}
             ref={this.dot}
             onMouseDown={this.handleDotMouseDown}

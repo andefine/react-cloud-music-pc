@@ -17,7 +17,7 @@ $rail-height: 4px;
 }
 
 .rail,
-.progress,
+.load-progress,
 .track {
   position: absolute;
   top: $dot-height / 2 - $rail-height / 2;
@@ -31,7 +31,7 @@ $rail-height: 4px;
   background: $bg-dark;
 }
 
-.progress {
+.load-progress {
   background: $bg-gray;
 }
 
